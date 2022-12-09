@@ -1,19 +1,24 @@
 import './App.css';
 import React from 'react';
-import Home from './pages/Home';
+import Home from './routes/Home';
+import { useState } from 'react';
 import {Routes, Route, Link} from 'react-router-dom';
 
 function App() {
+  let [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="app">
       <header className="app-header">
         <nav className="tool-bar">
-          <a href="#">
+          <button type="button" onClick={() => {
+            setIsOpen(!isOpen);
+          }}>
             <img
               src={process.env.PUBLIC_URL + '/public-assets/menu.png'}
               alt="menu icon"
               className="top-icon menu" />
-          </a>
+          </button>
           <Link to="/">
             <img 
               src={process.env.PUBLIC_URL + '/public-assets/logo.png'}
@@ -21,47 +26,56 @@ function App() {
               className="logo" />
           </Link>
           
-          <a href="#">
+          <Link to="#">
             <img 
               src={process.env.PUBLIC_URL + '/public-assets/search.png'}
               alt="search icon"
               className="top-icon search" />
-          </a>
+          </Link>
         </nav>
       </header>
+      
       <aside>
-        <Nav />
+        <Sidebar isOpen={isOpen} />
       </aside>
+
       <Routes>
-        <Route path="/" element={<Home />}/>
+        <Route path="/" element={<Home />} />
       </Routes>
     </div>
   );
 }
 
-function Nav() {
+function Sidebar(props) {
+  let isOpen;
+
+  if(!props.isOpen) {
+    isOpen = 'hide-sidebar';
+  } else {
+    isOpen = 'hide-sidebar show';
+  }
 
   return(
-    <ol className="slidebar">
-      <li className="gnb-item">
-        <img src="/public-assets/nav/click-home.png" alt="home icon" className="gnb-icon"/>
-        <span className="gnb-title click">홈</span>
+    <ol className={isOpen}>
+      <li className="side-item">
+        <img src="/public-assets/nav/click-home.png" alt="home icon" className="side-icon"/>
+        <span className="side-title click">홈</span>
       </li>
-      <li className="gnb-item">
-        <img src="/public-assets/nav/recipe.png" alt="recipe icon" className="gnb-icon"/>
-        <span className="gnb-title">레시피</span>
+      <li className="side-item">
+        <img src="/public-assets/nav/recipe.png" alt="recipe icon" className="side-icon"/>
+        <span className="side-title">레시피</span>
       </li>
-      <li className="gnb-item">
-        <img src="/public-assets/nav/main.png" alt="main icon" className="gnb-icon main"/>
-        <span className="gnb-title">나눔/신청</span>
+      <li className="side-item">
+        <img src="/public-assets/nav/main.png" alt="main icon" className="side-icon main"/>
+        <span className="side-title">나눔/신청</span>
       </li>
-      <li className="gnb-item">
-        <img src="/public-assets/nav/chat.png" alt="chatting icon" className="gnb-icon"/>
-        <span className="gnb-title">채팅</span>
+      <li className="side-item">
+        <img src="/public-assets/nav/chat.png" alt="chatting icon" className="side-icon"/>
+        <span className="side-title">채팅</span>
       </li>
-      <li className="gnb-item">
-        <img src="/public-assets/nav/mypage.png" alt="mypage icon" className="gnb-icon"/>
-        <span className="gnb-title">마이페이지</span>
+      <li className="gnsideb-item">
+        <img src="/public-assets/nav/mypage.png" alt="mypage icon" className="side-icon"/>
+        <span className="side-title">마이페이지</span>
       </li>
     </ol>
   );

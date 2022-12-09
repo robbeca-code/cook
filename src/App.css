@@ -12,10 +12,20 @@ ol, ul {
   list-style-type: none;
 }
 
+button {
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+}
+
 
 /*   App   */
 .app-header {
-  height: 112px;
+  height: 180px;
+  position: fixed;
+  width: 100%;
+  z-index: 998;
+  background-color: #fff;
 }
 
 .tool-bar {
@@ -32,7 +42,7 @@ ol, ul {
 
 
 /*   Sidebar   */
-.slidebar {
+.hide-sidebar {
   position: fixed;
 	top: 120px;
 	left: 0px;
@@ -43,22 +53,28 @@ ol, ul {
   grid-template-rows: repeat(5, 100px);
   background-color: #fff;
 	row-gap: 1rem;
+  z-index: 999;
+  visibility: hidden;
 }
 
-.gnb-item {
+.show {
+  visibility: visible;
+}
+
+.side-item {
   display: flex;
   place-items: center;
 }
 
-.gnb-icon {
+.side-icon {
   width: 50px;
 }
 
-.gnb-title {
+.side-title {
   font-size: 30px;
   margin-top: 10px;
 }
 
-.gnb-title.click {
+.side-title.click {
   color: #E67E22;
 }
