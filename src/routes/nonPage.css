@@ -1,0 +1,14 @@
+.container {
+  display: grid;
+  place-content: center;
+  padding-top: 200px;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+}
+
+strong {
+  color: #E67E22;
+}

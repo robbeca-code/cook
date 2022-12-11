@@ -102,7 +102,7 @@ function Content(props) {
               <h2 className="sub-title">{item.subTitle}</h2>
               <div className="content-header">
                 <h1 className="main-title">{item.mainTitle} <span className="point">{item.styleTitle}</span></h1>
-                <img src="/public-assets/bookmark.png" alt="bookrmark icon" className="bookmark" />
+                <img src="/public-assets/home/bookmark.png" alt="bookrmark icon" className="bookmark" />
               </div>
               <div className="content-main">
                 <div className="img-container">

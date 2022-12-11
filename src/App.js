@@ -3,6 +3,8 @@ import React from 'react';
 import Home from './routes/Home';
 import { useState } from 'react';
 import {Routes, Route, Link} from 'react-router-dom';
+import NonPage from './routes/nonPage';
+import ShaApp from './routes/sha-app';
 
 function App() {
   let [isOpen, setIsOpen] = useState(false);
@@ -41,6 +43,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="*" element={<NonPage />} />
+        <Route path="/share-application" element={<ShaApp />} />
       </Routes>
     </div>
   );
@@ -58,16 +62,20 @@ function Sidebar(props) {
   return(
     <ol className={isOpen}>
       <li className="side-item">
-        <img src="/public-assets/nav/click-home.png" alt="home icon" className="side-icon"/>
-        <span className="side-title click">홈</span>
+        <Link to="/">
+          <img src="/public-assets/nav/click-home.png" alt="home icon" className="side-icon"/>
+          <span className="side-title click">홈</span>
+        </Link>
       </li>
       <li className="side-item">
         <img src="/public-assets/nav/recipe.png" alt="recipe icon" className="side-icon"/>
         <span className="side-title">레시피</span>
       </li>
       <li className="side-item">
-        <img src="/public-assets/nav/main.png" alt="main icon" className="side-icon main"/>
-        <span className="side-title">나눔/신청</span>
+        <Link to="/share-application" className="link">
+          <img src="/public-assets/nav/main.png" alt="main icon" className="side-icon main"/>
+          <span className="side-title">나눔/신청</span>
+        </Link>
       </li>
       <li className="side-item">
         <img src="/public-assets/nav/chat.png" alt="chatting icon" className="side-icon"/>
@@ -80,4 +88,5 @@ function Sidebar(props) {
     </ol>
   );
 }
+
 export default App;

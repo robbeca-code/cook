@@ -1,28 +1,13 @@
 * {
-  padding: 0;
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-a {
-  text-decoration: none;
-}
-
-ol, ul {
-  list-style-type: none;
-}
-
-button {
-  background-color: transparent;
+.btn {
   border-style: none;
-  cursor: pointer;
-}
 
-.link {
-  color: #171717;
-  line-height: 57.33px;
 }
-
 
 /*   App   */
 .app-header {
@@ -82,4 +67,70 @@ button {
 
 .side-title.click {
   color: #E67E22;
+}
+
+
+/*   Share And Application   */
+.link {
+  color: #171717;
+}
+
+.container {
+  padding-top: 200px;
+}
+
+.content {
+  background-color: #dddddd;
+  width: 87vw;
+  padding: 30px 70px;
+}
+
+.content-title {
+  font-size: 1.4rem;
+}
+
+.items-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item {
+  padding: 1rem 0;
+}
+
+.img-container {
+  width: 240px;
+  height: 230px;
+}
+
+.img-container > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+/*   Recommended User   */
+.recommended-users {
+  padding-left: 70px;
+}
+
+.recommended-users > .content-title {
+  padding-bottom: 30px;
+  text-align: left;
+}
+
+.user-name {
+  font-size: 20px;
+}
+
+.ad {
+  width: 98vw;
+  height: auto;
+}
+
+.ad > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
