@@ -2,14 +2,15 @@ import React from 'react';
 import style from './Home.module.css';
 import cn from 'classnames';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Sidebar from './Sidebar';
 import {slide, tag, content} from './Home-data';
 
 function Home(props) {
+  let click = 'home';
   return (
     <div className="Home">
         <aside>
-          <Sidebar isOpen={props.isOpen} />
+          <Sidebar isOpen={props.isOpen} click={click} />
         </aside>
 
         <Slide slide={slide} />
@@ -18,46 +19,6 @@ function Home(props) {
 
         <Content content={content} />
     </div>
-  );
-}
-
-
-function Sidebar(props) {
-  let isOpen;
-
-  if(!props.isOpen) {
-    isOpen = 'hide-sidebar';
-  } else {
-    isOpen = 'hide-sidebar show';
-  }
-
-  return(
-    <ol className={isOpen}>
-      <li className={cn(style.sideItem)}>
-        <Link to="/">
-          <img src="/public-assets/nav/click-home.png" alt="home icon" className={cn(style.sideIcon)}/>
-          <span className={cn(style.sideTitle, style.click)}>홈</span>
-        </Link>
-      </li>
-      <li className={cn(style.sideItem)}>
-        <img src="/public-assets/nav/recipe.png" alt="recipe icon" className={cn(style.sideIcon)}/>
-        <span className={cn(style.sideTitle)}>레시피</span>
-      </li>
-      <li className={cn(style.sideItem)}>
-        <Link to="/share-application" className={cn(style.link)}>
-          <img src="/public-assets/nav/main.png" alt="main icon" className={cn(style.sideIcon, style.main)}/>
-          <span className={cn(style.sideTitle)}>나눔/신청</span>
-        </Link>
-      </li>
-      <li className={cn(style.sideItem)}>
-        <img src="/public-assets/nav/chat.png" alt="chatting icon" className={cn(style.sideIcon)}/>
-        <span className={cn(style.sideTitle)}>채팅</span>
-      </li>
-      <li className={cn(style.sideItem)}>
-        <img src="/public-assets/nav/mypage.png" alt="mypage icon" className={cn(style.sideIcon)}/>
-        <span className={cn(style.sideTitle)}>마이페이지</span>
-      </li>
-    </ol>
   );
 }
 

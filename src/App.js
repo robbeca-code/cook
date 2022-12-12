@@ -3,8 +3,10 @@ import React from 'react';
 import Home from './routes/Home';
 import { useState } from 'react';
 import {Routes, Route, Link} from 'react-router-dom';
-import NonPage from './routes/nonPage';
+import NonPage from './routes/NonPage';
 import ShaApp from './routes/sha-app';
+import OneServing from './routes/OneServing';
+import servingList from './routes/OneServing-data';
 
 function App() {
   let [isOpen, setIsOpen] = useState(false);
@@ -40,7 +42,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isOpen={isOpen} />} />
         <Route path="*" element={<NonPage />} />
-        <Route path="/share-application" element={<ShaApp />} />
+        <Route path="/share-application" element={<ShaApp isOpen={isOpen} />} />
+        <Route path="/share-application/one-serving" element={<OneServing isOpen={isOpen} data={servingList} />} />
       </Routes>
     </div>
   );

@@ -1,42 +1,16 @@
 import React from 'react';
 import style from './sha-app.module.css';
 import cn from 'classnames';
-import {Link} from 'react-router-dom';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Sidebar from './Sidebar';
 
-function ShaApp() {
-  let [isOpen, setIsOpen] = useState(false);
+function ShaApp(props) {
+  let click = 'share';
 
   return (
-    <div>
-      <header className={cn(style.appHeader)}>
-        <nav className={cn(style.toolBar)}>
-          <button type="button" onClick={() => {
-            setIsOpen(!isOpen);
-          }}>
-            <img
-              src={process.env.PUBLIC_URL + '/public-assets/menu.png'}
-              alt="menu icon"
-              className={cn(style.topIcon, style.menu)} />
-          </button>
-          <Link to="/">
-            <img 
-              src={process.env.PUBLIC_URL + '/public-assets/logo.png'}
-              alt="logo"
-              className={cn(style.logo)} />
-          </Link>
-          
-          <Link to="#">
-            <img 
-              src={process.env.PUBLIC_URL + '/public-assets/search.png'}
-              alt="search icon"
-              className={cn(style.topIcon, style.search)} />
-          </Link>
-        </nav>
-      </header>
-      
+    <div>      
       <aside>
-        <Sidebar isOpen={isOpen} />
+        <Sidebar isOpen={props.isOpen} click={click} />
       </aside>
 
       <section className={cn(style.container)}>
@@ -72,14 +46,17 @@ function ShaApp() {
           </header>
           <ul className={cn(style.itemsList)}>
             <li className={cn(style.item)}>
-              <button type="button" className={cn(style.btn, style.imgContainer)}>
-                <img src="/public-assets/sha_app/one-person.png" alt="The ingredients button" />
-              </button>
-              <h2>1인분</h2>
+              <Link to="/share-application/one-serving" className={cn(style.link)}>
+                <button type="button" className={cn(style.btn, style.imgContainer)}>
+                  <img src="/public-assets/sha_app/one-person.png" alt="The ingredients button" />
+                </button>
+                <h2>1인분</h2>
+              </Link>
+              
             </li>
             <li className={cn(style.item)}>
               <button type="button" className={cn(style.btn, style.imgContainer)}>
-                <img src="/public-assets/sha_app/desert.png" alt="The ingredients button" />
+                <img src="/public-assets/sha_app/dessert.png" alt="The ingredients button" />
               </button>
               <h2>디저트</h2>
             </li>
@@ -129,45 +106,6 @@ function ShaApp() {
         </aside>
       </section>
     </div>
-  );
-}
-
-function Sidebar(props) {
-  let isOpen;
-
-  if(!props.isOpen) {
-    isOpen = 'hide-sidebar';
-  } else {
-    isOpen = 'hide-sidebar show';
-  }
-
-  return(
-    <ol className={isOpen}>
-      <li className={cn(style.sideItem)}>
-        <Link to="/">
-          <img src="/public-assets/nav/home.png" alt="home icon" className={cn(style.sideIcon)}/>
-          <span className={cn(style.sideTitle, style.link)}>홈</span>
-        </Link>
-      </li>
-      <li className={cn(style.sideItem)}>
-        <img src="/public-assets/nav/recipe.png" alt="recipe icon" className={cn(style.sideIcon)}/>
-        <span className={cn(style.sideTitle)}>레시피</span>
-      </li>
-      <li className={cn(style.sideItem)}>
-        <Link to="/share-application" className={cn(style.link)}>
-          <img src="/public-assets/nav/main.png" alt="main icon" className={cn(style.sideIcon, style.main)}/>
-          <span className={cn(style.sideTitle, style.click)}>나눔/신청</span>
-        </Link>
-      </li>
-      <li className={cn(style.sideItem)}>
-        <img src="/public-assets/nav/chat.png" alt="chatting icon" className={cn(style.sideIcon)}/>
-        <span className={cn(style.sideTitle)}>채팅</span>
-      </li>
-      <li className={cn(style.sidebItem)}>
-        <img src="/public-assets/nav/mypage.png" alt="mypage icon" className={cn(style.sideIcon)}/>
-        <span className={cn(style.sideTitle)}>마이페이지</span>
-      </li>
-    </ol>
   );
 }
 

@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.link {
+  color: #171717;
+}
+
+.container {
+  padding-top: 200px;
+}
+
+.containerTitle {
+  font-size: 1.4rem;
+  display: grid;
+  grid-template-columns: 550px 550px 550px;
+  place-content: center;
+}
+
+.containerTitle > h1 {
+  text-align: center;
+  width: 100%;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #dedede;
+}
+
+.containerTitle > h1:nth-child(1) {
+  color: #E67E22;
+  border-bottom: 3px solid #E67E22;
+}
