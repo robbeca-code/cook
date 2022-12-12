@@ -10,7 +10,7 @@
 }
 
 /*   App   */
-.app-header {
+.appHeader {
   height: 180px;
   position: fixed;
   width: 100%;
@@ -18,7 +18,7 @@
   background-color: #fff;
 }
 
-.tool-bar {
+.toolBar {
   display: flex;
   justify-content: space-between;
   place-items: center;
@@ -26,13 +26,13 @@
   margin: 40px 0;
 }
 
-.top-icon {
+.topIcon {
   width: 42px;
 }
 
 
 /*   Sidebar   */
-.hide-sidebar {
+.hideSidebar {
   position: fixed;
 	top: 120px;
 	left: 0px;
@@ -51,21 +51,21 @@
   visibility: visible;
 }
 
-.side-item {
+.sideItem {
   display: flex;
   place-items: center;
 }
 
-.side-icon {
+.sideIcon {
   width: 50px;
 }
 
-.side-title {
+.sideTitle {
   font-size: 30px;
   margin-top: 10px;
 }
 
-.side-title.click {
+.sideTitle.click {
   color: #E67E22;
 }
 
@@ -81,29 +81,32 @@
 
 .content {
   background-color: #dddddd;
-  width: 87vw;
+  width: 92vw;
   padding: 30px 70px;
+  margin: 0 70px 20px;
 }
 
-.content-title {
+.contentTitle {
+  text-align: center;
   font-size: 1.4rem;
 }
 
-.items-list {
+.itemsList {
   display: flex;
   justify-content: space-between;
 }
 
 .item {
   padding: 1rem 0;
+  text-align: center;
 }
 
-.img-container {
+.imgContainer {
   width: 240px;
   height: 230px;
 }
 
-.img-container > img {
+.imgContainer > img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -111,19 +114,21 @@
 
 
 /*   Recommended User   */
-.recommended-users {
-  padding-left: 70px;
+.recommendedUsers {
+  padding: 70px;
 }
 
-.recommended-users > .content-title {
+.recommendedUsers > .contentTitle {
   padding-bottom: 30px;
   text-align: left;
 }
 
-.user-name {
+.userName {
   font-size: 20px;
 }
 
+
+/*   A*/
 .ad {
   width: 98vw;
   height: auto;

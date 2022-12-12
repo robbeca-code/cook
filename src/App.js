@@ -36,56 +36,13 @@ function App() {
           </Link>
         </nav>
       </header>
-      
-      <aside>
-        <Sidebar isOpen={isOpen} />
-      </aside>
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home isOpen={isOpen} />} />
         <Route path="*" element={<NonPage />} />
         <Route path="/share-application" element={<ShaApp />} />
       </Routes>
     </div>
-  );
-}
-
-function Sidebar(props) {
-  let isOpen;
-
-  if(!props.isOpen) {
-    isOpen = 'hide-sidebar';
-  } else {
-    isOpen = 'hide-sidebar show';
-  }
-
-  return(
-    <ol className={isOpen}>
-      <li className="side-item">
-        <Link to="/">
-          <img src="/public-assets/nav/click-home.png" alt="home icon" className="side-icon"/>
-          <span className="side-title click">홈</span>
-        </Link>
-      </li>
-      <li className="side-item">
-        <img src="/public-assets/nav/recipe.png" alt="recipe icon" className="side-icon"/>
-        <span className="side-title">레시피</span>
-      </li>
-      <li className="side-item">
-        <Link to="/share-application" className="link">
-          <img src="/public-assets/nav/main.png" alt="main icon" className="side-icon main"/>
-          <span className="side-title">나눔/신청</span>
-        </Link>
-      </li>
-      <li className="side-item">
-        <img src="/public-assets/nav/chat.png" alt="chatting icon" className="side-icon"/>
-        <span className="side-title">채팅</span>
-      </li>
-      <li className="gnsideb-item">
-        <img src="/public-assets/nav/mypage.png" alt="mypage icon" className="side-icon"/>
-        <span className="side-title">마이페이지</span>
-      </li>
-    </ol>
   );
 }
 
