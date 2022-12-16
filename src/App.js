@@ -19,20 +19,20 @@ function App() {
             setIsOpen(!isOpen);
           }}>
             <img
-              src={process.env.PUBLIC_URL + '/public-assets/menu.png'}
+              src={process.env.PUBLIC_URL + "/public-assets/menu.png"}
               alt="menu icon"
               className="top-icon menu" />
           </button>
           <Link to="/">
             <img 
-              src={process.env.PUBLIC_URL + '/public-assets/logo.png'}
+              src={process.env.PUBLIC_URL + "/public-assets/logo.png"}
               alt="logo"
               className="logo" />
           </Link>
           
           <Link to="#">
             <img 
-              src={process.env.PUBLIC_URL + '/public-assets/search.png'}
+              src={process.env.PUBLIC_URL + "/public-assets/search.png"}
               alt="search icon"
               className="top-icon search" />
           </Link>
