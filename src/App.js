@@ -7,6 +7,7 @@ import NonPage from './routes/NonPage';
 import ShaApp from './routes/sha-app';
 import OneServing from './routes/OneServing';
 import servingList from './routes/OneServing-data';
+import Content from './routes/One-Content';
 
 function App() {
   let [isOpen, setIsOpen] = useState(false);
@@ -44,6 +45,7 @@ function App() {
         <Route path="*" element={<NonPage />} />
         <Route path="/share-application" element={<ShaApp isOpen={isOpen} />} />
         <Route path="/share-application/one-serving" element={<OneServing isOpen={isOpen} data={servingList} />} />
+        <Route path="/share-application/one-serving/:id" element={<Content isOpen={isOpen} data={servingList} />} />
       </Routes>
     </div>
   );
