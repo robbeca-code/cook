@@ -6,11 +6,11 @@ import Sidebar from './Sidebar';
 import {slide, tag, content} from './Home-data';
 
 function Home(props) {
-  let click = 'home';
+  let target = 'home';
   return (
     <div className="Home">
         <aside>
-          <Sidebar isOpen={props.isOpen} click={click} />
+          <Sidebar isOpen={props.isOpen} target={target} />
         </aside>
 
         <Slide slide={slide} />

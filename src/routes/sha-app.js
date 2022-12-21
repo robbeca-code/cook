@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar';
 
 function ShaApp(props) {
-  let click = 'share';
+  let target = 'share';
 
   return (
     <div>      
       <aside>
-        <Sidebar isOpen={props.isOpen} click={click} />
+        <Sidebar isOpen={props.isOpen} target={target} />
       </aside>
 
       <section className={cn(style.container)}>

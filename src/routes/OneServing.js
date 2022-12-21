@@ -6,16 +6,16 @@ import { Link } from 'react-router-dom';
 
 
 function OneServing({isOpen, data}) {
-  let click = 'share';
+  const target = 'share';
   let [plusBtn, setPlusBtn] = useState(false);
   let [input, setInput] = useState(['kind', 'name', 'content']);
   let [newContent, setNewContent] = useState(false);
 
-  // console.log(input[1]);
+
   return(
     <section className={cn(style.container)}>
       <aside>
-        <Sidebar isOpen={isOpen} click={click} />
+        <Sidebar isOpen={isOpen} target={target} />
       </aside>
 
       <header className={cn(style.containerTitle)}>

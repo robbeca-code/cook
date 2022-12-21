@@ -4,18 +4,19 @@ import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-function Sidebar(props) {
-  let isOpen;
-  let [click, setClick] = useState(props.click);
+function Sidebar({isOpen, target}) {
+  let sidebar;
+  let [click, setClick] = useState({target});
+  console.log(target);
 
-  if(!props.isOpen) {
-    isOpen = 'hide-sidebar';
+  if(!isOpen) {
+    sidebar = `hide-sidebar`;
   } else {
-    isOpen = 'hide-sidebar show';
+    sidebar = `hide-sidebar show`;
   }
 
   return(
-    <ol className={isOpen}>
+    <ol className={sidebar}>
       <li className={cn(style.sideItem)}>
         <Link to="/" onClick={() => {
           setClick('home');
