@@ -20,22 +20,24 @@ function ShaApp(props) {
           </header>
           <ul className={cn(style.itemsList)}>
             <li className={cn(style.item)}>
-              <button type="button" className={cn(style.btn, style.imgContainer)}>
-                <img src="/public-assets/sha_app/item.png" alt="The ingredients button" />
-              </button>
+              <Link to="/share-application/share">
+                <button type="button" className={cn(style.btn, style.imgContainer)}>
+                  <img src="/public-assets/sha_app/item.png" alt="The ingredients button" />
+                </button>
+              </Link>
               <h2>식재료</h2>
             </li>
             <li className={cn(style.item)}>
               <button type="button" className={cn(style.btn, style.imgContainer)}>
                 <img src="/public-assets/sha_app/pork.png" alt="The ingredients button" />
               </button>
-              <h2>식기 및 도구</h2>
+              <h2 className={cn(style.unreleased)}>식기 및 도구</h2>
             </li>
             <li className={cn(style.item)}>
               <button type="button" className={cn(style.btn, style.imgContainer)}>
                 <img src="/public-assets/sha_app/book.png" alt="The ingredients button" />
               </button>
-              <h2>관련 도서</h2>
+              <h2 className={cn(style.unreleased)}>관련 도서</h2>
             </li>
           </ul>
         </article>
@@ -58,13 +60,13 @@ function ShaApp(props) {
               <button type="button" className={cn(style.btn, style.imgContainer)}>
                 <img src="/public-assets/sha_app/dessert.png" alt="The ingredients button" />
               </button>
-              <h2>디저트</h2>
+              <h2 className={cn(style.unreleased)}>디저트</h2>
             </li>
             <li className={cn(style.item)}>
               <button type="button" className={cn(style.btn, style.imgContainer)}>
                 <img src="/public-assets/sha_app/big-food.png" alt="The ingredients button" />
               </button>
-              <h2>대용량</h2>
+              <h2 className={cn(style.unreleased)}>대용량</h2>
             </li>
           </ul>
         </article>

@@ -8,6 +8,9 @@ import ShaApp from './routes/sha-app';
 import OneServing from './routes/OneServing';
 import servingList from './routes/OneServing-data';
 import Content from './routes/One-Content';
+import Share from "./routes/Share";
+import {food, product} from './routes/Share-data';
+import ShareContent from './routes/ShareContent';
 
 function App() {
   let [isOpen, setIsOpen] = useState(false);
@@ -66,6 +69,8 @@ function App() {
         <Route path="/share-application" element={<ShaApp isOpen={isOpen} />} />
         <Route path="/share-application/one-serving" element={<OneServing isOpen={isOpen} data={servingList} />} />
         <Route path="/share-application/one-serving/:id" element={<Content isOpen={isOpen} data={servingList} />} />
+        <Route path="/share-application/share" element={<Share isOpen={isOpen} food={food} product={product} />} />
+        <Route path="/share-application/share/:id" element={<ShareContent isOpen={isOpen} food={food} product={product}/>} />
       </Routes>
     </div>
   );

@@ -52,6 +52,10 @@
   object-fit: contain;
 }
 
+.unreleased {
+  color: #a0a0a0;
+}
+
 
 /*   Recommended User   */
 .recommendedUsers {

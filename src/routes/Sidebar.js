@@ -7,7 +7,6 @@ import { useState } from 'react';
 function Sidebar({isOpen, target}) {
   let sidebar;
   let [click, setClick] = useState({target});
-  console.log(target);
 
   if(!isOpen) {
     sidebar = `hide-sidebar`;

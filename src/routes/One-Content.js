@@ -6,7 +6,7 @@ import { useParams, Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
 function OneServing_Content(props) {
-  let click = 'share';
+  let target = 'target';
   let {id} = useParams();
   let data = props.data;
   let [like, setLike] = useState(false);
@@ -14,7 +14,7 @@ function OneServing_Content(props) {
   return(
     <section className={cn(style.container)}>
       <aside>
-        <Sidebar isOpen={props.isOpen} click={click} />
+        <Sidebar isOpen={props.isOpen} click={target} />
       </aside>
 
       <div className={cn(style.imgContainer)}>
