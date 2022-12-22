@@ -7,6 +7,32 @@ import { Link } from "react-router-dom";
 function Share({isOpen, food, product}) {
   const target = 'share';
   let [tab, setTab] = useState('food');
+  let [plus, setPlus] = useState(false);
+  let [newContent, setNewContent] = useState(false);
+  let [data, setData] = useState([
+    {
+      id: 'food',
+      title: '',
+      content: '',
+      kind: '식재료',
+      cost: ''
+    },
+    {
+      id: 'product',
+      title: '',
+      content: '',
+      kind: '식기 및 도구',
+      cost: ''
+    },
+    {
+      id: 'book',
+      title: '',
+      content: '',
+      kind: '관련도서',
+      cost: ''
+    }
+  ]);
+
 
   return(
     <section className={cn(style.container)}>
@@ -40,14 +66,22 @@ function Share({isOpen, food, product}) {
 
       <section className={cn(style.grid)}>
         {
-          <ClickList tab={tab} food={food} product={product} />
+          <ClickTab tab={tab} food={food} product={product} />
         }
       </section>
+
+      <button type="button" className={cn(style.plusBtn)} onClick={() => { setPlus(true) }}>
+        <img src="/public-assets/one-content/plus.png" alt="plus button" />
+      </button>
+
+      <PlusContent data={data} setData={setData} plus={plus} setPlus={setPlus} setNewContent={setNewContent} />
+      
     </section>
   );
 }
 
-function ClickList({tab, food, product}) {
+
+function ClickTab({tab, food, product}) {
   if(tab === 'food') {
     return(<ShareList data={food} />);
   }
@@ -83,6 +117,91 @@ function ShareList({data}) {
       );
     })
   );
+}
+
+function PlusContent({data, setData, plus, setPlus, setNewContent}) {
+  const options = ['종류 선택','식재료', '식기 및 도구', '관련도서'];
+  let kind;
+  let title;
+  let content;
+  let cost;
+
+  const handleKind = (e) => {
+    kind = e.target.value;
+  };
+
+  const handleTitle = (e) => {
+    title = e.target.value;
+  };
+
+  const handleContent = (e) => {
+    content = e.target.value;
+  };
+
+  const handleCost = (e) => {
+    cost = e.target.value;
+  };
+
+  const inputData = () => {
+    setPlus(false);
+    setNewContent(true);
+
+    for(let i=0; i<data.length; i++) {
+      if(data[i].kind === kind) {
+        data[i].title = title;
+        data[i].content = content;
+        data[i].cost = cost;
+        return;
+      }
+    }
+
+    let copyData = [...data];
+    setData(copyData);
+  };
+
+  if(plus) {
+    return(
+      <article className={cn(style.inputModal)}>
+        <header className={cn(style.modalTitle)}>
+          <h1>나눔 하기</h1>
+        </header>
+        <div className={cn(style.modalItem)}>
+          <strong>종류</strong>
+          <select onChange={handleKind} value={options[0]} className={cn(style.itemSize)} >
+            {
+              options.map((item) => {
+                return(
+                  <option value={item} key={item}>
+                    {item}
+                  </option>
+                );
+              })
+            }
+          </select>
+        </div>
+        
+        <div className={cn(style.modalItem)}>
+          <strong>제목</strong>
+          <input type="text" onChange={handleTitle}  className={cn(style.itemSize)} />
+        </div>
+        <div className={cn(style.modalItem)}>
+          <strong>가격</strong>
+          <input type="text" onChange={handleCost}  className={cn(style.itemSize)} />
+        </div>
+        <div className={cn(style.modalItem)}>
+          <strong>내용</strong>
+          <textarea onChange={handleContent}  className={cn(style.itemSize)} ></textarea>
+        </div>
+        
+        <button type="button" onClick={inputData} className={cn(style.inputBtn)} >
+          입력
+        </button>
+      </article>
+    );
+  } 
+  else {
+    return(null);
+  }
 }
 
 export default Share;

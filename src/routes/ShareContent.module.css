@@ -1,5 +1,114 @@
 /*   Show Content   */
 
 .container {
-  padding-top: 220px;
+  padding-top: 190px;
+  width: 100%;
+}
+
+.imgContainer {
+  width: 700px;
+  height: 620px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.imgContainer > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/*   User Container   */
+
+.userContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 70px 220px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.user > .imgContainer {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.userInfo > span {
+  font-size: 20px;
+}
+
+
+/*   Main Content   */
+
+.mainContent {
+  padding: 0 220px 300px;
+}
+
+.mainContent > h1 {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.mainContent > strong {
+  font-size: 23px;
+}
+
+.mainContent > p {
+  font-size: 18px;
+  margin-top: 23px;
+}
+
+
+/*   Bar   */
+
+.bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26px 120px;
+  border-top: 1px solid rgb(218, 218, 218);
+  background-color: #fff;
+}
+
+.leftItem {
+  display: flex;
+  align-items: center;
+}
+
+.heartBtn {
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  margin-right: 50px;
+}
+
+.heartBtn > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.leftItem > span {
+  font-size: 19px;
+}
+
+.chatBtn {
+  width: 150px;
+  height: 60px;
+  background-color: #E67E22;
+  border-radius: 20px;
+  font-size: 19px;
+  color: #fff;
 }
