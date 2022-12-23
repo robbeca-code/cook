@@ -69,7 +69,7 @@ function App() {
         <Route path="/share-application" element={<ShaApp isOpen={isOpen} />} />
         <Route path="/share-application/one-serving" element={<OneServing isOpen={isOpen} data={servingList} />} />
         <Route path="/share-application/one-serving/:id" element={<Content isOpen={isOpen} data={servingList} />} />
-        <Route path="/share-application/share" element={<Share isOpen={isOpen} food={food} product={product} />} />
+        <Route path="/share-application/share" element={<Share isOpen={isOpen} food={food} product={product} userId={login} />} />
         <Route path="/share-application/share/:id" element={<ShareContent isOpen={isOpen} food={food} product={product}/>} />
       </Routes>
     </div>

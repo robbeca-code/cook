@@ -1,38 +1,15 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Sidebar from './Sidebar';
 import style from './Share.module.css';
 import cn from "classnames";
 import { Link } from "react-router-dom";
 
-function Share({isOpen, food, product}) {
+function Share({isOpen, food, product, userId}) {
   const target = 'share';
+  const fLength = food.length;
+  const pLength = product.length;
   let [tab, setTab] = useState('food');
   let [plus, setPlus] = useState(false);
-  let [newContent, setNewContent] = useState(false);
-  let [data, setData] = useState([
-    {
-      id: 'food',
-      title: '',
-      content: '',
-      kind: '식재료',
-      cost: ''
-    },
-    {
-      id: 'product',
-      title: '',
-      content: '',
-      kind: '식기 및 도구',
-      cost: ''
-    },
-    {
-      id: 'book',
-      title: '',
-      content: '',
-      kind: '관련도서',
-      cost: ''
-    }
-  ]);
-
 
   return(
     <section className={cn(style.container)}>
@@ -74,7 +51,9 @@ function Share({isOpen, food, product}) {
         <img src="/public-assets/one-content/plus.png" alt="plus button" />
       </button>
 
-      <PlusContent data={data} setData={setData} plus={plus} setPlus={setPlus} setNewContent={setNewContent} />
+      {/* <PlusContent data={data} setData={setData} plus={plus} setPlus={setPlus} setNewContent={setNewContent} /> */}
+
+      <PlusContent f={food} p={product} author={userId} plus={plus} setPlus={setPlus} />
       
     </section>
   );
@@ -91,40 +70,56 @@ function ClickTab({tab, food, product}) {
 }
 
 function ShareList({data}) {
+
   return(
     data.map((item, i) => {
-      return(
-        <Link to={item.url} className={cn(style.item, style.link)} key={i}>
-          <div className={cn(style.imgContainer)}>
-            <img src={item.img} alt="나눔" />
-          </div>
-          <h2>
-            {
-              item.title.length >= 10 
-              ? item.title.slice(0, 11).concat('...') 
-              : item.title
-            }
-          </h2>
-          <div className={cn(style.subInfo)}>
-            <strong>
+      if(item.title != '') {
+        return(
+          <Link to={item.url} className={cn(style.item, style.link)} key={i}>
+            <div className={cn(style.imgContainer)}>
+              <img src={item.img} alt="나눔" />
+            </div>
+            <h2>
               {
-                item.cost != '가격없음' ? item.cost.concat('원') : item.cost
+                item.title.length >= 10 
+                ? item.title.slice(0, 11).concat('...') 
+                : item.title
               }
-            </strong>
-            <span>{item.location}</span>
-          </div>
-        </Link>
-      );
+            </h2>
+            <div className={cn(style.subInfo)}>
+              <strong>
+                {
+                  item.cost != '가격없음' ? item.cost.concat('원') : item.cost
+                }
+              </strong>
+              <span>{item.location}</span>
+            </div>
+          </Link>
+        );
+      }
+      else {
+        return(null);
+      }
     })
-  );
+  ); 
 }
 
-function PlusContent({data, setData, plus, setPlus, setNewContent}) {
+function PlusContent({f, p, author, plus, setPlus}) {
   const options = ['종류 선택','식재료', '식기 및 도구', '관련도서'];
+  const fileInput = useRef(null);
   let kind;
   let title;
   let content;
   let cost;
+  let img;
+
+  const clickUploadBtn = () => {
+    fileInput.current.click();
+  }
+
+  const changeFileInput = (e) => {
+    console.log(e.target.files);
+  }
 
   const handleKind = (e) => {
     kind = e.target.value;
@@ -144,19 +139,21 @@ function PlusContent({data, setData, plus, setPlus, setNewContent}) {
 
   const inputData = () => {
     setPlus(false);
-    setNewContent(true);
 
-    for(let i=0; i<data.length; i++) {
-      if(data[i].kind === kind) {
-        data[i].title = title;
-        data[i].content = content;
-        data[i].cost = cost;
-        return;
-      }
+    if(f[0].kind === kind) {
+      const index = f.length - 1;
+      f[index].title = title;
+      f[index].content = content;
+      f[index].cost = cost;
+      f[index].author = author;
     }
-
-    let copyData = [...data];
-    setData(copyData);
+    if(p[0].kind === kind) {
+      const index = p.length - 1;
+      p[index].title = title;
+      p[index].content = content;
+      p[index].cost = cost;
+      p[index].author = author;
+    }
   };
 
   if(plus) {
@@ -165,6 +162,14 @@ function PlusContent({data, setData, plus, setPlus, setNewContent}) {
         <header className={cn(style.modalTitle)}>
           <h1>나눔 하기</h1>
         </header>
+
+        <div className={cn(style.modalItem)}>
+          <button type="button"onClick={clickUploadBtn} className={cn(style.uploadBtn)}>
+            <img src="/public-assets/share-content/input-img.png" alt="file upload button" />
+          </button>
+          <input type="file" ref={fileInput} accept=".png, .jpg" onChange={changeFileInput} className={cn(style.hidden)} />
+        </div>
+
         <div className={cn(style.modalItem)}>
           <strong>종류</strong>
           <select onChange={handleKind} value={options[0]} className={cn(style.itemSize)} >
@@ -190,7 +195,7 @@ function PlusContent({data, setData, plus, setPlus, setNewContent}) {
         </div>
         <div className={cn(style.modalItem)}>
           <strong>내용</strong>
-          <textarea onChange={handleContent}  className={cn(style.itemSize)} ></textarea>
+          <textarea onChange={handleContent}  className={cn(style.itemSize, style.textarea)} ></textarea>
         </div>
         
         <button type="button" onClick={inputData} className={cn(style.inputBtn)} >

@@ -47,6 +47,18 @@ let food = [
     author: '데일리',
     user_img: '/public-assets/one-content/img6.png'
   },
+  {
+    id: 'fN',
+    url: '/share-application/share/fN',
+    kind: '식재료',
+    img: '/public-assets/share-content/non-food-img.png',
+    title: '',
+    content: '',
+    cost: '',
+    location: '성수동',
+    author: '',
+    user_img: '/public-assets/one-content/non-img.png'
+  }
 ];
 
 let product = [
@@ -74,6 +86,18 @@ let product = [
     author: 'LoRo',
     user_img: '/public-assets/one-content/img2.png'
   },
+  {
+    id: 'pN',
+    url: '/share-application/share/pN',
+    kind: '식기 및 도구',
+    img: '/public-assets/share-content/non-food-img.png',
+    title: '',
+    content: '',
+    cost: '',
+    location: '사근동',
+    author: '',
+    user_img: '/public-assets/one-content/non-img.png'
+  }
 ];
 
 export {food, product};
