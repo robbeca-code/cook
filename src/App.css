@@ -51,9 +51,10 @@ button {
 }
 
 .logo {
-  width: 257px;
-  height: 70px;
+  width: 287px;
+  height: 80px;
   overflow: hidden;
+  margin-left: 5rem;
 }
 
 .logo > img {
@@ -62,7 +63,7 @@ button {
   object-fit: contain;
 }
 
-.loginBox {
+.barItem {
   display: flex;
   align-items: center;
 }

@@ -11,6 +11,8 @@ import Content from './routes/One-Content';
 import Share from "./routes/Share";
 import {food, product} from './routes/Share-data';
 import ShareContent from './routes/ShareContent';
+import Recipe from "./routes/Recipe";
+import {recipe, tunaCan} from './routes/Recipe-data';
 
 function App() {
   let [isOpen, setIsOpen] = useState(false);
@@ -22,20 +24,23 @@ function App() {
     <div className="app">
       <header className="appHeader">
         <nav className="toolBar">
-          <button type="button" onClick={() => {
-            setIsOpen(!isOpen);
-          }}>
-            <img
-              src={process.env.PUBLIC_URL + "/public-assets/menu.png"}
-              alt="menu icon"
-              className="topIcon menu" />
-          </button>
-          <Link to="/" className="logo">
-            <img 
-              src={process.env.PUBLIC_URL + "/public-assets/logo.png"}
-              alt="logo" />
-          </Link>
-          <div className="loginBox">
+          <div className="barItem">
+            <button type="button" onClick={() => {
+              setIsOpen(!isOpen);
+            }}>
+              <img
+                src={process.env.PUBLIC_URL + "/public-assets/menu.png"}
+                alt="menu icon"
+                className="topIcon menu" />
+            </button>
+            <Link to="/" className="logo">
+              <img 
+                src={process.env.PUBLIC_URL + "/public-assets/logo.png"}
+                alt="logo" />
+            </Link>
+          </div>
+          
+          <div className="barItem">
             <Link to="#" className="search">
               <img 
                 src={process.env.PUBLIC_URL + "/public-assets/search.png"}
@@ -66,6 +71,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isOpen={isOpen} />} />
         <Route path="*" element={<NonPage />} />
+        <Route path="/recipe" element={<Recipe isOpen={isOpen} data={recipe} />} />
         <Route path="/share-application" element={<ShaApp isOpen={isOpen} />} />
         <Route path="/share-application/one-serving" element={<OneServing isOpen={isOpen} data={servingList} />} />
         <Route path="/share-application/one-serving/:id" element={<Content isOpen={isOpen} data={servingList} />} />
