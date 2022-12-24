@@ -12,6 +12,7 @@ import Share from "./routes/Share";
 import {food, product} from './routes/Share-data';
 import ShareContent from './routes/ShareContent';
 import Recipe from "./routes/Recipe";
+import Mypage from "./routes/Mypage";
 import {recipe, tunaCan} from './routes/Recipe-data';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   let [login, setLogin] = useState('');
   let [loginBtn, setLoginBtn] = useState(false);
   let [showUser, setShowUser] = useState(false);
+  let [mark, setMark] = [''];
 
   return (
     <div className="app">
@@ -77,6 +79,7 @@ function App() {
         <Route path="/share-application/one-serving/:id" element={<Content isOpen={isOpen} data={servingList} />} />
         <Route path="/share-application/share" element={<Share isOpen={isOpen} food={food} product={product} userId={login} />} />
         <Route path="/share-application/share/:id" element={<ShareContent isOpen={isOpen} food={food} product={product}/>} />
+        <Route path="/mypage" element={<Mypage isOpen={isOpen} login={login} setLogin={setLogin} setShowUser={setShowUser}setLoginBtn={setLoginBtn} />} />
       </Routes>
     </div>
   );

@@ -49,7 +49,7 @@ function Sidebar({isOpen, target}) {
         </Link>
       </li>
       <li className={cn(style.sideItem)}>
-        <Link to="/" onClick={() => {
+        <Link to="/mypage" onClick={() => {
           setClick('mypage');
         }}>
           <img src={click === 'mypage' ? '/public-assets/nav/click-mypage.png' : '/public-assets/nav/mypage.png'} alt="mypage icon" className={cn(style.sideIcon)}/>
