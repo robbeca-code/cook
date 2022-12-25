@@ -20,7 +20,8 @@ function App() {
   let [login, setLogin] = useState('');
   let [loginBtn, setLoginBtn] = useState(false);
   let [showUser, setShowUser] = useState(false);
-  let [mark, setMark] = [''];
+  let [mark, setMark] = useState([]);
+  console.log(mark);
 
   return (
     <div className="app">
@@ -78,8 +79,8 @@ function App() {
         <Route path="/share-application/one-serving" element={<OneServing isOpen={isOpen} data={servingList} />} />
         <Route path="/share-application/one-serving/:id" element={<Content isOpen={isOpen} data={servingList} />} />
         <Route path="/share-application/share" element={<Share isOpen={isOpen} food={food} product={product} userId={login} />} />
-        <Route path="/share-application/share/:id" element={<ShareContent isOpen={isOpen} food={food} product={product}/>} />
-        <Route path="/mypage" element={<Mypage isOpen={isOpen} login={login} setLogin={setLogin} setShowUser={setShowUser}setLoginBtn={setLoginBtn} />} />
+        <Route path="/share-application/share/:id" element={<ShareContent isOpen={isOpen} mark={mark} setMark={setMark} food={food} product={product}/>} />
+        <Route path="/mypage" element={<Mypage isOpen={isOpen} userId={login} mark={mark} food={food} product={product} />} />
       </Routes>
     </div>
   );
