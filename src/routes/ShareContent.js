@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import style from './ShareContent.module.css';
 import cn from 'classnames';
 import { useParams } from "react-router-dom";
 
-function ShareContent({isOpen, food, product}) {
+function ShareContent({isOpen, food, product, mark, setMark}) {
   let target = 'share';
   let {id} = useParams();
 
@@ -14,27 +14,48 @@ function ShareContent({isOpen, food, product}) {
         <Sidebar isOpen={isOpen} target={target} />
       </aside>
       {
-        <GetConent id={id} food={food} product={product}/>
+        <GetConent id={id} food={food} product={product} mark={mark} setMark={setMark} />
       }
     </section>
   );
 }
 
-function GetConent({id, food, product}) {
+function GetConent({id, food, product, mark, setMark}) {
   for(let i=0; i<food.length; i++) {
     if(id === food[i].id) {
-      return(<ShowContent data={food[i]} />);
+      return(<ShowContent data={food[i]} mark={mark} setMark={setMark} />);
     }
   }
 
   for(let i=0; i<product.length; i++) {
     if(id === product[i].id) {
-      return(<ShowContent data={product[i]} />);
+      return(<ShowContent data={product[i]} mark={mark} setMark={setMark} />);
     }
   }
 }
 
-function ShowContent({data}) {
+function ShowContent({data, mark, setMark}) {
+  let [heartBtn, setHeartBtn] = useState(false);
+
+  const handleHeartBtn = () => {
+    let copyMark = [...mark];
+
+    if(!heartBtn) {
+      setHeartBtn(true);
+      copyMark.push(data.id);
+      setMark(copyMark);
+    }
+    else {
+      setHeartBtn(false);
+      for(let i=0; i<copyMark.length; i++) {
+        if(copyMark[i] === data.id) {
+          copyMark.splice(i, 1);
+          setMark(copyMark);
+        }
+      }
+    }
+  }
+
   return(
     <section className={cn(style.container)}>
       <header className={cn(style.imgContainer)}>
@@ -67,8 +88,12 @@ function ShowContent({data}) {
 
       <aside className={cn(style.bar)}>
         <div className={cn(style.leftItem)}>
-          <button type="button" className={cn(style.heartBtn)}>
-            <img src="/public-assets/one-content/heart.png" alt="heart button" />
+          <button type="button" className={cn(style.heartBtn)} onClick={handleHeartBtn}>
+            {
+              !heartBtn 
+              ? <img src="/public-assets/one-content/heart.png" alt="heart button" />
+              : <img src="/public-assets/one-content/click-heart.png" alt="click heart button" />
+            }
           </button>
           <span>종류: {data.kind}</span>
         </div>

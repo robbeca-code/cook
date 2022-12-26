@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 
 function Share({isOpen, food, product, userId}) {
   const target = 'share';
-  const fLength = food.length;
-  const pLength = product.length;
   let [tab, setTab] = useState('food');
   let [plus, setPlus] = useState(false);
 
