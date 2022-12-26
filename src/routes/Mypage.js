@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import style from './Mypage.module.css';
 import cn from "classnames";
 
-function Mypage({isOpen, userId, food, product, mark}) {
+function Mypage({isOpen, userId, food, product, oneServing, dessert, mark}) {
   let target = 'mypage';
   let [tab, setTab] = useState(0);
   let [remove, setRemove] = useState('');
@@ -54,7 +54,7 @@ function Mypage({isOpen, userId, food, product, mark}) {
 
           <section className={cn(style.grid)}>
             {
-              <GetTab tab={tab} food={food} product={product} mark={mark} setRemove={setRemove} />
+              <GetTab tab={tab} food={food} product={product} mark={mark} oneServing={oneServing} dessert={dessert} setRemove={setRemove} />
             }
           </section>
         </div>
@@ -64,9 +64,12 @@ function Mypage({isOpen, userId, food, product, mark}) {
   );
 }
 
-function GetTab({tab, food, product, mark, setRemove}) {
+function GetTab({tab, food, product, oneServing, dessert, mark, setRemove}) {
   let fMark = [];
   let pMark = [];
+  let oMark = [];
+  let dMark = [];
+
   if(tab === 1) {  
     for(let i=0; i<food.length; i++) {
       let foodId = mark.indexOf(food[i].id);
@@ -93,6 +96,33 @@ function GetTab({tab, food, product, mark, setRemove}) {
       </section>
     );
   }
+
+  if(tab === 2) {  
+    for(let i=0; i<oneServing.length; i++) {
+      let oneServingId = mark.indexOf(oneServing[i].id);
+      if(oneServingId > -1) {
+        oMark.push(mark[oneServingId]);
+      }
+    }
+
+    for(let i=0; i<dessert.length; i++) {
+      let dessertId = mark.indexOf(dessert[i].id);
+      if(dessertId > -1) {
+        dMark.push(mark[dessertId]);
+      }
+    }
+
+    return(
+      <section className={cn(style.grid)}>
+        {
+          <ShowContent id={oMark} data={oneServing} setRemove={setRemove} />
+        }
+        {
+          <ShowContent id={dMark} data={dessert} setRemove={setRemove} />
+        }
+      </section>
+    );
+  }
 }
 
 function ShowContent({id, data, setRemove}) {
@@ -112,13 +142,6 @@ function ShowContent({id, data, setRemove}) {
                   : data.title
                 }
               </h3>
-              <strong>
-                {
-                  data.cost != '가격없음'
-                  ? data.cost.concat('원')
-                  : data.cost
-                }
-              </strong>
               <span>{data.author}</span>
               <button type="button" className={cn(style.removeBtn)} onClick={() => { setRemove(data.id) }}>
                 <img src="/public-assets/mypage/remove.png" alt="remove button" />

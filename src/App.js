@@ -4,10 +4,10 @@ import Home from './routes/Home';
 import { useState } from 'react';
 import {Routes, Route, Link} from 'react-router-dom';
 import NonPage from './routes/NonPage';
-import ShaApp from './routes/sha-app';
-import OneServing from './routes/OneServing';
-import servingList from './routes/OneServing-data';
-import Content from './routes/One-Content';
+import ShaApp from './routes/Sha-App';
+import Application from './routes/Application';
+import {oneServing, dessert} from './routes/Application-data';
+import ApplyContent from './routes/ApplyContent';
 import Share from "./routes/Share";
 import {food, product} from './routes/Share-data';
 import ShareContent from './routes/ShareContent';
@@ -76,11 +76,11 @@ function App() {
         <Route path="*" element={<NonPage />} />
         <Route path="/recipe" element={<Recipe isOpen={isOpen} data={recipe} />} />
         <Route path="/share-application" element={<ShaApp isOpen={isOpen} />} />
-        <Route path="/share-application/one-serving" element={<OneServing isOpen={isOpen} data={servingList} />} />
-        <Route path="/share-application/one-serving/:id" element={<Content isOpen={isOpen} data={servingList} />} />
+        <Route path="/share-application/apply" element={<Application isOpen={isOpen} oneServing={oneServing} dessert={dessert} userId={login} />} />
+        <Route path="/share-application/apply/:id" element={<ApplyContent isOpen={isOpen} mark={mark} setMark={setMark} oneServing={oneServing} dessert={dessert} />} />
         <Route path="/share-application/share" element={<Share isOpen={isOpen} food={food} product={product} userId={login} />} />
         <Route path="/share-application/share/:id" element={<ShareContent isOpen={isOpen} mark={mark} setMark={setMark} food={food} product={product}/>} />
-        <Route path="/mypage" element={<Mypage isOpen={isOpen} userId={login} mark={mark} food={food} product={product} />} />
+        <Route path="/mypage" element={<Mypage isOpen={isOpen} userId={login} mark={mark} food={food} product={product} oneServing={oneServing} dessert={dessert} />} />
       </Routes>
     </div>
   );
