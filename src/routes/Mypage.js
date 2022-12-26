@@ -3,14 +3,13 @@ import Sidebar from "./Sidebar";
 import style from './Mypage.module.css';
 import cn from "classnames";
 
-function Mypage({isOpen, userId, food, product, mark, setMark}) {
+function Mypage({isOpen, userId, food, product, mark}) {
   let target = 'mypage';
   let [tab, setTab] = useState(0);
   let [remove, setRemove] = useState('');
 
   if(mark.indexOf(remove) > -1) {
     let index = mark.indexOf(remove);
-    console.log(index);
     mark.splice(index, 1);
   }
 
@@ -20,38 +19,47 @@ function Mypage({isOpen, userId, food, product, mark, setMark}) {
         <Sidebar isOpen={isOpen} target={target} />
       </aside>
 
-      <header className={cn(style.header)}>
-        <div className={cn(style.userImg)}>
-          <img src="/public-assets/mypage/userImg.png" alt="user profile"/>
+      {
+        userId === ''
+        ? <div className={cn(style.alert)}>
+            <img src="/public-assets/mypage/login-alert.png" alt="" />
+            <h1>Login을 한 다음 진행해주세요</h1>
+          </div>
+        : <div>
+          <header className={cn(style.header)}>
+            <div className={cn(style.userImg)}>
+              <img src="/public-assets/mypage/userImg.png" alt="user profile"/>
+            </div>
+            <div className={cn(style.userInfo)}>
+              <h2>{userId}</h2>
+              <p>저렴한 가격으로 나눔해요~ 반갑습니다~~~</p>
+              <img src="/public-assets/mypage/userManner.png" alt="user manner" />
+            </div>
+          </header>
+
+          <div className={cn(style.tabContainer)}>
+            <button type="button" className={
+              tab === 0 ? cn(style.tabBtn, style.click) : cn(style.tabBtn)
+            } onClick={() => {setTab(0)}}>판매 물품</button>
+            <button type="button" className={
+              tab === 1 ? cn(style.tabBtn, style.click) : cn(style.tabBtn)
+            } onClick={() => {setTab(1)}}>관심 나눔</button>
+            <button type="button" className={
+              tab === 2 ? cn(style.tabBtn, style.click) : cn(style.tabBtn)
+            } onClick={() => {setTab(2)}}>관심 신청</button>
+            <button type="button" className={
+              tab === 3 ? cn(style.tabBtn, style.click) : cn(style.tabBtn)
+            } onClick={() => {setTab(3)}}>관심 레시피</button>
+          </div>
+
+          <section className={cn(style.grid)}>
+            {
+              <GetTab tab={tab} food={food} product={product} mark={mark} setRemove={setRemove} />
+            }
+          </section>
         </div>
-        <div className={cn(style.userInfo)}>
-          <h2>{userId}</h2>
-          <p>저렴한 가격으로 나눔해요~ 반갑습니다~~~</p>
-          <img src="/public-assets/mypage/userManner.png" alt="user manner" />
-        </div>
-      </header>
-
-      <div className={cn(style.tabContainer)}>
-        <button type="button" className={
-          tab === 0 ? cn(style.tabBtn, style.click) : cn(style.tabBtn)
-        } onClick={() => {setTab(0)}}>판매 물품</button>
-        <button type="button" className={
-          tab === 1 ? cn(style.tabBtn, style.click) : cn(style.tabBtn)
-        } onClick={() => {setTab(1)}}>관심 나눔</button>
-        <button type="button" className={
-          tab === 2 ? cn(style.tabBtn, style.click) : cn(style.tabBtn)
-        } onClick={() => {setTab(2)}}>관심 신청</button>
-        <button type="button" className={
-          tab === 3 ? cn(style.tabBtn, style.click) : cn(style.tabBtn)
-        } onClick={() => {setTab(3)}}>관심 레시피</button>
-      </div>
-
-      <section className={cn(style.grid)}>
-        {
-          <GetTab tab={tab} food={food} product={product} mark={mark} setRemove={setRemove} />
-        }
-
-      </section>
+      }
+      
     </section>
   );
 }

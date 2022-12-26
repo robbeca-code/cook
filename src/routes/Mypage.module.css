@@ -6,6 +6,21 @@
 }
 
 
+/*   Alert   */
+.alert {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.alert > img {
+  width: 300px;
+}
+
+.alert > h1 {
+  margin-top: 40px;
+}
+
+
 /*   Header   */
 .header {
   display: flex;
