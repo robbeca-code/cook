@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import style from './Mypage.module.css';
 import cn from "classnames";
 
-function Mypage({isOpen, userId, food, product, oneServing, dessert, mark}) {
+function Mypage({isOpen, userId, food, product, oneServing, dessert, recipe, mark}) {
   let target = 'mypage';
   let [tab, setTab] = useState(0);
   let [remove, setRemove] = useState('');
@@ -54,7 +54,7 @@ function Mypage({isOpen, userId, food, product, oneServing, dessert, mark}) {
 
           <section className={cn(style.grid)}>
             {
-              <GetTab tab={tab} food={food} product={product} mark={mark} oneServing={oneServing} dessert={dessert} setRemove={setRemove} />
+              <GetTab tab={tab} food={food} product={product} mark={mark} oneServing={oneServing} dessert={dessert} recipe={recipe} setRemove={setRemove} />
             }
           </section>
         </div>
@@ -64,11 +64,12 @@ function Mypage({isOpen, userId, food, product, oneServing, dessert, mark}) {
   );
 }
 
-function GetTab({tab, food, product, oneServing, dessert, mark, setRemove}) {
+function GetTab({tab, food, product, oneServing, dessert, recipe, mark, setRemove}) {
   let fMark = [];
   let pMark = [];
   let oMark = [];
   let dMark = [];
+  let rMark = [];
 
   if(tab === 1) {  
     for(let i=0; i<food.length; i++) {
@@ -123,6 +124,23 @@ function GetTab({tab, food, product, oneServing, dessert, mark, setRemove}) {
       </section>
     );
   }
+
+  if(tab === 3) {  
+    for(let i=0; i<recipe.length; i++) {
+      let recipeId = mark.indexOf(recipe[i].id);
+      if(recipeId > -1) {
+        rMark.push(mark[recipeId]);
+      }
+    }
+
+    return(
+      <section className={cn(style.grid)}>
+        {
+          <ShowContent id={rMark} data={recipe} setRemove={setRemove} />
+        }
+      </section>
+    );
+  }
 }
 
 function ShowContent({id, data, setRemove}) {
@@ -142,7 +160,7 @@ function ShowContent({id, data, setRemove}) {
                   : data.title
                 }
               </h3>
-              <span>{data.author}</span>
+              <span>{'by '.concat(data.author)}</span>
               <button type="button" className={cn(style.removeBtn)} onClick={() => { setRemove(data.id) }}>
                 <img src="/public-assets/mypage/remove.png" alt="remove button" />
               </button>

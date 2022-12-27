@@ -20,10 +20,10 @@ function Recipe({isOpen, data}) {
 
       <section className={cn(style.grid)}>
         <article className={cn(style.recipeList)}>
-          <header className={cn(style.kindTitle)}>
+          <Link to="/recipe/tunaCan" className={cn(style.kindTitle, style.link)}>
             <h1>참치 통조림</h1>
-            <Link to="/recipe/tunaCan" className={cn(style.link)}>더보기</Link>
-          </header>
+            <span>더보기</span>
+          </Link>
           <section className={cn(style.grid)}>
           {
             <RecipeItems kind={kind[0]} data={data} />
@@ -35,7 +35,7 @@ function Recipe({isOpen, data}) {
         <article className={cn(style.recipeList)}>
           <header className={cn(style.kindTitle)}>
             <h1>스팸</h1>
-            <Link to="/recipe/tunaCan" className={cn(style.link)}>더보기</Link>
+            더보기
           </header>
           <section className={cn(style.grid)}>
           {
@@ -48,7 +48,7 @@ function Recipe({isOpen, data}) {
         <article className={cn(style.recipeList)}>
           <header className={cn(style.kindTitle)}>
             <h1>김치</h1>
-            <Link to="/recipe/tunaCan" className={cn(style.link)}>더보기</Link>
+            <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
           {
@@ -61,7 +61,7 @@ function Recipe({isOpen, data}) {
         <article className={cn(style.recipeList)}>
           <header className={cn(style.kindTitle)}>
             <h1>만두</h1>
-            <Link to="/recipe/tunaCan" className={cn(style.link)}>더보기</Link>
+            <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
           {
@@ -74,7 +74,7 @@ function Recipe({isOpen, data}) {
         <article className={cn(style.recipeList)}>
           <header className={cn(style.kindTitle)}>
             <h1>라면</h1>
-            <Link to="/recipe/tunaCan" className={cn(style.link)}>더보기</Link>
+            <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
           {
@@ -106,7 +106,7 @@ function RecipeItems({kind, data}) {
     data.map((item, i) => {
       if(item.kind === kind) {
         return(
-          <Link to={item.url} className={cn(style.recipeItem, style.link)} key={i}>
+          <article className={cn(style.recipeItem)} key={i}>
             <div className={cn(style.imgContainer)}>
               <img src={item.img} alt={item.img_alt} />
             </div>
@@ -125,7 +125,7 @@ function RecipeItems({kind, data}) {
                 <span>{item.time}</span>
               </div>
             </div>
-          </Link>
+          </article>
         );
       }
       else {

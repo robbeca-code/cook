@@ -14,6 +14,7 @@ import ShareContent from './routes/ShareContent';
 import Recipe from "./routes/Recipe";
 import Mypage from "./routes/Mypage";
 import {recipe, tunaCan} from './routes/Recipe-data';
+import RecipeContent from "./routes/RecipeContent";
 
 function App() {
   let [isOpen, setIsOpen] = useState(false);
@@ -74,13 +75,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isOpen={isOpen} />} />
         <Route path="*" element={<NonPage />} />
+
         <Route path="/recipe" element={<Recipe isOpen={isOpen} data={recipe} />} />
+        <Route path="/recipe/tunaCan" element={<RecipeContent isOpen={isOpen} data={tunaCan}  mark={mark} setMark={setMark} /> } />
+
         <Route path="/share-application" element={<ShaApp isOpen={isOpen} />} />
         <Route path="/share-application/apply" element={<Application isOpen={isOpen} oneServing={oneServing} dessert={dessert} userId={login} />} />
         <Route path="/share-application/apply/:id" element={<ApplyContent isOpen={isOpen} mark={mark} setMark={setMark} oneServing={oneServing} dessert={dessert} />} />
         <Route path="/share-application/share" element={<Share isOpen={isOpen} food={food} product={product} userId={login} />} />
         <Route path="/share-application/share/:id" element={<ShareContent isOpen={isOpen} mark={mark} setMark={setMark} food={food} product={product}/>} />
-        <Route path="/mypage" element={<Mypage isOpen={isOpen} userId={login} mark={mark} food={food} product={product} oneServing={oneServing} dessert={dessert} />} />
+
+        <Route path="/mypage" element={<Mypage isOpen={isOpen} userId={login} mark={mark} food={food} product={product} oneServing={oneServing} dessert={dessert} recipe={tunaCan} />} />
       </Routes>
     </div>
   );
