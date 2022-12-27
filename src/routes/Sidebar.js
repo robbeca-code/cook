@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 function Sidebar({isOpen, target}) {
   let sidebar;
-  let [click, setClick] = useState({target});
+  let [click, setClick] = useState(target);
 
   if(!isOpen) {
     sidebar = `hide-sidebar`;
@@ -16,43 +16,58 @@ function Sidebar({isOpen, target}) {
 
   return(
     <ol className={sidebar}>
-      <li className={cn(style.sideItem)}>
-        <Link to="/" onClick={() => {
+      <li>
+        <Link to="/"  className={cn(style.sideItem)} 
+        onClick={() => {
           setClick('home');
-        }}>
-          <img src={click === 'home' ? '/public-assets/nav/click-home.png' : '/public-assets/nav/home.png'} alt="home icon" className={cn(style.sideIcon, style.click)} />
+        }} >
+          <div className={cn(style.sideIcon)}>
+            <img src={click === 'home' ? '/public-assets/nav/click-home.png' : '/public-assets/nav/home.png'} alt="home icon" />
+          </div>
           <span className={click === 'home' ? cn(style.sideTitle, style.click) : cn(style.sideTitle, style.link)}>홈</span>
         </Link>
       </li>
-      <li className={cn(style.sideItem)}>
-        <Link to="/recipe" onClick={() => {
+      <li>
+        <Link to="/recipe"  className={cn(style.sideItem)}
+        onClick={() => {
           setClick('recipe');
         }}>
-          <img src={click === 'recipe' ? '/public-assets/nav/click-recipe.png' : '/public-assets/nav/recipe.png'} alt="recipe icon" className={cn(style.sideIcon)}/>
+          <div className={cn(style.sideIcon)}>
+            <img src={click === 'recipe' ? '/public-assets/nav/click-recipe.png' : '/public-assets/nav/recipe.png'} alt="recipe icon"/>
+          </div>
           <span className={click === 'recipe' ? cn(style.sideTitle, style.click) : cn(style.sideTitle, style.link)}>레시피</span>
         </Link>
       </li>
-      <li className={cn(style.sideItem)}>
-        <Link to="/share-application" onClick={() => {
+      <li>
+        <Link to="/share-application" className={cn(style.sideItem)} 
+        onClick={() => {
           setClick('share');
         }}>
-          <img src="/public-assets/nav/main.png" alt="main icon" className={cn(style.sideIcon, style.main)}/>
+          <div className={cn(style.sideIcon, style.main)}>
+            <img src="/public-assets/nav/main.png" alt="main icon" />
+          </div>
           <span className={click === 'share' ? cn(style.sideTitle, style.click): cn(style.sideTitle, style.link)}>나눔/신청</span>
         </Link>
       </li>
-      <li className={cn(style.sideItem)}>
-        <Link to="/" onClick={() => {
+      <li>
+        <Link to="/" className={cn(style.sideItem)} 
+        onClick={() => {
           setClick('chat');
         }}>
-          <img src={click === 'chat' ? '/public-assets/nav/click-chat.png' : '/public-assets/nav/chat.png'} alt="chatting icon" className={cn(style.sideIcon)}/>
+          <div className={cn(style.sideIcon)}>
+            <img src={click === 'chat' ? '/public-assets/nav/click-chat.png' : '/public-assets/nav/chat.png'} alt="chatting icon"/>
+          </div>
           <span className={click === 'chat' ? cn(style.sideTitle, style.click): cn(style.sideTitle, style.link)}>채팅</span>
         </Link>
       </li>
-      <li className={cn(style.sideItem)}>
-        <Link to="/mypage" onClick={() => {
+      <li>
+        <Link to="/mypage" className={cn(style.sideItem)} 
+        onClick={() => {
           setClick('mypage');
         }}>
-          <img src={click === 'mypage' ? '/public-assets/nav/click-mypage.png' : '/public-assets/nav/mypage.png'} alt="mypage icon" className={cn(style.sideIcon)}/>
+          <div className={cn(style.sideIcon)}>
+            <img src={click === 'mypage' ? '/public-assets/nav/click-mypage.png' : '/public-assets/nav/mypage.png'} alt="mypage icon"/>
+          </div>
           <span className={click === 'mypage' ? cn(style.sideTitle, style.click): cn(style.sideTitle, style.link)}>마이페이지</span>
         </Link>
       </li>

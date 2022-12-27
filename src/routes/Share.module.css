@@ -30,8 +30,8 @@
 }
 
 .tab.click {
-  color: #E67E22;
-  border-bottom: 3px solid #E67E22;
+  color: #ea5936;
+  border-bottom: 3px solid #ea5936;
 }
 
 
@@ -158,7 +158,7 @@
 }
 
 .inputBtn {
-  background-color: #E67E22;
+  background-color: #ea5936;
   border-radius: 20px;
   width: 200px;
   height: 50px;

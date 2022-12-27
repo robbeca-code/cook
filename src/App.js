@@ -77,7 +77,7 @@ function App() {
         <Route path="*" element={<NonPage />} />
 
         <Route path="/recipe" element={<Recipe isOpen={isOpen} data={recipe} />} />
-        <Route path="/recipe/tunaCan" element={<RecipeContent isOpen={isOpen} data={tunaCan}  mark={mark} setMark={setMark} /> } />
+        <Route path="/recipe/tunaCan" element={<RecipeContent isOpen={isOpen} data={tunaCan}  mark={mark} setMark={setMark} login={login} /> } />
 
         <Route path="/share-application" element={<ShaApp isOpen={isOpen} />} />
         <Route path="/share-application/apply" element={<Application isOpen={isOpen} oneServing={oneServing} dessert={dessert} userId={login} />} />

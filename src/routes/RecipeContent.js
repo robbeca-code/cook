@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import style from './RecipeContent.module.css';
 import cn from 'classnames';
 
-function RecipeContent({isOpen, data, mark, setMark}) {
+function RecipeContent({isOpen, data, mark, setMark, login}) {
   let target = 'recipe';
   let [bookmark, setBookmark] = useState([false, false, false, false, false, false, false, false, false, false]);
 
@@ -20,13 +20,19 @@ function RecipeContent({isOpen, data, mark, setMark}) {
   }
 
   const handleBookmarkBtn = (id, index) => {
-    let copyBookmark = [...bookmark];
-    copyBookmark[index] = true;
-    setBookmark(copyBookmark);
+    if(login === '') {
+      alert('로그인을 해주세요.');
+    }
+    else {
+      let copyBookmark = [...bookmark];
+      copyBookmark[index] = true;
+      setBookmark(copyBookmark);
 
-    let copyMark = [...mark];
-    copyMark.push(id);
-    setMark(copyMark);
+      let copyMark = [...mark];
+      copyMark.push(id);
+      setMark(copyMark);
+    }
+    
   }
 
   return(

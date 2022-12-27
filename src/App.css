@@ -74,7 +74,7 @@ button {
 
 .loginBtn {
   background-color: #fff;
-  border: 2px solid #E67E22;
+  border: 2px solid #ea5936;
   width: 80px;
   height: 40px;
   font-size: 18px;
@@ -122,7 +122,7 @@ button {
 }
 
 .inputBtn {
-  background-color: #E67E22;
+  background-color: #ea5936;
   border-radius: 20px;
   width: 200px;
   height: 50px;
@@ -137,11 +137,11 @@ button {
   position: fixed;
 	top: 100px;
 	left: 0px;
+  padding-top: 20px;
 	width: 400px;
 	height: 100%;
-  padding-left: 70px;
 	display: grid;
-  grid-template-rows: repeat(5, 100px);
+  grid-template-rows: repeat(5, 70px);
   background-color: #fff;
 	row-gap: 1rem;
   z-index: 999;
