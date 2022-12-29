@@ -8,7 +8,7 @@ import {slide, tag, content} from './Home-data';
 function Home(props) {
   let target = 'home';
   return (
-    <div className="Home">
+    <div className={cn(style.home)}>
         <aside>
           <Sidebar isOpen={props.isOpen} target={target} />
         </aside>
@@ -18,6 +18,17 @@ function Home(props) {
         <Tag tag={tag} />
 
         <Content content={content} />
+
+        <article className={cn(style.video)}>
+          <header>
+            <h2 className={cn(style.subTitle)}>영상으로 확인하는</h2>
+            <h1 className={cn(style.mainTitle)}>특별한 <span className={cn(style.point)}>저녁시간</span></h1>
+          </header>
+          <div className={cn(style.videoPlayer)}>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/jC41T25dImI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          
+        </article>
     </div>
   );
 }
@@ -114,13 +125,12 @@ function Content(props) {
                 <div className={cn(style.imgContainer)}>
                   <img src={item.img1} alt="" />
                 </div>
-                {
-                  item.img2 === undefined ? null : 
-                    <div className={cn(style.imgContainer)}>
-                      <img src={item.img2} alt="" />
-                    </div>
-                }
-                
+                <div className={cn(style.imgContainer)}>
+                  <img src={item.img2} alt="" />
+                </div>
+                <div className={cn(style.imgContainer)}>
+                  <img src={item.img3} alt="" />
+                </div>
               </div>
             </article>
           );

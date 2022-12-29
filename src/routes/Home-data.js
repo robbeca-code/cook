@@ -19,21 +19,17 @@ let content = [
     mainTitle: '오늘의',
     styleTitle: '셰프 요리',
     img1: '/public-assets/home/chef-cook1.jpg',
-    img2: '/public-assets/home/chef-cook2.jpg'
+    img2: '/public-assets/home/chef-cook2.jpg',
+    img3: '/public-assets/home/chef-cook3.jpg'
   },
   {
     subTitle: '음식과 함께',
     mainTitle: '건강한',
     styleTitle: '다이어트',
     img1: '/public-assets/home/healthy1.jpg',
-    img2: '/public-assets/home/healthy2.jpg'
-  },
-  {
-    subTitle: '영상으로 확인하는',
-    mainTitle: '특별한',
-    styleTitle: '저녁시간',
-    img1: '/public-assets/home/healthy1.jpg'
-  },
+    img2: '/public-assets/home/healthy2.jpg',
+    img3: '/public-assets/home/healthy3.jpg'
+  }
 ];
 
 

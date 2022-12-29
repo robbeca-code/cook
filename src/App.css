@@ -47,12 +47,12 @@ button {
 }
 
 .topIcon {
-  width: 42px;
+  width: 32px;
 }
 
 .logo {
-  width: 287px;
-  height: 80px;
+  width: auto;
+  height: 62px;
   overflow: hidden;
   margin-left: 5rem;
 }
