@@ -1,70 +1,228 @@
-# Getting Started with Create React App
+# 요리할래?! (React 프로젝트)
+### 사이트 주제
+- 요리 레시피를 알려주면서 원하는 요리를 신청해서 돈을 벌 수 있어서 혼자서 사는 자취생과 코로나로 인해 피해받은 자영업자분들을 위한 사이트 입니다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 주요 기능
+1. [요리 신청 글쓰기](#요리-신청-글쓰기)
+2. 관심 레시피/나눔/신청 저장하기
+3. 로그인 하기
+</br>
+</br>
 
-## Available Scripts
+### #요리 신청 글쓰기
+📌 원하는 음식을 만들어 달라는 글을 작성할 수 있습니다.</br></br>
+**주요 코드**</br>
+**1. 전체 코드**
+```jsx
+function PlusContent({o, d, author, plus, setPlus}) {
+  const options = ['종류 선택','1인분', '디저트', '대용량'];
+  const fileInput = useRef(null);
+  let kind;
+  let title;
+  let content;
+  let img;
 
-In the project directory, you can run:
+  const clickUploadBtn = () => {
+    fileInput.current.click();
+  }
 
-### `npm start`
+  const changeFileInput = (e) => {
+    img = e.target.files;
+  }
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  const handleKind = (e) => {
+    kind = e.target.value;
+  };
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  const handleTitle = (e) => {
+    title = e.target.value;
+  };
 
-### `npm test`
+  const handleContent = (e) => {
+    content = e.target.value;
+  };
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  const inputData = () => {
+    setPlus(false);
 
-### `npm run build`
+    if(o[0].kind === kind) {
+      const index = o.length - 1;
+      o[index].title = title;
+      o[index].content = content;
+      o[index].author = author;
+    }
+    if(d[0].kind === kind) {
+      const index = d.length - 1;
+      d[index].title = title;
+      d[index].content = content;
+      d[index].author = author;
+    }
+  };
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  if(plus) {
+    return(
+      <article className={cn(style.inputModal)}>
+        <header className={cn(style.modalTitle)}>
+          <h1>나눔 하기</h1>
+        </header>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+        <div className={cn(style.modalItem)}>
+          <button type="button"onClick={clickUploadBtn} className={cn(style.uploadBtn)}>
+            <img src="/public-assets/share-content/input-img.png" alt="file upload button" />
+          </button>
+          <input type="file" ref={fileInput} accept=".png, .jpg" onChange={changeFileInput} className={cn(style.hidden)} />
+        </div>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+        <div className={cn(style.modalItem)}>
+          <strong>종류</strong>
+          <select onChange={handleKind} value={options[0]} className={cn(style.itemSize)} >
+            {
+              options.map((item) => {
+                return(
+                  <option value={item} key={item}>
+                    {item}
+                  </option>
+                );
+              })
+            }
+          </select>
+        </div>
+        
+        <div className={cn(style.modalItem)}>
+          <strong>제목</strong>
+          <input type="text" onChange={handleTitle}  className={cn(style.itemSize)} />
+        </div>
 
-### `npm run eject`
+        <div className={cn(style.modalItem)}>
+          <strong>내용</strong>
+          <textarea onChange={handleContent}  className={cn(style.itemSize, style.textarea)} ></textarea>
+        </div>
+        
+        <button type="button" onClick={inputData} className={cn(style.inputBtn)} >
+          입력
+        </button>
+      </article>
+    );
+  } 
+  else {
+    return(null);
+  }
+}
+```
+</br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**2. 함수의 매개변수와 지역변수 의미**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```jsx
+function PlusContent({o, d, author, plus, setPlus}) {
+  const options = ['종류 선택','1인분', '디저트', '대용량'];
+  const fileInput = useRef(null);
+  let kind;
+  let title;
+  let content;
+  let img;
+  ...
+}
+```
+1. `o, d` 는 신청에 관한 데이터가 저장되어 있고, `plus`는 글 작성 버튼을 클릭 유무를 저장하는 state 입니다. `setPlus`는 글쓰기 폼을 보여줄지 말지를 결정하는 state 입니다.
+2. `options`는 글을 작성할 때 종류를 분류하기 위한 값을 저장한 변수입니다.
+3. 순서대로 종류, 글제목, 글내용, 첨부사진 을 저장하기 위한 변수가 선언되었습니다.
+</br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**3. 각종 함수들 의미**
+```jsx
+const clickUploadBtn = () => {
+  fileInput.current.click();
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+const changeFileInput = (e) => {
+  img = e.target.files;
+}
 
-## Learn More
+const handleKind = (e) => {
+  kind = e.target.value;
+};
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+const handleTitle = (e) => {
+  title = e.target.value;
+};
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+const handleContent = (e) => {
+  content = e.target.value;
+};
 
-### Code Splitting
+const inputData = () => {
+  setPlus(false);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  if(o[0].kind === kind) {
+    const index = o.length - 1;
+    o[index].title = title;
+    o[index].content = content;
+    o[index].author = author;
+  }
+  if(d[0].kind === kind) {
+    const index = d.length - 1;
+    d[index].title = title;
+    d[index].content = content;
+    d[index].author = author;
+  }
+};
+```
+1. `clickUploadBtn`는 이미지 업로드 버튼을 눌렀을 때 input의 file 타입이 클릭되는 역할을 수행합니다.
+2. `handle...` 함수들은 input 태그에 작성한 값을 **e.target.value**로 가져와서 각각에 맞는 변수에 저장하는 역할을 합니다.
+3. `inputData` 함수는 입력한 자료를 <span style='background-color:#ffdce0'>신청 데이터가 정리된 파일에 저장하는 역할</span> 을 해서, `d[0].kind === kind` 이렇게 종류에 맞는 데이터 마지막에 저장합니다.
+</br>
 
-### Analyzing the Bundle Size
+**4. 작성 폼 구조**
+```jsx
+if(plus) {
+  return(
+    <article className={cn(style.inputModal)}>
+      <header className={cn(style.modalTitle)}>
+        <h1>나눔 하기</h1>
+      </header>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+      <div className={cn(style.modalItem)}>
+        <button type="button"onClick={clickUploadBtn} className={cn(style.uploadBtn)}>
+          <img src="/public-assets/share-content/input-img.png" alt="file upload button" />
+        </button>
+        <input type="file" ref={fileInput} accept=".png, .jpg" onChange={changeFileInput} className={cn(style.hidden)} />
+      </div>
 
-### Making a Progressive Web App
+      <div className={cn(style.modalItem)}>
+        <strong>종류</strong>
+        <select onChange={handleKind} value={options[0]} className={cn(style.itemSize)} >
+          {
+            options.map((item) => {
+              return(
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              );
+            })
+          }
+        </select>
+      </div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+      <div className={cn(style.modalItem)}>
+        <strong>제목</strong>
+        <input type="text" onChange={handleTitle}  className={cn(style.itemSize)} />
+      </div>
 
-### Advanced Configuration
+      <div className={cn(style.modalItem)}>
+        <strong>내용</strong>
+        <textarea onChange={handleContent}  className={cn(style.itemSize, style.textarea)} ></textarea>
+      </div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+      <button type="button" onClick={inputData} className={cn(style.inputBtn)} >
+        입력
+      </button>
+    </article>
+  );
+} 
+else {
+  return(null);
+}
+```
+1. `if(plus)`는 글작성 버튼을 눌렀을 때(**true**) 일 때 글작성 폼을 보여줍니다.
+2. 만약 버튼을 누르지 않았다면, `null`을 반환해서 글작성 폼이 보이지 않게 합니다.
