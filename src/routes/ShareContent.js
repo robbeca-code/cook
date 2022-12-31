@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import style from './ShareContent.module.css';
 import cn from 'classnames';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function ShareContent({isOpen, food, product, mark, setMark}) {
   let target = 'share';
@@ -36,6 +36,7 @@ function GetConent({id, food, product, mark, setMark}) {
 
 function ShowContent({data, mark, setMark}) {
   let [heartBtn, setHeartBtn] = useState(false);
+  let url = "/share-apply/chat/" + data.id;
 
   const handleHeartBtn = () => {
     let copyMark = [...mark];

@@ -39,7 +39,7 @@ function Sidebar({isOpen, target}) {
         </Link>
       </li>
       <li>
-        <Link to="/share-application" className={cn(style.sideItem)} 
+        <Link to="/share-apply" className={cn(style.sideItem)} 
         onClick={() => {
           setClick('share');
         }}>

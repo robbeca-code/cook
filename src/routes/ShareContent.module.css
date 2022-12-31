@@ -1,5 +1,9 @@
-/*   Show Content   */
+.relative {
+  position: relative;
+}
 
+
+/*   Show Content   */
 .container {
   padding-top: 190px;
   width: 100%;
@@ -111,4 +115,74 @@
   border-radius: 20px;
   font-size: 19px;
   color: #fff;
+}
+
+
+/*   Show Chat   */
+.absolute {
+  position: absolute;
+  width: 600px;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  box-shadow: 0 0 0 100vw rgba(0,0,0,0.2);
+}
+
+.chatContainer > .header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #949494;
+  margin-bottom: 20px;
+  width: 100%;
+  position: relative;
+}
+
+.chatContainer > .header > .imgContainer {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.itemInfo {
+  padding-left: 20px;
+}
+
+.itemInfo > h2 {
+  margin-bottom: 10px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 23px;
+  height: 23px;
+}
+
+.closeBtn > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+/*   Chat List   */
+.chatList {
+  height: 400px;
+}
+
+.sendContainer {
+  width: 100%;
+  transform: translateX(5%);
+}
+
+.sendContainer > input {
+  width: 80%;
+}
+
+.sendContainer > button {
+  margin-left: 10px;
 }

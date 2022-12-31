@@ -2,39 +2,51 @@ import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import style from './ShareContent.module.css';
 import cn from 'classnames';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import Year from 'react-live-clock';
+import Month from 'react-live-clock';
 
-function ApplyContent({isOpen, oneServing, dessert, mark, setMark}) {
+function ApplyContent({isOpen, mark, setMark, chat, setChat, oneServing, dessert }) {
   let target = 'share';
   let {id} = useParams();
+  let [chatBtn, setChatBtn] = useState(false);
+  let [data, setData] = useState('');
 
   return(
-    <section>
+    <section className={cn(style.relative)}>
       <aside>
         <Sidebar isOpen={isOpen} target={target} />
       </aside>
       {
-        <GetConent id={id} oneServing={oneServing} dessert={dessert} mark={mark} setMark={setMark} />
+        <GetConent id={id} oneServing={oneServing} dessert={dessert} mark={mark} setMark={setMark} setChatBtn={setChatBtn} setData={setData} />
+      }
+      {
+        chatBtn ? <ShowChat data={data} chat={chat} setChat={setChat} setChatBtn={setChatBtn} /> : null
       }
     </section>
   );
 }
 
-function GetConent({id, oneServing, dessert, mark, setMark}) {
+
+function GetConent({id, oneServing, dessert, mark, setMark, setChatBtn, setData}) {
   for(let i=0; i<oneServing.length; i++) {
     if(id === oneServing[i].id) {
-      return(<ShowContent data={oneServing[i]} mark={mark} setMark={setMark} />);
+      let data = oneServing[i];
+      setData(data);
+      return(<ShowContent data={oneServing[i]} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
     }
   }
 
   for(let i=0; i<dessert.length; i++) {
     if(id === dessert[i].id) {
-      return(<ShowContent data={dessert[i]} mark={mark} setMark={setMark} />);
+      let data = dessert[i];
+      setData(data);
+      return(<ShowContent data={dessert[i]} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
     }
   }
 }
 
-function ShowContent({data, mark, setMark}) {
+function ShowContent({data, mark, setMark, setChatBtn}) {
   let [heartBtn, setHeartBtn] = useState(false);
 
   const handleHeartBtn = () => {
@@ -46,6 +58,10 @@ function ShowContent({data, mark, setMark}) {
       setMark(copyMark);
     }
   }
+
+  const handleChatBtn = () => {
+    setChatBtn(true);
+  };
 
   return(
     <section className={cn(style.container)}>
@@ -83,11 +99,83 @@ function ShowContent({data, mark, setMark}) {
           </button>
           <span>종류: {data.kind}</span>
         </div>
-        <button type="button" className={cn(style.chatBtn)}>
+        <button type="button" className={cn(style.chatBtn)} onClick={handleChatBtn} >
           채팅하기
         </button>
       </aside>
     </section>
+  );
+}
+
+
+function ShowChat({data, chat, setChat, setChatBtn}) {
+  let [send, setSend] = useState(false);
+
+  const handleChatInput = (e) => {
+    let userChat = e.target.value;
+
+    if(send) {
+      let copyChat = [...chat];
+      copyChat.push(userChat);
+      setChat(copyChat);
+      console.log(userChat + ', ' + chat);
+    }
+  };
+
+  console.log(send + ', ' + chat);
+
+  const handleSubmitBtn = () => {
+    setSend(true);
+  }
+
+  return(
+    <section className={cn(style.absolute)}>
+      <article className={cn(style.chatContainer)}>
+        <header className={cn(style.header)}>
+          <div className={cn(style.imgContainer)}>
+            <img src={data.img} alt="상품 이미지" />
+          </div>
+          <div className={cn(style.itemInfo)}>
+            <h2>{data.title}</h2>
+            <strong>{data.author}</strong>
+          </div>
+          <button type="button" className={cn(style.closeBtn)} onClick={() => {setChatBtn(false)}}>
+            <img src="/public-assets/apply-content/close.png" alt="close button" />
+          </button>
+        </header>
+
+        <article className={cn(style.chatList)}>
+          <aside className={cn(style.dateContainer)}>
+            <span className={cn(style.date)}>
+              <Year format={"YYYY"} ticking={false} timezone={"KR/Pacific"} />
+            </span>
+            <span>-</span>
+            <span className={cn(style.date)}>
+              <Month format={"MM"} ticking={false} timezone={"KR/Pacific"} />
+            </span>
+          </aside>
+          <section>
+          {
+            <ShowChatList chatList={chat} />
+          }
+          </section>
+        </article>
+        <div className={cn(style.sendContainer)}>
+          <input type="text" className={cn(style.inputStyle)} onChange={handleChatInput} />
+          <button type="button" onClick={handleSubmitBtn}>전송</button>
+        </div>
+      </article>
+    </section>
+  );
+}
+
+function ShowChatList({chatList}) {
+  return (
+    chatList.map((chat, i) => {
+      <article key={i}>
+        <span>{chat}</span>
+      </article>
+    })
   );
 }
 
