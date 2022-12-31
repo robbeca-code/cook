@@ -30,8 +30,8 @@
 }
 
 .imgContainer {
-  width: 240px;
-  height: 230px;
+  width: 160px;
+  height: 160px;
 }
 
 .imgContainer > img {
@@ -49,6 +49,14 @@
 .recommendedUsers > .contentTitle {
   padding-bottom: 30px;
   text-align: left;
+}
+
+.recommendedUsers > .itemsList {
+  justify-content: flex-start;
+}
+
+.recommendedUsers > .itemsList > .item {
+  padding-right: 60px;
 }
 
 .userName {

@@ -1,7 +1,7 @@
 let food = [
   {
     id: 'f0',
-    url: '/share-application/share/f0',
+    url: '/share-apply/share/f0',
     kind: '식재료',
     img: '/public-assets/share-content/food1.png',
     title: '사과 나눔합니다.',
@@ -13,7 +13,7 @@ let food = [
   },
   {
     id: 'f1',
-    url: '/share-application/share/f1',
+    url: '/share-apply/share/f1',
     kind: '식재료',
     img: '/public-assets/share-content/food2.jpg',
     title: '스팸이랑 참치 만원에 들고가세요',
@@ -25,7 +25,7 @@ let food = [
   },
   {
     id: 'f2',
-    url: '/share-application/share/f2',
+    url: '/share-apply/share/f2',
     kind: '식재료',
     img: '/public-assets/share-content/food3.jpg',
     title: '벌레 먹은 쌀 닭 모이용으로 드림합니다.',
@@ -37,7 +37,7 @@ let food = [
   },
   {
     id: 'f3',
-    url: '/share-application/share/f3',
+    url: '/share-apply/share/f3',
     kind: '식재료',
     img: '/public-assets/share-content/food4.jpg',
     title: '꿀',
@@ -49,7 +49,7 @@ let food = [
   },
   {
     id: 'fN',
-    url: '/share-application/share/fN',
+    url: '/share-apply/share/fN',
     kind: '식재료',
     img: '/public-assets/share-content/non-food-img.png',
     title: '',
@@ -64,7 +64,7 @@ let food = [
 let product = [
   {
     id: 'p0',
-    url: '/share-application/share/p0',
+    url: '/share-apply/share/p0',
     kind: '식기 및 도구',
     img: '/public-assets/share-content/product1.jpg',
     title: '독일 휘슬러 냄비세트',
@@ -76,7 +76,7 @@ let product = [
   },
   {
     id: 'p1',
-    url: '/share-application/share/p1',
+    url: '/share-apply/share/p1',
     kind: '식기 및 도구',
     img: '/public-assets/share-content/product2.jpg',
     title: '휘슬러 냄비 4종세트',
@@ -88,7 +88,7 @@ let product = [
   },
   {
     id: 'pN',
-    url: '/share-application/share/pN',
+    url: '/share-apply/share/pN',
     kind: '식기 및 도구',
     img: '/public-assets/share-content/non-food-img.png',
     title: '',

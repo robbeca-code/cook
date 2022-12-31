@@ -20,7 +20,7 @@ function ShaApp(props) {
           </header>
           <ul className={cn(style.itemsList)}>
             <li className={cn(style.item)}>
-              <Link to="/share-application/share">
+              <Link to="/share-apply/share">
                 <button type="button" className={cn(style.btn, style.imgContainer)}>
                   <img src="/public-assets/sha_app/item.png" alt="The ingredients button" />
                 </button>
@@ -28,7 +28,7 @@ function ShaApp(props) {
               <h2>식재료</h2>
             </li>
             <li className={cn(style.item)}>
-              <Link to="/share-application/share">
+              <Link to="/share-apply/share">
                 <button type="button" className={cn(style.btn, style.imgContainer)}>
                   <img src="/public-assets/sha_app/pork.png" alt="The ingredients button" />
                 </button>
@@ -36,7 +36,7 @@ function ShaApp(props) {
               <h2>식기 및 도구</h2>
             </li>
             <li className={cn(style.item)}>
-              <Link to="/share-application/share">
+              <Link to="/share-apply/share">
                 <button type="button" className={cn(style.btn, style.imgContainer)}>
                   <img src="/public-assets/sha_app/book.png" alt="The ingredients button" />
                 </button>
@@ -52,7 +52,7 @@ function ShaApp(props) {
           </header>
           <ul className={cn(style.itemsList)}>
             <li className={cn(style.item)}>
-              <Link to="/share-application/apply" className={cn(style.link)}>
+              <Link to="/share-apply/apply" className={cn(style.link)}>
                 <button type="button" className={cn(style.btn, style.imgContainer)}>
                   <img src="/public-assets/sha_app/one-person.png" alt="The ingredients button" />
                 </button>
@@ -61,7 +61,7 @@ function ShaApp(props) {
               
             </li>
             <li className={cn(style.item)}>
-              <Link to="/share-application/apply" className={cn(style.link)}>
+              <Link to="/share-apply/apply" className={cn(style.link)}>
                 <button type="button" className={cn(style.btn, style.imgContainer)}>
                   <img src="/public-assets/sha_app/dessert.png" alt="The ingredients button" />
                 </button>
@@ -69,7 +69,7 @@ function ShaApp(props) {
               <h2>디저트</h2>
             </li>
             <li className={cn(style.item)}>
-              <Link to="/share-application/apply" className={cn(style.link)}>
+              <Link to="/share-apply/apply" className={cn(style.link)}>
                 <button type="button" className={cn(style.btn, style.imgContainer)}>
                   <img src="/public-assets/sha_app/big-food.png" alt="The ingredients button" />
                 </button>

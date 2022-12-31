@@ -79,11 +79,13 @@ function App() {
         <Route path="/recipe" element={<Recipe isOpen={isOpen} data={recipe} />} />
         <Route path="/recipe/tunaCan" element={<RecipeContent isOpen={isOpen} data={tunaCan}  mark={mark} setMark={setMark} login={login} /> } />
 
-        <Route path="/share-application" element={<ShaApp isOpen={isOpen} />} />
-        <Route path="/share-application/apply" element={<Application isOpen={isOpen} oneServing={oneServing} dessert={dessert} userId={login} />} />
-        <Route path="/share-application/apply/:id" element={<ApplyContent isOpen={isOpen} mark={mark} setMark={setMark} oneServing={oneServing} dessert={dessert} />} />
-        <Route path="/share-application/share" element={<Share isOpen={isOpen} food={food} product={product} userId={login} />} />
-        <Route path="/share-application/share/:id" element={<ShareContent isOpen={isOpen} mark={mark} setMark={setMark} food={food} product={product}/>} />
+        <Route path="/share-apply" element={<ShaApp isOpen={isOpen} />} />
+        <Route path="/share-apply/apply" element={<Application isOpen={isOpen} oneServing={oneServing} dessert={dessert} userId={login} />} />
+        <Route path="/share-apply/apply/:id" element={<ApplyContent isOpen={isOpen} mark={mark} setMark={setMark} oneServing={oneServing} dessert={dessert} />} />
+        <Route path="/share-apply/share" element={<Share isOpen={isOpen} food={food} product={product} userId={login} />} />
+        <Route path="/share-apply/share/:id" element={<ShareContent isOpen={isOpen} mark={mark} setMark={setMark} food={food} product={product}/>} />
+
+        <Route path="/share-apply/chat/:id" />
 
         <Route path="/mypage" element={<Mypage isOpen={isOpen} userId={login} mark={mark} food={food} product={product} oneServing={oneServing} dessert={dessert} recipe={tunaCan} />} />
       </Routes>
