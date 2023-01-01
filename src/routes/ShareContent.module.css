@@ -186,3 +186,37 @@
 .sendContainer > button {
   margin-left: 10px;
 }
+
+
+/*   Chat List   */
+.dateContainer {
+  width: 100%;
+  text-align: center;
+}
+
+.date::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 80px;
+  transform: translateY(-50%);
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.date::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  right: 80px;
+  transform: translateY(-50%);
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.date {
+  font-size: 15px;
+  color: #6e6e6e;
+  position: relative;
+}

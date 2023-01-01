@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import style from './ShareContent.module.css';
 import cn from 'classnames';
 import { useParams, Link } from "react-router-dom";
-import Year from 'react-live-clock';
-import Month from 'react-live-clock';
+import Clock from 'react-live-clock';
 
 function ApplyContent({isOpen, mark, setMark, chat, setChat, oneServing, dessert }) {
   let target = 'share';
@@ -18,7 +17,7 @@ function ApplyContent({isOpen, mark, setMark, chat, setChat, oneServing, dessert
         <Sidebar isOpen={isOpen} target={target} />
       </aside>
       {
-        <GetConent id={id} oneServing={oneServing} dessert={dessert} mark={mark} setMark={setMark} setChatBtn={setChatBtn} setData={setData} />
+        <GetContent id={id} oneServing={oneServing} dessert={dessert} mark={mark} setMark={setMark} setChatBtn={setChatBtn} setData={setData} />
       }
       {
         chatBtn ? <ShowChat data={data} chat={chat} setChat={setChat} setChatBtn={setChatBtn} /> : null
@@ -28,26 +27,30 @@ function ApplyContent({isOpen, mark, setMark, chat, setChat, oneServing, dessert
 }
 
 
-function GetConent({id, oneServing, dessert, mark, setMark, setChatBtn, setData}) {
+function GetContent({id, oneServing, dessert, mark, setMark, setChatBtn, setData}) {
+  let data;
+
   for(let i=0; i<oneServing.length; i++) {
     if(id === oneServing[i].id) {
-      let data = oneServing[i];
-      setData(data);
-      return(<ShowContent data={oneServing[i]} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
+      data = oneServing[i];
+      return(<ShowContent data={oneServing[i]} setData={setData} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
     }
   }
 
   for(let i=0; i<dessert.length; i++) {
     if(id === dessert[i].id) {
-      let data = dessert[i];
-      setData(data);
-      return(<ShowContent data={dessert[i]} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
+      data = dessert[i];
+      return(<ShowContent data={dessert[i]} setData={setData} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
     }
   }
 }
 
-function ShowContent({data, mark, setMark, setChatBtn}) {
+function ShowContent({data,  setData, mark, setMark, setChatBtn}) {
   let [heartBtn, setHeartBtn] = useState(false);
+
+  useEffect(()=>{
+    setData(data);
+  });
 
   const handleHeartBtn = () => {
     let copyMark = [...mark];
@@ -109,23 +112,17 @@ function ShowContent({data, mark, setMark, setChatBtn}) {
 
 
 function ShowChat({data, chat, setChat, setChatBtn}) {
-  let [send, setSend] = useState(false);
+  let [text, setText] = useState('');
 
   const handleChatInput = (e) => {
-    let userChat = e.target.value;
-
-    if(send) {
-      let copyChat = [...chat];
-      copyChat.push(userChat);
-      setChat(copyChat);
-      console.log(userChat + ', ' + chat);
-    }
+    setText(e.target.value);
   };
 
-  console.log(send + ', ' + chat);
-
   const handleSubmitBtn = () => {
-    setSend(true);
+    let copyChat = [...chat];
+    copyChat.push(text);
+    setChat(copyChat);
+    setText('');
   }
 
   return(
@@ -147,11 +144,7 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
         <article className={cn(style.chatList)}>
           <aside className={cn(style.dateContainer)}>
             <span className={cn(style.date)}>
-              <Year format={"YYYY"} ticking={false} timezone={"KR/Pacific"} />
-            </span>
-            <span>-</span>
-            <span className={cn(style.date)}>
-              <Month format={"MM"} ticking={false} timezone={"KR/Pacific"} />
+              <Clock format={'YYYY-MM-DD'} ticking={false} timezone={"Asia/Seoul"} />
             </span>
           </aside>
           <section>
@@ -161,7 +154,7 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
           </section>
         </article>
         <div className={cn(style.sendContainer)}>
-          <input type="text" className={cn(style.inputStyle)} onChange={handleChatInput} />
+          <input type="text" value={text} className={cn(style.inputStyle)} onChange={handleChatInput} />
           <button type="button" onClick={handleSubmitBtn}>전송</button>
         </div>
       </article>
@@ -172,9 +165,11 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
 function ShowChatList({chatList}) {
   return (
     chatList.map((chat, i) => {
-      <article key={i}>
+      return(
+        <article key={i}>
         <span>{chat}</span>
       </article>
+      );
     })
   );
 }
