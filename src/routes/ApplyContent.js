@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import style from './ShareContent.module.css';
 import cn from 'classnames';
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Clock from 'react-live-clock';
 
 function ApplyContent({isOpen, mark, setMark, chat, setChat, oneServing, dessert }) {
@@ -28,18 +28,15 @@ function ApplyContent({isOpen, mark, setMark, chat, setChat, oneServing, dessert
 
 
 function GetContent({id, oneServing, dessert, mark, setMark, setChatBtn, setData}) {
-  let data;
 
   for(let i=0; i<oneServing.length; i++) {
     if(id === oneServing[i].id) {
-      data = oneServing[i];
       return(<ShowContent data={oneServing[i]} setData={setData} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
     }
   }
 
   for(let i=0; i<dessert.length; i++) {
     if(id === dessert[i].id) {
-      data = dessert[i];
       return(<ShowContent data={dessert[i]} setData={setData} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
     }
   }
@@ -120,9 +117,11 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
 
   const handleSubmitBtn = () => {
     let copyChat = [...chat];
-    copyChat.push(text);
-    setChat(copyChat);
-    setText('');
+    if(text != '') {
+      copyChat.push(text);
+      setChat(copyChat);
+      setText('');
+    }
   }
 
   return(
@@ -147,15 +146,17 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
               <Clock format={'YYYY-MM-DD'} ticking={false} timezone={"Asia/Seoul"} />
             </span>
           </aside>
-          <section>
+          <section className={cn(style.myChat)}>
           {
             <ShowChatList chatList={chat} />
           }
           </section>
         </article>
         <div className={cn(style.sendContainer)}>
-          <input type="text" value={text} className={cn(style.inputStyle)} onChange={handleChatInput} />
-          <button type="button" onClick={handleSubmitBtn}>전송</button>
+          <input type="text" value={text} className={cn(style.inputStyle)} onChange={handleChatInput} placeholder="내용입력" />
+          <button type="button" onClick={handleSubmitBtn} className={cn(style.sendBtn)}>
+            <img src="/public-assets/one-content/share.png" alt="share button" />
+          </button>
         </div>
       </article>
     </section>
@@ -166,9 +167,14 @@ function ShowChatList({chatList}) {
   return (
     chatList.map((chat, i) => {
       return(
-        <article key={i}>
-        <span>{chat}</span>
-      </article>
+        <div className={cn(style.relative)} key={i}>
+          <article className={cn(style.chatBox)}>
+            <p className={cn(style.myMsg)}>{chat}</p>
+            <span className={cn(style.chatTime)}>
+              <Clock format={'A HH:mm'} ticking={false} timezone={"Asia/Seoul"} />
+            </span>
+          </article>
+        </div>
       );
     })
   );
