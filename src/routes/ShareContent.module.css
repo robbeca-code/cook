@@ -254,7 +254,16 @@
 
 .chatTime {
   position: absolute;
-  left: -72px;
-  top: 15px;
+  left: -64px;
+  bottom: 2px;
+  font-size: 14px;
   color: #171717;
+}
+
+.nonRead {
+  position: absolute;
+  bottom: 18px;
+  left: -13px;
+  font-size: 14px;
+  color: #ea5936;
 }

@@ -81,9 +81,9 @@ function App() {
 
         <Route path="/share-apply" element={<ShaApp isOpen={isOpen} />} />
         <Route path="/share-apply/apply" element={<Application isOpen={isOpen} oneServing={oneServing} dessert={dessert} userId={login} />} />
-        <Route path="/share-apply/apply/:id" element={<ApplyContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} oneServing={oneServing} dessert={dessert} />} />
+        <Route path="/share-apply/apply/:id" element={<ApplyContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} oneServing={oneServing} dessert={dessert} login={login} />} />
         <Route path="/share-apply/share" element={<Share isOpen={isOpen} food={food} product={product} userId={login} />} />
-        <Route path="/share-apply/share/:id" element={<ShareContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} food={food} product={product}/>} />
+        <Route path="/share-apply/share/:id" element={<ShareContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} food={food} product={product} login={login} />} />
 
         <Route path="/mypage" element={<Mypage isOpen={isOpen} userId={login} mark={mark} food={food} product={product} oneServing={oneServing} dessert={dessert} recipe={tunaCan} />} />
       </Routes>

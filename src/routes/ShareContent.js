@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { useParams } from "react-router-dom";
 import Clock from 'react-live-clock';
 
-function ShareContent({isOpen, food, product, chat, setChat, mark, setMark}) {
+function ShareContent({isOpen, food, product, chat, setChat, mark, setMark, login}) {
   let target = 'share';
   let {id} = useParams();
   let [chatBtn, setChatBtn] = useState(false);
@@ -17,19 +17,19 @@ function ShareContent({isOpen, food, product, chat, setChat, mark, setMark}) {
         <Sidebar isOpen={isOpen} target={target} />
       </aside>
       {
-        <GetConent id={id} food={food} product={product} mark={mark} setMark={setMark} setChatBtn={setChatBtn} setData={setData} />
+        <GetConent id={id} food={food} product={product} mark={mark} setMark={setMark} setChatBtn={setChatBtn} setData={setData} login={login} />
       }
       {
-        chatBtn ? <ShowChat data={data} chat={chat} setChat={setChat} setChatBtn={setChatBtn} /> : null
+        chatBtn ? <ShowChat data={data} setChat={setChat} setChatBtn={setChatBtn} login={login} /> : null
       }
     </section>
   );
 }
 
-function GetConent({id, food, product, mark, setMark, setChatBtn, setData}) {
+function GetConent({id, food, product, mark, setMark, setChatBtn, setData, login}) {
   for(let i=0; i<food.length; i++) {
     if(id === food[i].id) {
-      return(<ShowContent data={food[i]} setData={setData} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
+      return(<ShowContent data={food[i]} setData={setData} mark={mark} setMark={setMark} setChatBtn={setChatBtn} login={login} />);
     }
   }
 
@@ -40,7 +40,7 @@ function GetConent({id, food, product, mark, setMark, setChatBtn, setData}) {
   }
 }
 
-function ShowContent({data, mark, setMark, setData, setChatBtn}) {
+function ShowContent({data, mark, setMark, setData, setChatBtn, login}) {
   let [heartBtn, setHeartBtn] = useState(false);
 
   useEffect(()=>{
@@ -49,6 +49,11 @@ function ShowContent({data, mark, setMark, setData, setChatBtn}) {
 
   const handleHeartBtn = () => {
     let copyMark = [...mark];
+
+    if(login === '') {
+      alert('로그인을 해주세요.');
+      return;
+    }
 
     if(!heartBtn) {
       setHeartBtn(true);
@@ -67,7 +72,12 @@ function ShowContent({data, mark, setMark, setData, setChatBtn}) {
   }
 
   const handleChatBtn = () => {
-    setChatBtn(true);
+    if(login === '') {
+      alert('로그인을 해주세요.');
+    }
+    else {
+      setChatBtn(true);
+    }
   };
 
   return(
@@ -119,18 +129,28 @@ function ShowContent({data, mark, setMark, setData, setChatBtn}) {
   );
 }
 
-function ShowChat({data, chat, setChat, setChatBtn}) {
+function ShowChat({data, setChat, setChatBtn}) {
   let [text, setText] = useState('');
+  let [msg, setMsg] = useState([]);
+
+  const handleCloseBtn = () => {
+    setChat(msg);
+    let reset = [];
+    setTimeout(setMsg(reset), 1000);
+    setChatBtn(false);
+  }
 
   const handleChatInput = (e) => {
     setText(e.target.value);
   };
 
   const handleSubmitBtn = () => {
-    let copyChat = [...chat];
+    let copyMsg = [...msg];
+
     if(text != '') {
-      copyChat.push(text);
-      setChat(copyChat);
+      copyMsg.push(text);
+      setMsg(copyMsg);
+
       setText('');
     }
   }
@@ -143,10 +163,16 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
             <img src={data.img} alt="상품 이미지" />
           </div>
           <div className={cn(style.itemInfo)}>
-            <h2>{data.title}</h2>
+            <h2>
+            {
+              data.title.length > 10
+              ? data.title.slice(0, 12).concat('...')
+              : data.title
+            }
+            </h2>
             <strong>{data.author}</strong>
           </div>
-          <button type="button" className={cn(style.closeBtn)} onClick={() => {setChatBtn(false)}}>
+          <button type="button" className={cn(style.closeBtn)} onClick={handleCloseBtn}>
             <img src="/public-assets/apply-content/close.png" alt="close button" />
           </button>
         </header>
@@ -159,7 +185,7 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
           </aside>
           <section className={cn(style.myChat)}>
           {
-            <ShowChatList chatList={chat} />
+            <ShowChatList msgList={msg} />
           }
           </section>
         </article>
@@ -174,15 +200,18 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
   );
 }
 
-function ShowChatList({chatList}) {
+function ShowChatList({msgList}) {
   return (
-    chatList.map((chat, i) => {
+    msgList.map((chat, i) => {
       return(
-        <div className={cn(style.relative)} key={i}>
+        <div key={i}>
           <article className={cn(style.chatBox)}>
             <p className={cn(style.myMsg)}>{chat}</p>
             <span className={cn(style.chatTime)}>
               <Clock format={'A HH:mm'} ticking={false} timezone={"Asia/Seoul"} />
+            </span>
+            <span className={cn(style.nonRead)}>
+              1
             </span>
           </article>
         </div>
