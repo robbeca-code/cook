@@ -20,7 +20,7 @@ function ApplyContent({isOpen, mark, setMark, chat, setChat, oneServing, dessert
         <GetContent id={id} oneServing={oneServing} dessert={dessert} mark={mark} setMark={setMark} setChatBtn={setChatBtn} setData={setData} login={login} />
       }
       {
-        chatBtn ? <ShowChat data={data} setChat={setChat} setChatBtn={setChatBtn} /> : null
+        chatBtn ? <ShowChat data={data} chat={chat} setChat={setChat} setChatBtn={setChatBtn} /> : null
       }
     </section>
   );
@@ -117,13 +117,19 @@ function ShowContent({data,  setData, mark, setMark, setChatBtn, login}) {
 }
 
 
-function ShowChat({data, setChat, setChatBtn}) {
+function ShowChat({data, chat, setChat, setChatBtn}) {
   let [text, setText] = useState('');
-  let [msg, setMsg] = useState([]);
+  let [msg, setMsg] = useState({userProfile: '', title: '', author: '', chat: []});
+
+  msg.userProfile = data.user_img;
+  msg.title = data.title;
+  msg.author = data.author;
 
   const handleCloseBtn = () => {
-    setChat(msg);
-    let reset = [];
+    let copyChat = [...chat];
+    copyChat.push(msg);
+    setChat(copyChat);
+    let reset = {img: '', title: '', author: '', chat: []};
     setTimeout(setMsg(reset), 1000);
     setChatBtn(false);
   }
@@ -133,11 +139,8 @@ function ShowChat({data, setChat, setChatBtn}) {
   };
 
   const handleSubmitBtn = () => {
-    let copyMsg = [...msg];
     if(text != '') {
-      copyMsg.push(text);
-      setMsg(copyMsg);
-
+      msg.chat.push(text);
       setText('');
     }
   }
@@ -172,7 +175,7 @@ function ShowChat({data, setChat, setChatBtn}) {
           </aside>
           <section className={cn(style.myChat)}>
           {
-            <ShowChatList msgList={msg} />
+            <ShowChatList msgList={msg.chat} />
           }
           </section>
         </article>
