@@ -11,6 +11,8 @@ function ApplyContent({isOpen, mark, setMark, chat, setChat, oneServing, dessert
   let [chatBtn, setChatBtn] = useState(false);
   let [data, setData] = useState('');
 
+  console.log(chat);
+
   return(
     <section className={cn(style.relative)}>
       <aside>
@@ -119,16 +121,31 @@ function ShowContent({data,  setData, mark, setMark, setChatBtn, login}) {
 
 function ShowChat({data, chat, setChat, setChatBtn}) {
   let [text, setText] = useState('');
-  let [msg, setMsg] = useState({userProfile: '', title: '', author: '', chat: []});
+  let [msg, setMsg] = useState({userProfile: '', title: '', author: '', kind: '', chat: []});
 
   msg.userProfile = data.user_img;
   msg.title = data.title;
   msg.author = data.author;
+  msg.kind = `신청: ${data.kind}`;
+
 
   const handleCloseBtn = () => {
+    for(let i=0; i<chat.length; i++) {
+      if(chat[i].title.indexOf(data.title) > -1) {
+        let copyChat = [...chat];
+        setChat(copyChat);
+        setReset();
+        return;
+      }
+    }
+
     let copyChat = [...chat];
     copyChat.push(msg);
     setChat(copyChat);
+    setReset();
+  }
+
+  const setReset = () => {
     let reset = {img: '', title: '', author: '', chat: []};
     setTimeout(setMsg(reset), 1000);
     setChatBtn(false);
@@ -139,10 +156,27 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
   };
 
   const handleSubmitBtn = () => {
-    if(text != '') {
-      msg.chat.push(text);
-      setText('');
+    // chat에 이미 정보가 들어있을 때 -> 채팅 정보만 추가한다.
+    for(let i=0; i<chat.length; i++) {
+      if(text != '' && chat[i].title.indexOf(data.title) > -1) {
+        chat[i].chat.push(text);
+        inputMsg(text);
+        return;
+      }
+      else {
+        continue;
+      }
     }
+
+    // 처음 채팅할 때
+    if(text != '' ) {
+      inputMsg(text);
+    }
+  }
+
+  const inputMsg = (text) => {
+    msg.chat.push(text);
+    setText('');
   }
 
   return(

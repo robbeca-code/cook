@@ -20,7 +20,7 @@ function ShareContent({isOpen, food, product, chat, setChat, mark, setMark, logi
         <GetConent id={id} food={food} product={product} mark={mark} setMark={setMark} setChatBtn={setChatBtn} setData={setData} login={login} />
       }
       {
-        chatBtn ? <ShowChat data={data} setChat={setChat} setChatBtn={setChatBtn} login={login} /> : null
+        chatBtn ? <ShowChat data={data} chat={chat} setChat={setChat} setChatBtn={setChatBtn} login={login} /> : null
       }
     </section>
   );
@@ -129,30 +129,65 @@ function ShowContent({data, mark, setMark, setData, setChatBtn, login}) {
   );
 }
 
-function ShowChat({data, setChat, setChatBtn}) {
+function ShowChat({data, chat, setChat, setChatBtn}) {
   let [text, setText] = useState('');
-  let [msg, setMsg] = useState([]);
+  let [msg, setMsg] = useState({userProfile: '', title: '', author: '', kind: '', chat: []});
+
+  msg.userProfile = data.user_img;
+  msg.title = data.title;
+  msg.author = data.author;
+  msg.kind = `나눔: ${data.kind}`;
+  
 
   const handleCloseBtn = () => {
-    setChat(msg);
-    let reset = [];
+    for(let i=0; i<chat.length; i++) {
+      if(chat[i].title.indexOf(data.title) > -1) {
+        let copyChat = [...chat];
+        setChat(copyChat);
+        setReset();
+        return;
+      }
+    }
+
+    let copyChat = [...chat];
+    copyChat.push(msg);
+    setChat(copyChat);
+    setReset();
+  }
+
+  const setReset = () => {
+    let reset = {img: '', title: '', author: '', chat: []};
     setTimeout(setMsg(reset), 1000);
     setChatBtn(false);
   }
+
 
   const handleChatInput = (e) => {
     setText(e.target.value);
   };
 
   const handleSubmitBtn = () => {
-    let copyMsg = [...msg];
-
-    if(text != '') {
-      copyMsg.push(text);
-      setMsg(copyMsg);
-
-      setText('');
+    // chat에 이미 정보가 들어있을 때 -> 채팅 정보만 추가한다.
+    for(let i=0; i<chat.length; i++) {
+      if(text != '' && chat[i].title.indexOf(data.title) > -1) {
+        chat[i].chat.push(text);
+        inputMsg(text);
+        return;
+      }
+      else {
+        continue;
+      }
     }
+
+    // 처음 채팅할 때
+    if(text != '' ) {
+      inputMsg(text);
+    }
+  }
+
+  const inputMsg = (text) => {
+    msg.chat.push(text);
+    setText('');
   }
 
   return(
@@ -185,7 +220,7 @@ function ShowChat({data, setChat, setChatBtn}) {
           </aside>
           <section className={cn(style.myChat)}>
           {
-            <ShowChatList msgList={msg} />
+            <ShowChatList msgList={msg.chat} />
           }
           </section>
         </article>

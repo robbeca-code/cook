@@ -50,7 +50,7 @@ function Sidebar({isOpen, target}) {
         </Link>
       </li>
       <li>
-        <Link to="/" className={cn(style.sideItem)} 
+        <Link to="/chat" className={cn(style.sideItem)} 
         onClick={() => {
           setClick('chat');
         }}>

@@ -15,6 +15,7 @@ import Recipe from "./routes/Recipe";
 import Mypage from "./routes/Mypage";
 import {recipe, tunaCan} from './routes/Recipe-data';
 import RecipeContent from "./routes/RecipeContent";
+import Chat from './routes/Chat';
 
 function App() {
   let [isOpen, setIsOpen] = useState(false);
@@ -84,6 +85,8 @@ function App() {
         <Route path="/share-apply/apply/:id" element={<ApplyContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} oneServing={oneServing} dessert={dessert} login={login} />} />
         <Route path="/share-apply/share" element={<Share isOpen={isOpen} food={food} product={product} userId={login} />} />
         <Route path="/share-apply/share/:id" element={<ShareContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} food={food} product={product} login={login} />} />
+
+        <Route path="/chat" element={<Chat isOpen={isOpen} chat={chat} />} />
 
         <Route path="/mypage" element={<Mypage isOpen={isOpen} userId={login} mark={mark} food={food} product={product} oneServing={oneServing} dessert={dessert} recipe={tunaCan} />} />
       </Routes>
