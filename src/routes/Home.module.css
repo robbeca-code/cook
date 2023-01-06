@@ -6,7 +6,7 @@
 /*   Slide   */
 .slideContainer {
   position: relative;
-  height: 500px;
+  height: 430px;
   overflow: hidden;
 }
 
@@ -40,7 +40,7 @@
 
 .prevBtn {
   position: absolute;
-  height: 61px;
+  height: 55px;
   top: 50%;
   left: 40px;
   transform: translateY(-50%);
@@ -54,7 +54,7 @@
 
 .nextBtn {
   position: absolute;
-  height: 61px;
+  height: 55px;
   top: 50%;
   right: 40px;
   transform: translateY(-50%);
@@ -113,6 +113,13 @@
 
 .bookmark {
   width: 4rem;
+  height: 4rem;
+}
+
+.bookmark > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .contentMain {
@@ -156,4 +163,105 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+
+/*   Media Query   */
+@media screen and (max-width: 800px) {
+  .home {
+    margin: 0 auto;
+    padding-top: 90px;
+  }
+
+
+  /*   Slide   */
+  .slideContainer {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+  }
+
+  .slideFontContainer {
+    padding: 0 70px;
+    top: 57%;
+  }
+  
+  .slideFont {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .slideFont.title {
+    font-size: 1.3rem;
+    width: 100%;
+  }
+  
+  .prevBtn {
+    height: 35px;
+  }
+  
+  .nextBtn {
+    height: 35px;
+  }
+
+
+  /*   Tag   */
+  .tagContainer {
+    width: 80vw;
+    margin: 30px auto;
+  }
+
+  .tagBtn {
+    font-size: 15px;
+    border-radius: 30px;
+    background-color: rgb(210, 210, 210);
+    padding: 0.4rem 1rem;
+    margin: 0.5rem 1rem;
+  }
+
+
+  /*   Content   */
+  .content {
+    margin: 50px 70px 100px;
+  }
+
+  .subTitle {
+    font-size: 1rem;
+  }
+
+  .mainTitle {
+    font-size: 2rem;
+  }
+
+  .contentHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .bookmark {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .contentMain {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+    overflow: hidden;
+  }
+
+  .contentMain > .imgContainer {
+    width: 600px;
+    height: 300px;
+    overflow: hidden;
+  }
+
+  /*   Video   */
+  .videoPlayer {
+    margin: 32px auto 100px;
+    margin-top: 32px;
+    width: 100%;
+    height: 300px;
+  }
 }

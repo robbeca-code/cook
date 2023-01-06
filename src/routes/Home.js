@@ -117,10 +117,14 @@ function Content(props) {
           return (
             <article className={cn(style.content)} key={i}>
               <h2 className={cn(style.subTitle)}>{item.subTitle}</h2>
+              
               <div className={cn(style.contentHeader)}>
                 <h1 className={cn(style.mainTitle)}>{item.mainTitle} <span className={cn(style.point)}>{item.styleTitle}</span></h1>
-                <img src="/public-assets/home/bookmark.png" alt="bookrmark icon" className={cn(style.bookmark)} />
+                <div className={cn(style.bookmark)}>
+                  <img src="/public-assets/home/bookmark.png" alt="bookrmark icon" className={cn(style.bookmark)} />
+                </div>
               </div>
+
               <div className={cn(style.contentMain)}>
                 <div className={cn(style.imgContainer)}>
                   <img src={item.img1} alt="" />

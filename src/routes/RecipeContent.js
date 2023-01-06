@@ -61,7 +61,7 @@ function RecipeContent({isOpen, data, mark, setMark, login}) {
                   }
                   </button>
                 </div>
-                <h2>{item.title}</h2>
+                <strong>{item.title}</strong>
                 <div className={cn(style.itemInfo)}>
                   <div className={cn(style.item)}>
                     <img src="/public-assets/recipe/heart.png" className={cn(style.subInfoImg)} alt="like" />

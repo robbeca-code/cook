@@ -1,5 +1,5 @@
 .container {
-  width: 1392px;
+  width: 1200px;
   margin: 0 auto 100px;
   padding-top: 150px;
 }
@@ -17,7 +17,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 300px 300px 300px 300px;
+  grid-template-columns: repeat(3, 1fr);
   column-gap: 30px;
   row-gap: 50px;
   margin-top: 20px;
@@ -54,8 +54,10 @@
   object-fit: contain;
 }
 
-.itemContainer > h2 {
-  margin-top: 10px;
+.itemContainer > strong {
+  display: block;
+  padding-top: 10px;
+  font-size: 22px;
 }
 
 .itemInfo {
@@ -71,11 +73,60 @@
 }
 
 .item > img {
-  width: 28px;
-  height: 28px;
+  width: 25px;
+  height: 25px;
   margin-right: 5px;
 }
 
 .item > span {
   font-size: 20px;
+}
+
+
+/*   Media Query   */
+@media screen and (max-width: 800px) {
+  .container {
+    width: 700px;
+    margin: 0 auto 100px;
+    padding-top: 100px;
+  }
+  
+  .containerTitle > h1 {
+    font-size: 20px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 30px;
+    row-gap: 80px;
+    margin-top: 20px;
+    place-content: center;
+  }
+
+
+  /*   Item Container   */
+  .bookmark {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+  }
+
+  .itemContainer > strong {
+    display: block;
+    padding-top: 5px;
+    font-size: 18px;
+  }
+  
+  .item > img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+  
+  .item > span {
+    font-size: 16px;
+  }
 }

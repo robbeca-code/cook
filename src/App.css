@@ -36,6 +36,7 @@ button {
   width: 100%;
   z-index: 998;
   background-color: #fff;
+  box-shadow: 0 4px 4px -4px rgba(0,0,0,0.2);
 }
 
 .toolBar {
@@ -90,8 +91,8 @@ button {
   left: 50%;
   z-index: 985;
   transform: translate(-50%);
-  width: 580px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
   background-color: #fff;
   box-shadow: 0 0 0 100vw rgba(0,0,0,0.2);
 }
@@ -109,12 +110,12 @@ button {
 }
 
 .loginItem > strong {
-  font-size: 18px;
+  font-size: 15px;
   color: #949494;
 }
 
 .loginItem > input {
-  height: 50px;
+  height: 40px;
   margin-top: 10px;
   font-size: 23px;
   border-style: none;
@@ -123,12 +124,15 @@ button {
 
 .inputBtn {
   background-color: #ea5936;
-  border-radius: 20px;
-  width: 200px;
-  height: 50px;
+  border-radius: 12px;
+  width: 180px;
+  height: 43px;
   font-size: 18px;
   color: #fff;
-  margin: 20px 0 0 195px;
+  position: relative;
+  margin-top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 
@@ -175,5 +179,65 @@ button {
   transform: translate(-50%,-50%);
   font-size: 20px;
   color: #fff;
+}
 
+@media screen and (max-width: 800px) {
+  /*   App   */
+  .appHeader {
+    height: 70px;
+    position: fixed;
+    width: 100%;
+    z-index: 998;
+    background-color: #fff;
+  }
+  
+  .toolBar {
+    display: flex;
+    justify-content: space-between;
+    place-items: center;
+    padding: 0 50px;
+    height: 70px;
+  }
+
+  .topIcon {
+    width: 24px;
+  }
+  
+  .logo {
+    width: auto;
+    height: 42px;
+    overflow: hidden;
+    margin-left: 3rem;
+  }
+  
+  .search {
+    margin-right: 30px;
+  }
+  
+  .loginBtn {
+    background-color: #fff;
+    border: 2px solid #ea5936;
+    width: 60px;
+    height: 30px;
+    font-size: 15px;
+    box-shadow: 3px 3px 10px #fff1e6;
+  }
+
+
+  /*   User Profile   */
+  .loginImgContainer {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .loginImgContainer > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 15px;
+    color: #fff;
+  }
 }
