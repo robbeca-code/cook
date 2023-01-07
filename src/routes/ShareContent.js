@@ -95,7 +95,7 @@ function ShowContent({data, mark, setMark, setData, setChatBtn, login}) {
             <span>{data.location}</span>
           </div>
         </div>
-        <div>
+        <div className={cn(style.manner)}>
           <img src="/public-assets/one-content/manner.png" alt="user manner gauge" />
         </div>
       </article>

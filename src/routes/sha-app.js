@@ -56,9 +56,8 @@ function ShaApp(props) {
                 <button type="button" className={cn(style.btn, style.imgContainer)}>
                   <img src="/public-assets/sha_app/one-person.png" alt="The ingredients button" />
                 </button>
-                <h2>1인분</h2>
               </Link>
-              
+              <h2>1인분</h2>
             </li>
             <li className={cn(style.item)}>
               <Link to="/share-apply/apply" className={cn(style.link)}>

@@ -1,22 +1,22 @@
-/*   Share And Application   */
+/*   Share And Apply   */
 .link {
   color: #171717;
 }
 
 .container {
-  padding-top: 200px;
+  padding-top: 120px;
 }
 
 .content {
   background-color: #dddddd;
   width: 92vw;
   padding: 30px 70px;
-  margin: 0 70px 20px;
+  margin: 0 auto 20px;
 }
 
 .contentTitle {
   text-align: center;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 .itemsList {
@@ -64,16 +64,63 @@
 }
 
 
-/*   A*/
+/*   Ad   */
 .ad {
   margin-top: 100px;
   width: 100%;
-  height: 300px;
-  background-color: #E7E7E7;
+  height: 170px;
+  background-color: #f8fd96;
 }
 
 .ad > img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+
+/*   Media Query   */
+@media screen and (max-width: 800px) {
+  /*   Share and Apply   */
+  .container {
+    padding-top: 90px;
+  }
+
+  .contentTitle {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .imgContainer {
+    width: 100px;
+    height: 100px;
+  }
+
+  .item > h2 {
+    font-size: 18px;
+  }
+
+
+  /*   Recommended User   */
+  .recommendedUsers {
+    padding: 30px;
+  }
+
+  .recommendedUsers > .contentTitle {
+    padding-bottom: 10px;
+    text-align: left;
+  }
+
+  .userName {
+    font-size: 18px;
+  }
+
+
+  /*   Ad   */
+  .ad {
+    margin-top: 100px;
+    width: 100%;
+    height: 100px;
+    background-color: #f8fd96;
+  }
 }

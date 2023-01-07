@@ -5,13 +5,13 @@
 
 /*   Show Content   */
 .container {
-  padding-top: 190px;
+  padding-top: 170px;
   width: 100%;
 }
 
 .imgContainer {
-  width: 700px;
-  height: 620px;
+  width: 600px;
+  height: 520px;
   border-radius: 8px;
   overflow: hidden;
   margin: 0 auto;
@@ -53,16 +53,16 @@
 /*   Main Content   */
 
 .mainContent {
-  padding: 0 220px 300px;
+  padding: 0 220px 200px;
 }
 
 .mainContent > h1 {
-  font-size: 28px;
+  font-size: 23px;
   margin-bottom: 12px;
 }
 
 .mainContent > strong {
-  font-size: 23px;
+  font-size: 20px;
 }
 
 .mainContent > p {
@@ -81,7 +81,7 @@
   width: 100vw;
   justify-content: space-between;
   align-items: center;
-  padding: 26px 120px;
+  padding: 10px 120px;
   border-top: 1px solid rgb(218, 218, 218);
   background-color: #fff;
 }
@@ -92,8 +92,8 @@
 }
 
 .heartBtn {
-  width: 70px;
-  height: 70px;
+  width: 65px;
+  height: 65px;
   overflow: hidden;
   margin-right: 50px;
 }
@@ -110,10 +110,10 @@
 
 .chatBtn {
   width: 150px;
-  height: 60px;
+  height: 55px;
   background-color: #ea5936;
-  border-radius: 20px;
-  font-size: 19px;
+  border-radius: 12px;
+  font-size: 18px;
   color: #fff;
 }
 
@@ -150,6 +150,7 @@
 }
 
 .itemInfo > h2 {
+  font-size: 21px;
   margin-bottom: 10px;
 }
 
@@ -267,4 +268,117 @@
   left: -13px;
   font-size: 14px;
   color: #ea5936;
+}
+
+
+/*   Media Query   */
+@media screen and (max-width: 800px) {
+  /*   Show Content   */
+  .container {
+    padding-top: 120px;
+    width: 100%;
+  }
+
+  .imgContainer {
+    width: 500px;
+    height: 420px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  .imgContainer > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+  /*   User Container   */
+  .userContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 70px 90px;
+  }
+
+  .user > .imgContainer {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+
+  .userInfo > h2 {
+    font-size: 20px;
+  }
+
+  .userInfo > span {
+    font-size: 18px;
+  }
+
+  .manner {
+    width: 150px;
+  }
+  
+  .manner > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+
+  /*   Main Content   */
+  .mainContent {
+    padding: 0 100px 200px;
+  }
+
+  .mainContent > h1 {
+    font-size: 21px;
+    margin-bottom: 12px;
+  }
+
+  .mainContent > strong {
+    font-size: 18px;
+  }
+
+  .mainContent > p {
+    font-size: 16px;
+    margin-top: 23px;
+  }
+
+
+  /*   Bar   */
+  .bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 60px;
+    border-top: 1px solid rgb(218, 218, 218);
+    background-color: #fff;
+  }
+
+  .heartBtn {
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    margin-right: 50px;
+  }
+
+  .leftItem > span {
+    font-size: 17px;
+  }
+
+  .chatBtn {
+    width: 140px;
+    height: 45px;
+    background-color: #ea5936;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #fff;
+  }
 }
