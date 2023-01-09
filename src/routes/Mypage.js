@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import Sidebar from "./Sidebar";
+import React, { useEffect, useState } from 'react';
+import Sidebar from './Sidebar';
 import style from './Mypage.module.css';
-import cn from "classnames";
+import cn from 'classnames';
+import { Link } from 'react-router-dom';
 
 function Mypage({isOpen, userId, food, product, oneServing, dessert, recipe, mark}) {
   let target = 'mypage';
@@ -144,12 +145,22 @@ function GetTab({tab, food, product, oneServing, dessert, recipe, mark, setRemov
 }
 
 function ShowContent({id, data, setRemove}) {
+  let url;
 
   return(
-      data.map((data, i) => {
-        if(id.indexOf(data.id) > -1)  {
-          return(
-            <article className={cn(style.item)} key={i}>
+    data.map((data, i) => {
+      if(id.indexOf(data.id) > -1)  {
+        
+        // 각 관심 아이템마다 알맞는 url을 주기 위한 if문입니다.
+        if(data.kind === '1인분' || data.kind === '디저트' || data.kind === '대용량') {
+          url = '/share-apply/apply/' + id;
+        } else {
+          url = '/share-apply/share/' + id;
+        }
+
+        return(
+          <Link to={url} className={cn(style.link)} key={i}>
+            <article className={cn(style.item)}>
               <div className={cn(style.imgContainer)}>
                 <img src={data.img} alt={data.img_alt} />
               </div>
@@ -165,12 +176,21 @@ function ShowContent({id, data, setRemove}) {
                 <img src="/public-assets/mypage/remove.png" alt="remove button" />
               </button>
             </article>
-          );
-        } else {
-          return (null);
-        }
-      })
+          </Link>
+        );
+      } else {
+        return (null);
+      }
+    })
   );
+}
+
+function GetDataUrl({setUrl, kind ,id}) {
+  if(kind === '1인분' || kind === '디저트' || kind === '대용량') {
+    return(setUrl('/share-apply/apply/' + id));
+  } else {
+    return(setUrl('/share-apply/share/' + id));
+  }
 }
 
 export default Mypage;
