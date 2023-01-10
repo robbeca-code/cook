@@ -34,3 +34,29 @@
 .sideTitle.link {
   color: #171717;
 }
+
+
+/*   Max-width: 550px   */
+@media screen and (max-width:550px) {
+  /*   Sidebar   */
+  .sideItem {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+  }
+  
+  .sideIcon {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+  }
+  
+  .main {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .sideTitle {
+    font-size: 18px;
+  }
+}

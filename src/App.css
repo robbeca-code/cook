@@ -181,6 +181,8 @@ button {
   color: #fff;
 }
 
+
+/*   Max-Width: 800px   */
 @media screen and (max-width: 800px) {
   /*   App   */
   .appHeader {
@@ -239,5 +241,143 @@ button {
     transform: translate(-50%,-50%);
     font-size: 15px;
     color: #fff;
+  }
+}
+
+
+/*   Max-Width: 550px   */
+@media screen and (max-width: 550px) {
+  /*   App   */
+  .appHeader {
+    height: 40px;
+    position: fixed;
+    width: 100%;
+    z-index: 997;
+    background-color: #fff;
+  }
+  
+  .toolBar {
+    display: flex;
+    justify-content: space-between;
+    place-items: center;
+    padding: 0 17px;
+    height: 40px;
+  }
+
+  .topIcon {
+    width: 18px;
+  }
+  
+  .logo {
+    width: auto;
+    height: 32px;
+    overflow: hidden;
+    margin-left: 2rem;
+  }
+  
+  .search {
+    display: none;
+  }
+  
+  .loginBtn {
+    background-color: #ea5936;
+    border-style: none;
+    width: 45px;
+    height: 23px;
+    font-size: 11px;
+    color: #fff;
+    box-shadow: 3px 3px 10px #fff1e6;
+  }
+
+
+  /*   User Profile   */
+  .loginImgContainer {
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .loginImgContainer > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 13px;
+    color: #fff;
+  }
+
+
+  /*   Login Modal   */
+  .loginModal {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    z-index: 985;
+    transform: translate(-50%);
+    width: 300px;
+    height: 400px;
+    background-color: #fff;
+    box-shadow: 0 0 0 100vw rgba(0,0,0,0.2);
+  }
+
+  .loginModal > .title {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 12px;
+    border-bottom: 2px solid #adadad;
+  }
+
+  .loginItem {
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .loginItem > strong {
+    font-size: 13px;
+    color: #949494;
+  }
+
+  .loginItem > input {
+    height: 30px;
+    margin-top: 10px;
+    font-size: 20px;
+    border-style: none;
+    border-bottom: 1px solid #545454;
+  }
+
+  .inputBtn {
+    background-color: #ea5936;
+    border-radius: 12px;
+    width: 140px;
+    height: 38px;
+    font-size: 15px;
+    color: #fff;
+    position: relative;
+    margin-top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+
+  /*   Sidebar   */
+  .hide-sidebar {
+    position: fixed;
+    top: 40px;
+    left: 0px;
+    padding-top: 20px;
+    width: 250px;
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(5, 40px);
+    background-color: #fff;
+    row-gap: 1rem;
+    z-index: 999;
+    visibility: hidden;
+  }
+
+  .show {
+    visibility: visible;
   }
 }
