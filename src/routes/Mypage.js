@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import style from './Mypage.module.css';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-function Mypage({isOpen, userId, food, product, oneServing, dessert, recipe, mark}) {
+function Mypage({isOpen, food, product, oneServing, dessert, recipe, mark}) {
   let target = 'mypage';
   let [tab, setTab] = useState(0);
   let [remove, setRemove] = useState('');
+  let userId = useSelector((state) => (state.login.nickname));
 
   if(mark.indexOf(remove) > -1) {
     let index = mark.indexOf(remove);

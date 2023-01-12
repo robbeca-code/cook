@@ -3,8 +3,9 @@ import Sidebar from './Sidebar';
 import style from './Share.module.css';
 import cn from "classnames";
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
-function Share({isOpen, food, product, userId}) {
+function Share({isOpen, food, product}) {
   const target = 'share';
   let [tab, setTab] = useState('food');
   let [plus, setPlus] = useState(false);
@@ -49,10 +50,8 @@ function Share({isOpen, food, product, userId}) {
         <img src="/public-assets/one-content/plus.png" alt="plus button" />
       </button>
 
-      {/* <PlusContent data={data} setData={setData} plus={plus} setPlus={setPlus} setNewContent={setNewContent} /> */}
+      <PlusContent f={food} p={product} plus={plus} setPlus={setPlus} />
 
-      <PlusContent f={food} p={product} author={userId} plus={plus} setPlus={setPlus} />
-      
     </section>
   );
 }
@@ -102,7 +101,7 @@ function ShareList({data}) {
   ); 
 }
 
-function PlusContent({f, p, author, plus, setPlus}) {
+function PlusContent({f, p, plus, setPlus}) {
   const options = ['종류 선택','식재료', '식기 및 도구', '관련도서'];
   const fileInput = useRef(null);
   let kind;
@@ -110,13 +109,14 @@ function PlusContent({f, p, author, plus, setPlus}) {
   let content;
   let cost;
   let img;
+  let author = useSelector((state) => (state.login.nickname));
 
   const clickUploadBtn = () => {
     fileInput.current.click();
   }
 
   const changeFileInput = (e) => {
-    console.log(e.target.files);
+    img = e.target.files;
   }
 
   const handleKind = (e) => {

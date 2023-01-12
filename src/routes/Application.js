@@ -3,8 +3,9 @@ import Sidebar from './Sidebar';
 import style from './Share.module.css';
 import cn from "classnames";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function Application({isOpen, oneServing, dessert, userId}) {
+function Application({isOpen, oneServing, dessert}) {
   const target = 'share';
   let [tab, setTab] = useState('oneServing');
   let [plus, setPlus] = useState(false);
@@ -49,7 +50,7 @@ function Application({isOpen, oneServing, dessert, userId}) {
         <img src="/public-assets/one-content/plus.png" alt="plus button" />
       </button>
 
-      <PlusContent o={oneServing} d={dessert} author={userId} plus={plus} setPlus={setPlus} />
+      <PlusContent o={oneServing} d={dessert}  plus={plus} setPlus={setPlus} />
       
     </section>
   );
@@ -95,13 +96,14 @@ function ApplyList({data}) {
   ); 
 }
 
-function PlusContent({o, d, author, plus, setPlus}) {
+function PlusContent({o, d, plus, setPlus}) {
   const options = ['종류 선택','1인분', '디저트', '대용량'];
   const fileInput = useRef(null);
   let kind;
   let title;
   let content;
   let img;
+  let author = useSelector((state) => (state.login.nickname));
 
   const clickUploadBtn = () => {
     fileInput.current.click();

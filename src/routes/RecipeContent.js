@@ -2,10 +2,12 @@ import React , { useState } from "react";
 import Sidebar from "./Sidebar";
 import style from './RecipeContent.module.css';
 import cn from 'classnames';
+import { useSelector } from 'react-redux';
 
-function RecipeContent({isOpen, data, mark, setMark, login}) {
+function RecipeContent({isOpen, data, mark, setMark}) {
   let target = 'recipe';
   let [bookmark, setBookmark] = useState([false, false, false, false, false, false, false, false, false, false]);
+  let userId = useSelector((state) => (state.login.nickname));
 
   const handleLevel = (level) => {
     if(level === '하') {
@@ -20,7 +22,7 @@ function RecipeContent({isOpen, data, mark, setMark, login}) {
   }
 
   const handleBookmarkBtn = (id, index) => {
-    if(login === '') {
+    if(userId === '') {
       alert('로그인을 해주세요.');
     }
     else {

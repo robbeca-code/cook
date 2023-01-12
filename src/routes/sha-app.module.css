@@ -124,3 +124,120 @@
     background-color: #f8fd96;
   }
 }
+
+
+/*   Max-Width: 550px   */
+@media screen and (max-width: 550px) {
+  /*   Share and Apply   */
+  .container {
+    padding-top: 90px;
+  }
+
+  .content {
+    background-color: #dddddd;
+    width: 92vw;
+    padding: 20px 40px;
+    margin: 0 auto 20px;
+  }
+
+  .contentTitle {
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .imgContainer {
+    width: 80px;
+    height: 80px;
+  }
+
+  .item > h2 {
+    font-size: 16px;
+  }
+
+
+  /*   Recommended User   */
+  .recommendedUsers {
+    padding: 20px;
+  }
+
+  .recommendedUsers > .contentTitle {
+    padding-bottom: 10px;
+    text-align: left;
+  }
+
+  .recommendedUsers > .itemsList > .item {
+    padding-right: 30px;
+  }
+
+  .userName {
+    font-size: 15px;
+  }
+
+
+  /*   Ad   */
+  .ad {
+    margin-top: 30px;
+    width: 100%;
+    height: 80px;
+    background-color: #f8fd96;
+  }
+}
+
+
+/*   Max-Width: 400px   */
+@media screen and (max-width: 400px) {
+  /*   Share and Apply   */
+  .container {
+    padding-top: 70px;
+  }
+
+  .content {
+    background-color: #dddddd;
+    width: 92vw;
+    padding: 10px 20px;
+    margin: 0 auto 5px;
+  }
+
+  .contentTitle {
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .imgContainer {
+    width: 60px;
+    height: 60px;
+  }
+
+  .item > h2 {
+    font-size: 13px;
+  }
+
+
+  /*   Recommended User   */
+  .recommendedUsers {
+    padding: 17px;
+  }
+
+  .recommendedUsers > .contentTitle {
+    padding-bottom: 10px;
+    text-align: left;
+  }
+
+  .recommendedUsers > .itemsList > .item {
+    padding-right: 10px;
+    padding-top: 0;
+  }
+
+  .userName {
+    font-size: 13px;
+  }
+
+
+  /*   Ad   */
+  .ad {
+    margin-top: 30px;
+    width: 100%;
+    height: 73px;
+    background-color: #f8fd96;
+  }
+}

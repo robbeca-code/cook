@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
-import Sidebar from "./Sidebar";
+import React, { useState, useEffect } from 'react';
+import Sidebar from './Sidebar';
 import style from './ShareContent.module.css';
 import cn from 'classnames';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import Clock from 'react-live-clock';
+import { useDispatch, useSelector } from 'react-redux';
+import { inputMark } from '../store';
 
-function ShareContent({isOpen, food, product, chat, setChat, mark, setMark, login}) {
+function ShareContent({isOpen, food, product, chat, setChat, mark, setMark}) {
   let target = 'share';
   let {id} = useParams();
   let [chatBtn, setChatBtn] = useState(false);
   let [data, setData] = useState('');
+  let Mark = useSelector((state) => (state.mark));
+  console.log(Mark);
 
   return(
     <section>
@@ -17,19 +21,19 @@ function ShareContent({isOpen, food, product, chat, setChat, mark, setMark, logi
         <Sidebar isOpen={isOpen} target={target} />
       </aside>
       {
-        <GetConent id={id} food={food} product={product} mark={mark} setMark={setMark} setChatBtn={setChatBtn} setData={setData} login={login} />
+        <GetConent id={id} food={food} product={product} mark={mark} setMark={setMark} setChatBtn={setChatBtn} setData={setData} />
       }
       {
-        chatBtn ? <ShowChat data={data} chat={chat} setChat={setChat} setChatBtn={setChatBtn} login={login} /> : null
+        chatBtn ? <ShowChat data={data} chat={chat} setChat={setChat} setChatBtn={setChatBtn} /> : null
       }
     </section>
   );
 }
 
-function GetConent({id, food, product, mark, setMark, setChatBtn, setData, login}) {
+function GetConent({id, food, product, mark, setMark, setChatBtn, setData}) {
   for(let i=0; i<food.length; i++) {
     if(id === food[i].id) {
-      return(<ShowContent data={food[i]} setData={setData} mark={mark} setMark={setMark} setChatBtn={setChatBtn} login={login} />);
+      return(<ShowContent data={food[i]} setData={setData} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
     }
   }
 
@@ -40,8 +44,11 @@ function GetConent({id, food, product, mark, setMark, setChatBtn, setData, login
   }
 }
 
-function ShowContent({data, mark, setMark, setData, setChatBtn, login}) {
+function ShowContent({data, mark, setMark, setData, setChatBtn}) {
   let [heartBtn, setHeartBtn] = useState(false);
+  let userId = useSelector((state) => (state.login.nickname));
+  let marK = useSelector((state) => (state.mark));
+  let dispatch = useDispatch();
 
   useEffect(()=>{
     setData(data);
@@ -49,8 +56,9 @@ function ShowContent({data, mark, setMark, setData, setChatBtn, login}) {
 
   const handleHeartBtn = () => {
     let copyMark = [...mark];
+    
 
-    if(login === '') {
+    if(userId === '') {
       alert('로그인을 해주세요.');
       return;
     }
@@ -59,12 +67,13 @@ function ShowContent({data, mark, setMark, setData, setChatBtn, login}) {
       setHeartBtn(true);
       copyMark.push(data.id);
       setMark(copyMark);
+      dispatch(inputMark(data.id));
     }
     else {
       setHeartBtn(false);
-      for(let i=0; i<copyMark.length; i++) {
-        if(copyMark[i] === data.id) {
-          copyMark.splice(i, 1);
+      for(let i=0; i<mark.length; i++) {
+        if(mark[i] === data.id) {
+          mark.splice(i, 1);
           setMark(copyMark);
         }
       }
@@ -72,7 +81,7 @@ function ShowContent({data, mark, setMark, setData, setChatBtn, login}) {
   }
 
   const handleChatBtn = () => {
-    if(login === '') {
+    if(userId === '') {
       alert('로그인을 해주세요.');
     }
     else {

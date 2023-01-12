@@ -16,14 +16,16 @@ import Mypage from "./routes/Mypage";
 import {recipe, tunaCan} from './routes/Recipe-data';
 import RecipeContent from "./routes/RecipeContent";
 import Chat from './routes/Chat';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeEmail, changePasswd, changeNick } from "./store";
 
 function App() {
   let [isOpen, setIsOpen] = useState(false);
-  let [login, setLogin] = useState('');
   let [loginBtn, setLoginBtn] = useState(false);
   let [showUser, setShowUser] = useState(false);
   let [mark, setMark] = useState([]);
   let [chat, setChat] = useState([]);
+  let nickname = useSelector((state) => {return state.login.nickname});
 
   return (
     <div className="app">
@@ -55,7 +57,7 @@ function App() {
 
             {
               showUser 
-              ? <UserImg login={login} /> 
+              ? <UserImg login={nickname} /> 
               : <button type="button" className="loginBtn" onClick={() => {
                 loginBtn ? setLoginBtn(false) : setLoginBtn(true)
               }}>
@@ -69,7 +71,7 @@ function App() {
 
       {
         loginBtn 
-        ? <LoginModal setLogin={setLogin} setShowUser={setShowUser} setLoginBtn={setLoginBtn} /> 
+        ? <LoginModal setShowUser={setShowUser} setLoginBtn={setLoginBtn} /> 
         : null
       }
 
@@ -78,28 +80,25 @@ function App() {
         <Route path="*" element={<NonPage />} />
 
         <Route path="/recipe" element={<Recipe isOpen={isOpen} data={recipe} />} />
-        <Route path="/recipe/tunaCan" element={<RecipeContent isOpen={isOpen} data={tunaCan}  mark={mark} setMark={setMark} login={login} /> } />
+        <Route path="/recipe/tunaCan" element={<RecipeContent isOpen={isOpen} data={tunaCan} mark={mark} setMark={setMark} /> } />
 
         <Route path="/share-apply" element={<ShaApp isOpen={isOpen} />} />
-        <Route path="/share-apply/apply" element={<Application isOpen={isOpen} oneServing={oneServing} dessert={dessert} userId={login} />} />
-        <Route path="/share-apply/apply/:id" element={<ApplyContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} oneServing={oneServing} dessert={dessert} login={login} />} />
-        <Route path="/share-apply/share" element={<Share isOpen={isOpen} food={food} product={product} userId={login} />} />
-        <Route path="/share-apply/share/:id" element={<ShareContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} food={food} product={product} login={login} />} />
+        <Route path="/share-apply/apply" element={<Application isOpen={isOpen} oneServing={oneServing} dessert={dessert} />} />
+        <Route path="/share-apply/apply/:id" element={<ApplyContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} oneServing={oneServing} dessert={dessert} />} />
+        <Route path="/share-apply/share" element={<Share isOpen={isOpen} food={food} product={product} />} />
+        <Route path="/share-apply/share/:id" element={<ShareContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} food={food} product={product} />} />
 
         <Route path="/chat" element={<Chat isOpen={isOpen} chat={chat} />} />
 
-        <Route path="/mypage" element={<Mypage isOpen={isOpen} userId={login} mark={mark} food={food} product={product} oneServing={oneServing} dessert={dessert} recipe={tunaCan} />} />
+        <Route path="/mypage" element={<Mypage isOpen={isOpen}  mark={mark} food={food} product={product} oneServing={oneServing} dessert={dessert} recipe={tunaCan} />} />
       </Routes>
     </div>
   );
 }
 
 
-function LoginModal({setLogin, setShowUser, setLoginBtn}) {
-
-  const handleLogin = (e) => {
-    setLogin(e.target.value);
-  }
+function LoginModal({setShowUser, setLoginBtn}) {
+  let dispatch = useDispatch();
 
   const clickLoginBtn = () => {
     setShowUser(true);
@@ -115,17 +114,17 @@ function LoginModal({setLogin, setShowUser, setLoginBtn}) {
 
         <div className="loginItem">
           <strong>이메일</strong>
-          <input type="email" />
+          <input type="email" onChange={(e) => (dispatch(changeEmail(e.target.value)))} />
         </div>
         
         <div className="loginItem">
           <strong>비밀번호</strong>
-          <input type="password" />
+          <input type="password" onChange={(e) => (dispatch(changePasswd(e.target.value)))} />
         </div>
         
         <div className="loginItem">
           <strong>닉네임</strong>
-          <input type="text" onChange={handleLogin} />
+          <input type="text" onChange={(e) => (dispatch(changeNick(e.target.value))) } />
         </div>
 
         <button type="button" className="inputBtn" onClick={clickLoginBtn}>
