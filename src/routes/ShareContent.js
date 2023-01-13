@@ -5,15 +5,13 @@ import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import Clock from 'react-live-clock';
 import { useDispatch, useSelector } from 'react-redux';
-import { inputMark } from '../store';
+import { inputMark, deleteMark } from '../store';
 
-function ShareContent({isOpen, food, product, chat, setChat, mark, setMark}) {
+function ShareContent({isOpen, chat, setChat, food, product}) {
   let target = 'share';
   let {id} = useParams();
   let [chatBtn, setChatBtn] = useState(false);
   let [data, setData] = useState('');
-  let Mark = useSelector((state) => (state.mark));
-  console.log(Mark);
 
   return(
     <section>
@@ -21,7 +19,7 @@ function ShareContent({isOpen, food, product, chat, setChat, mark, setMark}) {
         <Sidebar isOpen={isOpen} target={target} />
       </aside>
       {
-        <GetConent id={id} food={food} product={product} mark={mark} setMark={setMark} setChatBtn={setChatBtn} setData={setData} />
+        <GetConent id={id} food={food} product={product} setChatBtn={setChatBtn} setData={setData} />
       }
       {
         chatBtn ? <ShowChat data={data} chat={chat} setChat={setChat} setChatBtn={setChatBtn} /> : null
@@ -30,24 +28,23 @@ function ShareContent({isOpen, food, product, chat, setChat, mark, setMark}) {
   );
 }
 
-function GetConent({id, food, product, mark, setMark, setChatBtn, setData}) {
+function GetConent({id, food, product, setChatBtn, setData}) {
   for(let i=0; i<food.length; i++) {
     if(id === food[i].id) {
-      return(<ShowContent data={food[i]} setData={setData} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
+      return(<ShowContent data={food[i]} setData={setData} setChatBtn={setChatBtn} />);
     }
   }
 
   for(let i=0; i<product.length; i++) {
     if(id === product[i].id) {
-      return(<ShowContent data={product[i]} setData={setData} mark={mark} setMark={setMark} setChatBtn={setChatBtn} />);
+      return(<ShowContent data={product[i]} setData={setData} setChatBtn={setChatBtn} />);
     }
   }
 }
 
-function ShowContent({data, mark, setMark, setData, setChatBtn}) {
+function ShowContent({data, setData, setChatBtn}) {
   let [heartBtn, setHeartBtn] = useState(false);
   let userId = useSelector((state) => (state.login.nickname));
-  let marK = useSelector((state) => (state.mark));
   let dispatch = useDispatch();
 
   useEffect(()=>{
@@ -55,9 +52,6 @@ function ShowContent({data, mark, setMark, setData, setChatBtn}) {
   });
 
   const handleHeartBtn = () => {
-    let copyMark = [...mark];
-    
-
     if(userId === '') {
       alert('로그인을 해주세요.');
       return;
@@ -65,18 +59,11 @@ function ShowContent({data, mark, setMark, setData, setChatBtn}) {
 
     if(!heartBtn) {
       setHeartBtn(true);
-      copyMark.push(data.id);
-      setMark(copyMark);
       dispatch(inputMark(data.id));
     }
     else {
       setHeartBtn(false);
-      for(let i=0; i<mark.length; i++) {
-        if(mark[i] === data.id) {
-          mark.splice(i, 1);
-          setMark(copyMark);
-        }
-      }
+      dispatch(deleteMark(data.id));
     }
   }
 
@@ -142,20 +129,20 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
   let [text, setText] = useState('');
   let [msg, setMsg] = useState({userProfile: '', title: '', author: '', kind: '', chat: []});
 
-  msg.userProfile = data.user_img;
-  msg.title = data.title;
-  msg.author = data.author;
-  msg.kind = `나눔: ${data.kind}`;
+  useEffect(() => {
+    msg.userProfile = data.user_img;
+    msg.title = data.title;
+    msg.author = data.author;
+    msg.kind = `나눔: ${data.kind}`;
+  }, [data.title]);
   
 
   const handleCloseBtn = () => {
-    for(let i=0; i<chat.length; i++) {
-      if(chat[i].title.indexOf(data.title) > -1) {
-        let copyChat = [...chat];
-        setChat(copyChat);
-        setReset();
-        return;
-      }
+    if(chat.findIndex((c) => (c.title === data.title)) > -1) {
+      let copyChat = [...chat];
+      setChat(copyChat);
+      setReset();
+      return;
     }
 
     let copyChat = [...chat];
@@ -166,10 +153,9 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
 
   const setReset = () => {
     let reset = {img: '', title: '', author: '', chat: []};
-    setTimeout(setMsg(reset), 1000);
+    setMsg(reset);
     setChatBtn(false);
   }
-
 
   const handleChatInput = (e) => {
     setText(e.target.value);
@@ -177,15 +163,11 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
 
   const handleSubmitBtn = () => {
     // chat에 이미 정보가 들어있을 때 -> 채팅 정보만 추가한다.
-    for(let i=0; i<chat.length; i++) {
-      if(text != '' && chat[i].title.indexOf(data.title) > -1) {
-        chat[i].chat.push(text);
-        inputMsg(text);
-        return;
-      }
-      else {
-        continue;
-      }
+    if(chat.findIndex((c) => (c.title === data.title)) > -1) {
+      let i = chat.findIndex((c) => (c.title === data.title));
+      chat[i].chat.push(text);
+      inputMsg(text);
+      return;
     }
 
     // 처음 채팅할 때
@@ -246,11 +228,11 @@ function ShowChat({data, chat, setChat, setChatBtn}) {
 
 function ShowChatList({msgList}) {
   return (
-    msgList.map((chat, i) => {
+    msgList.map((msg, i) => {
       return(
         <div key={i}>
           <article className={cn(style.chatBox)}>
-            <p className={cn(style.myMsg)}>{chat}</p>
+            <p className={cn(style.myMsg)}>{msg}</p>
             <span className={cn(style.chatTime)}>
               <Clock format={'A HH:mm'} ticking={false} timezone={"Asia/Seoul"} />
             </span>

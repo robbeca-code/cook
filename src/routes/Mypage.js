@@ -4,17 +4,13 @@ import style from './Mypage.module.css';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { deleteMark } from "../store";
 
-function Mypage({isOpen, food, product, oneServing, dessert, recipe, mark}) {
+function Mypage({isOpen, food, product, oneServing, dessert, recipe}) {
   let target = 'mypage';
   let [tab, setTab] = useState(0);
-  let [remove, setRemove] = useState('');
   let userId = useSelector((state) => (state.login.nickname));
-
-  if(mark.indexOf(remove) > -1) {
-    let index = mark.indexOf(remove);
-    mark.splice(index, 1);
-  }
 
   return(
     <section className={cn(style.container)}>
@@ -57,7 +53,7 @@ function Mypage({isOpen, food, product, oneServing, dessert, recipe, mark}) {
 
           <section className={cn(style.grid)}>
             {
-              <GetTab tab={tab} food={food} product={product} mark={mark} oneServing={oneServing} dessert={dessert} recipe={recipe} setRemove={setRemove} />
+              <GetTab tab={tab} food={food} product={product} oneServing={oneServing} dessert={dessert} recipe={recipe} />
             }
           </section>
         </div>
@@ -67,7 +63,8 @@ function Mypage({isOpen, food, product, oneServing, dessert, recipe, mark}) {
   );
 }
 
-function GetTab({tab, food, product, oneServing, dessert, recipe, mark, setRemove}) {
+function GetTab({tab, food, product, oneServing, dessert, recipe}) {
+  let mark = useSelector((state) => (state.mark));
   let fMark = [];
   let pMark = [];
   let oMark = [];
@@ -92,10 +89,10 @@ function GetTab({tab, food, product, oneServing, dessert, recipe, mark, setRemov
     return(
       <section className={cn(style.grid)}>
         {
-          <ShowContent id={fMark} data={food} setRemove={setRemove} />
+          <ShowContent id={fMark} data={food} />
         }
         {
-          <ShowContent id={pMark} data={product} setRemove={setRemove} />
+          <ShowContent id={pMark} data={product} />
         }
       </section>
     );
@@ -119,10 +116,10 @@ function GetTab({tab, food, product, oneServing, dessert, recipe, mark, setRemov
     return(
       <section className={cn(style.grid)}>
         {
-          <ShowContent id={oMark} data={oneServing} setRemove={setRemove} />
+          <ShowContent id={oMark} data={oneServing} />
         }
         {
-          <ShowContent id={dMark} data={dessert} setRemove={setRemove} />
+          <ShowContent id={dMark} data={dessert} />
         }
       </section>
     );
@@ -139,60 +136,43 @@ function GetTab({tab, food, product, oneServing, dessert, recipe, mark, setRemov
     return(
       <section className={cn(style.grid)}>
         {
-          <ShowContent id={rMark} data={recipe} setRemove={setRemove} />
+          <ShowContent id={rMark} data={recipe} />
         }
       </section>
     );
   }
 }
 
-function ShowContent({id, data, setRemove}) {
-  let url;
+function ShowContent({id, data}) {
+  let dispatch = useDispatch();
 
   return(
     data.map((data, i) => {
       if(id.indexOf(data.id) > -1)  {
-        
-        // 각 관심 아이템마다 알맞는 url을 주기 위한 if문입니다.
-        if(data.kind === '1인분' || data.kind === '디저트' || data.kind === '대용량') {
-          url = '/share-apply/apply/' + id;
-        } else {
-          url = '/share-apply/share/' + id;
-        }
 
         return(
-          <Link to={url} className={cn(style.link)} key={i}>
-            <article className={cn(style.item)}>
-              <div className={cn(style.imgContainer)}>
-                <img src={data.img} alt={data.img_alt} />
-              </div>
-              <h3>
-                {
-                  data.title.length > 10
-                  ? data.title.slice(0, 11).concat('...')
-                  : data.title
-                }
-              </h3>
-              <span>{'by '.concat(data.author)}</span>
-              <button type="button" className={cn(style.removeBtn)} onClick={() => { setRemove(data.id) }}>
-                <img src="/public-assets/mypage/remove.png" alt="remove button" />
-              </button>
-            </article>
-          </Link>
+          <article className={cn(style.item)} key={i}>
+            <div className={cn(style.imgContainer)}>
+              <img src={data.img} alt={data.img_alt} />
+            </div>
+            <h3>
+              {
+                data.title.length > 10
+                ? data.title.slice(0, 11).concat('...')
+                : data.title
+              }
+            </h3>
+            <span>{'by '.concat(data.author)}</span>
+            <button type="button" className={cn(style.removeBtn)} onClick={() => { dispatch(deleteMark(data.id)) }}>
+              <img src="/public-assets/mypage/remove.png" alt="remove button" />
+            </button>
+          </article>
         );
       } else {
         return (null);
       }
     })
   );
-}
-
-function GetDataUrl({setUrl, kind ,id}) {
-  if(kind === '1인분' || kind === '디저트' || kind === '대용량') {
-    return(setUrl('/share-apply/apply/' + id));
-  } else {
-    return(setUrl('/share-apply/share/' + id));
-  }
 }
 
 export default Mypage;

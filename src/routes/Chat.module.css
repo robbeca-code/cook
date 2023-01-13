@@ -79,7 +79,7 @@
 }
 
 
-/*   Media Query   */
+/*   Max-Width: 800px   */
 @media screen and (max-width: 800px) {
   .container {
     padding-top: 120px;
@@ -122,5 +122,151 @@
 
   .itemRight > span {
     font-size: 13px;
+  }
+}
+
+
+/*   Max-Width: 550px   */
+@media screen and (max-width: 550px) {
+  .container {
+    padding-top: 90px;
+    width: 500px;
+    margin: 0 auto 70px;
+  }
+  
+  .banner {
+    margin-bottom: 40px;
+    width: 100%;
+    height: 80px;
+    background-color: #ffdae1;
+    text-align: center;
+  }
+
+
+  /*   Non Chat   */
+  .nonChat {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .nonChat > h2 {
+    margin-bottom: 30px;
+    font-size: 20px;
+  }
+
+  .nonChat > img {
+    width: 170px;
+    height: auto;
+    opacity: 80%;
+  }
+
+
+  /*   Show Chat List   */
+  .chatList {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    row-gap: 8px;
+  }
+
+  .chatItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cecece;
+  }
+
+  .imgContainer {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 13px;
+  }
+
+  .chatInfo > h3 {
+    margin-bottom: 3px;
+    font-size: 17px;
+  }
+
+  .chatInfo > p {
+    font-size: 14px;
+  }
+
+  .itemRight > span {
+    font-size: 12px;
+  }
+}
+
+
+/*   Max-Width: 400px   */
+@media screen and (max-width: 400px) {
+  .container {
+    padding-top: 60px;
+    width: 360px;
+    margin: 0 auto 40px;
+  }
+  
+  .banner {
+    margin-bottom: 40px;
+    width: 100%;
+    height: 60px;
+    background-color: #ffdae1;
+    text-align: center;
+  }
+
+
+  /*   Non Chat   */
+  .nonChat {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .nonChat > h2 {
+    margin-bottom: 30px;
+    font-size: 18px;
+  }
+
+  .nonChat > img {
+    width: 150px;
+    height: auto;
+    opacity: 80%;
+  }
+
+
+  /*   Show Chat List   */
+  .chatList {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    row-gap: 6px;
+  }
+
+  .chatItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #cecece;
+  }
+
+  .imgContainer {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+
+  .chatInfo > h3 {
+    margin-bottom: 0;
+    font-size: 15px;
+  }
+
+  .chatInfo > p {
+    font-size: 12px;
+  }
+
+  .itemRight > span {
+    font-size: 10px;
   }
 }

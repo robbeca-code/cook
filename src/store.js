@@ -20,20 +20,23 @@ let login = createSlice({
 
 let mark = createSlice({
   name: 'mark',
-  initialState: [''],
+  initialState: [],
 
-  inputMark(state, id) {
-    return state.push(id);
-  },
-
-  deleteMark(state, i) {
-    return state.slice(i, 1);
+  reducers: {
+    inputMark(state, id) {
+      state.push(id.payload);
+    },
+  
+    deleteMark(state, id) {
+      state.splice(state.indexOf(id), 1);
+    }
   }
 });
 
 export let {changeEmail, changePasswd, changeNick} = login.actions;
 
 export let {inputMark, deleteMark} = mark.actions;
+
 
 export default configureStore({
   reducer: {

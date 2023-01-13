@@ -2,12 +2,14 @@ import React , { useState } from "react";
 import Sidebar from "./Sidebar";
 import style from './RecipeContent.module.css';
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { inputMark, deleteMark } from '../store';
 
-function RecipeContent({isOpen, data, mark, setMark}) {
+function RecipeContent({isOpen, data}) {
   let target = 'recipe';
   let [bookmark, setBookmark] = useState([false, false, false, false, false, false, false, false, false, false]);
   let userId = useSelector((state) => (state.login.nickname));
+  let dispatch = useDispatch();
 
   const handleLevel = (level) => {
     if(level === '하') {
@@ -25,16 +27,20 @@ function RecipeContent({isOpen, data, mark, setMark}) {
     if(userId === '') {
       alert('로그인을 해주세요.');
     }
-    else {
+    if(!bookmark[index]) {
       let copyBookmark = [...bookmark];
       copyBookmark[index] = true;
       setBookmark(copyBookmark);
 
-      let copyMark = [...mark];
-      copyMark.push(id);
-      setMark(copyMark);
+      dispatch(inputMark(id));
     }
-    
+    else if (bookmark[index]) {
+      let copyBookmark = [...bookmark];
+      copyBookmark[index] = false;
+      setBookmark(copyBookmark);
+
+      dispatch(deleteMark(id));
+    }
   }
 
   return(

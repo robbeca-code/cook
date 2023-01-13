@@ -254,6 +254,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    padding: 0 5px;
   }
 
   .kindTitle > h1 {
@@ -268,9 +269,10 @@
   /*   Recipe Items   */
   .recipeList > .grid {
     display: grid;
-    grid-template-columns: repeat(3, 118px);
+    grid-template-columns: repeat(3, 113px);
     column-gap: 5px;
     overflow: hidden;
+    padding: 0 5px;
   }
 
   .imgContainer {
@@ -280,7 +282,13 @@
   }
 
   .recipeItem > h2 {
-    font-size: 15px;
+    font-size: 14px;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    margin-right: 2px;
   }
 
   .item > img {
