@@ -23,7 +23,6 @@ function App() {
   let [isOpen, setIsOpen] = useState(false);
   let [loginBtn, setLoginBtn] = useState(false);
   let [showUser, setShowUser] = useState(false);
-  let [mark, setMark] = useState([]);
   let [chat, setChat] = useState([]);
   let nickname = useSelector((state) => {return state.login.nickname});
 
@@ -80,17 +79,17 @@ function App() {
         <Route path="*" element={<NonPage />} />
 
         <Route path="/recipe" element={<Recipe isOpen={isOpen} data={recipe} />} />
-        <Route path="/recipe/tunaCan" element={<RecipeContent isOpen={isOpen} data={tunaCan} mark={mark} setMark={setMark} /> } />
+        <Route path="/recipe/tunaCan" element={<RecipeContent isOpen={isOpen} data={tunaCan} /> } />
 
         <Route path="/share-apply" element={<ShaApp isOpen={isOpen} />} />
         <Route path="/share-apply/apply" element={<Application isOpen={isOpen} oneServing={oneServing} dessert={dessert} />} />
-        <Route path="/share-apply/apply/:id" element={<ApplyContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} oneServing={oneServing} dessert={dessert} />} />
+        <Route path="/share-apply/apply/:id" element={<ApplyContent isOpen={isOpen} chat={chat} setChat={setChat} oneServing={oneServing} dessert={dessert} />} />
         <Route path="/share-apply/share" element={<Share isOpen={isOpen} food={food} product={product} />} />
-        <Route path="/share-apply/share/:id" element={<ShareContent isOpen={isOpen} mark={mark} setMark={setMark} chat={chat} setChat={setChat} food={food} product={product} />} />
+        <Route path="/share-apply/share/:id" element={<ShareContent isOpen={isOpen} chat={chat} setChat={setChat} food={food} product={product} />} />
 
         <Route path="/chat" element={<Chat isOpen={isOpen} chat={chat} />} />
 
-        <Route path="/mypage" element={<Mypage isOpen={isOpen}  mark={mark} food={food} product={product} oneServing={oneServing} dessert={dessert} recipe={tunaCan} />} />
+        <Route path="/mypage" element={<Mypage isOpen={isOpen}  food={food} product={product} oneServing={oneServing} dessert={dessert} recipe={tunaCan} />} />
       </Routes>
     </div>
   );
