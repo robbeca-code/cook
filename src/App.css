@@ -8,6 +8,10 @@ a {
   text-decoration: none;
 }
 
+span, p, h1, h2, h3, h4, h5, h6, strong {
+  color: #171717;
+}
+
 ol, ul {
   list-style-type: none;
 }
@@ -75,7 +79,7 @@ button {
 
 .loginBtn {
   background-color: #fff;
-  border: 2px solid #ea5936;
+  border-style: none;
   width: 80px;
   height: 40px;
   font-size: 18px;
@@ -218,9 +222,9 @@ button {
   
   .loginBtn {
     background-color: #fff;
-    border: 2px solid #ea5936;
+    border-style: none;
     width: 60px;
-    height: 30px;
+    height: 35px;
     font-size: 15px;
     box-shadow: 3px 3px 10px #fff1e6;
   }
@@ -280,12 +284,12 @@ button {
   }
   
   .loginBtn {
-    background-color: #ea5936;
+    background-color: #fff;
     border-style: none;
     width: 45px;
     height: 23px;
-    font-size: 11px;
-    color: #fff;
+    font-size: 12px;
+    color: #171717;
     box-shadow: 3px 3px 10px #fff1e6;
   }
 

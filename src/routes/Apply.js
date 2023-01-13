@@ -9,6 +9,16 @@ function Application({isOpen, oneServing, dessert}) {
   const target = 'share';
   let [tab, setTab] = useState('oneServing');
   let [plus, setPlus] = useState(false);
+  let login = useSelector((state) => (state.login.nickname));
+
+  const handlePlusBtn = () => {
+    if(login === '') {
+      alert('로그인을 해주세요.');
+    }
+    else {
+      setPlus(true);
+    }
+  }
 
   return(
     <section className={cn(style.container)}>
@@ -46,7 +56,7 @@ function Application({isOpen, oneServing, dessert}) {
         }
       </section>
 
-      <button type="button" className={cn(style.plusBtn)} onClick={() => { setPlus(true) }}>
+      <button type="button" className={cn(style.plusBtn)} onClick={handlePlusBtn}>
         <img src="/public-assets/one-content/plus.png" alt="plus button" />
       </button>
 
@@ -76,16 +86,22 @@ function ApplyList({data}) {
             <div className={cn(style.imgContainer)}>
               <img src={item.img} alt={item.img_alt} />
             </div>
-            <h2>
-              {
-                item.title.length >= 10 
-                ? item.title.slice(0, 11).concat('...') 
-                : item.title
-              }
-            </h2>
-            <div className={cn(style.subInfo)}>
-              <span>{item.location}</span>
+            <div className={cn(style.itemInfo)}>
+              <h2>
+                {
+                  item.title.length >= 10 
+                  ? item.title.slice(0, 11).concat('...') 
+                  : item.title
+                }
+              </h2>
+              <div className={cn(style.subInfo)}>
+                <span>{item.location}</span>
+              </div>
+              <div className={cn(style.author)}>
+                <span>작성자: {item.author}</span>
+              </div>
             </div>
+            
           </Link>
         );
       }

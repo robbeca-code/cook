@@ -5,8 +5,8 @@ import { useState } from 'react';
 import {Routes, Route, Link} from 'react-router-dom';
 import NonPage from './routes/NonPage';
 import ShaApp from './routes/Sha-App';
-import Application from './routes/Application';
-import {oneServing, dessert} from './routes/Application-data';
+import Apply from './routes/Apply';
+import {oneServing, dessert} from './routes/Apply-data';
 import ApplyContent from './routes/ApplyContent';
 import Share from "./routes/Share";
 import {food, product} from './routes/Share-data';
@@ -82,7 +82,7 @@ function App() {
         <Route path="/recipe/tunaCan" element={<RecipeContent isOpen={isOpen} data={tunaCan} /> } />
 
         <Route path="/share-apply" element={<ShaApp isOpen={isOpen} />} />
-        <Route path="/share-apply/apply" element={<Application isOpen={isOpen} oneServing={oneServing} dessert={dessert} />} />
+        <Route path="/share-apply/apply" element={<Apply isOpen={isOpen} oneServing={oneServing} dessert={dessert} />} />
         <Route path="/share-apply/apply/:id" element={<ApplyContent isOpen={isOpen} chat={chat} setChat={setChat} oneServing={oneServing} dessert={dessert} />} />
         <Route path="/share-apply/share" element={<Share isOpen={isOpen} food={food} product={product} />} />
         <Route path="/share-apply/share/:id" element={<ShareContent isOpen={isOpen} chat={chat} setChat={setChat} food={food} product={product} />} />

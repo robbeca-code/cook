@@ -9,6 +9,17 @@ function Share({isOpen, food, product}) {
   const target = 'share';
   let [tab, setTab] = useState('food');
   let [plus, setPlus] = useState(false);
+  let login = useSelector((state) => (state.login.nickname));
+
+  const handlePlusBtn = () => {
+    if(login === '') {
+      alert('로그인을 해주세요.');
+      return;
+    }
+    else {
+      setPlus(true);
+    }
+  }
 
   return(
     <section className={cn(style.container)}>
@@ -46,7 +57,7 @@ function Share({isOpen, food, product}) {
         }
       </section>
 
-      <button type="button" className={cn(style.plusBtn)} onClick={() => { setPlus(true) }}>
+      <button type="button" className={cn(style.plusBtn)} onClick={handlePlusBtn}>
         <img src="/public-assets/one-content/plus.png" alt="plus button" />
       </button>
 
@@ -76,20 +87,31 @@ function ShareList({data}) {
             <div className={cn(style.imgContainer)}>
               <img src={item.img} alt="나눔" />
             </div>
-            <h2>
-              {
-                item.title.length >= 10 
-                ? item.title.slice(0, 11).concat('...') 
-                : item.title
-              }
-            </h2>
-            <div className={cn(style.subInfo)}>
-              <strong>
+            <div className={cn(style.itemInfo)}>
+              <h2>
                 {
-                  item.cost != '가격없음' ? item.cost.concat('원') : item.cost
+                  item.title.length >= 10 
+                  ? item.title.slice(0, 11).concat('...') 
+                  : item.title
                 }
-              </strong>
-              <span>{item.location}</span>
+              </h2>
+              <div className={cn(style.subInfo)}>
+                <strong>
+                  {
+                    item.cost != '가격없음' ? item.cost.concat('원') : item.cost
+                  }
+                </strong>
+                <span>{item.location}</span>
+              </div>
+              <div className={cn(style.author)}>
+                <span>작성자:&nbsp;
+                {
+                  item.author.length >= 5 
+                  ? item.author.slice(0, 5)
+                  : item.author
+                }  
+                </span>
+              </div>
             </div>
           </Link>
         );

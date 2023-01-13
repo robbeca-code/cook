@@ -230,7 +230,7 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 30px;
+    column-gap: 10px;
     row-gap: 80px;
     margin-top: 20px;
     place-content: center;
@@ -240,7 +240,7 @@
   /*   Item Container   */
   .imgContainer {
     width: 100%;
-    height: 200px;
+    height: 150px;
     border-radius: 12px;
     overflow: hidden;
     position: relative;

@@ -29,11 +29,15 @@
 
 .tab > h1 {
   font-size: 1.3rem;
+  color: #949494;
 }
 
 .tab.click {
-  color: #ea5936;
   border-bottom: 3px solid #ea5936;
+}
+
+.tab.click > h1 {
+  color: #ea5936;
 }
 
 
@@ -69,8 +73,8 @@
   object-fit: cover;
 }
 
-.item > h2 {
-  margin: 10px 0;
+.itemInfo > h2 {
+  margin: 10px 0 2px;
   font-size: 21px;
 }
 
@@ -86,6 +90,15 @@
 
 .subInfo > span {
   font-size: 18px;
+}
+
+.author {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.author > span {
+  color: #6a6a6a;
 }
 
 
@@ -176,6 +189,7 @@
 }
 
 
+/*   Max-Width: 800px   */
 @media screen and (max-width: 800px) {
   .container {
     padding-top: 100px;
@@ -220,8 +234,8 @@
     overflow: hidden;
   }
 
-  .item > h2 {
-    margin: 10px 0;
+  .itemInfo > h2 {
+    margin: 10px 0 2px;
     font-size: 19px;
   }
   
@@ -231,7 +245,13 @@
   }
   
   .subInfo > span {
+    font-size: 16px;
+  }
+
+  .author {
+    margin-top: 7px;
     font-size: 15px;
+    color: #6a6a6a;
   }
 
 
@@ -301,6 +321,318 @@
     width: 180px;
     height: 50px;
     font-size: 18px;
+    color: #fff;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 20px;
+  }
+}
+
+
+/*   Max-Width: 550px   */
+@media screen and (max-width: 550px) {
+  .container {
+    padding-top: 80px;
+    width: 500px;
+    position: relative;
+    margin: 0 auto 50px;
+  }
+
+
+  /*   Header   */
+  .tabContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tab {
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #949494;
+    cursor: pointer;
+  }
+
+  .tab > h1 {
+    font-size: 1rem;
+  }
+
+
+  /*   Grid   */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    column-gap: 10px;
+    row-gap: 1rem;
+    padding: 0 50px;
+    place-items: center;
+    z-index: 980;
+  }
+
+
+  /*   Share List   */
+  .item {
+    padding-top: 20px;
+  }
+
+  .imgContainer {
+    width: 200px;
+    height: 190px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .itemInfo > h2 {
+    margin: 7px 0 2px;
+    font-size: 18px;
+  }
+  
+  .subInfo > strong {
+    font-size: 16px;
+    padding-bottom: 4px;
+  }
+
+  .author {
+    margin-top: 3px;
+    font-size: 15px;
+    color: #6a6a6a;
+  }
+
+
+  /*   Plus Button   */
+  .plusBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+  }
+
+
+  /*   Plus Content   */
+  .inputModal {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    z-index: 985;
+    transform: translate(-50%);
+    width: 450px;
+    height: 610px;
+    background-color: #fff;
+    box-shadow: 0 0 0 100vw rgba(0,0,0,0.2);
+  }
+
+  .modalTitle {
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #cdcdcd;
+  }
+
+  .modalItem {
+    margin: 20px 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .uploadBtn {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border: 1px solid #4e4e4e;
+  }
+
+  .modalItem > strong {
+    font-size: 16px;
+    padding-bottom: 5px;
+  }
+
+  .modalItem > .itemSize {
+    font-size: 18px;
+    height: 30px;
+    border: 1px solid #949494;
+  }
+
+  .modalItem > .textarea {
+    height: 70px;
+    resize: none;
+  }
+
+  .inputBtn {
+    background-color: #ea5936;
+    border-radius: 12px;
+    width: 170px;
+    height: 45px;
+    font-size: 17px;
+    color: #fff;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 20px;
+  }
+}
+
+
+/*   Max-Width: 400px   */
+@media screen and (max-width: 400px) {
+  .container {
+    padding-top: 80px;
+    width: 360px;
+    position: relative;
+    margin: 0 auto 50px;
+  }
+
+
+  /*   Header   */
+  .tabContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    place-content: center;
+  }
+
+  .tab {
+    text-align: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #949494;
+    cursor: pointer;
+  }
+
+  .tab > h1 {
+    font-size: 15px;
+  }
+
+
+  /*   Grid   */
+  .grid {
+    display: grid;
+    grid-template-columns: 333px;
+    row-gap: 0;
+    padding: 0 17px;
+    place-items: baseline;
+    z-index: 980;
+  }
+
+
+  /*   Share List   */
+  .item {
+    padding-top: 20px;
+    display: flex;
+  }
+
+  .imgContainer {
+    width: 120px;
+    height: 110px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .imgContainer > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .itemInfo {
+    margin: 5px 0 0 5px;
+    width: 180px;
+    position: relative;
+  }
+
+  .itemInfo > h2 {
+    margin: 5px 0 0;
+    font-size: 16px;
+  }
+
+  .subInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .subInfo > strong {
+    font-size: 15px;
+    padding-bottom: 0px;
+  }
+
+  .subInfo > span {
+    font-size: 15px;
+  }
+
+  .author {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 15px;
+  }
+
+
+  /*   Plus Button   */
+  .plusBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+  }
+
+
+  /*   Plus Content   */
+  .inputModal {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    z-index: 985;
+    transform: translate(-50%);
+    width: 350px;
+    height: 510px;
+    background-color: #fff;
+    box-shadow: 0 0 0 100vw rgba(0,0,0,0.2);
+  }
+
+  .modalTitle {
+    font-size: 16px;
+    text-align: center;
+    padding: 7px;
+    border-bottom: 1px solid #cdcdcd;
+  }
+
+  .modalItem {
+    margin: 13px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .uploadBtn {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border: 1px solid #4e4e4e;
+  }
+
+  .modalItem > strong {
+    font-size: 14px;
+    padding-bottom: 3px;
+  }
+
+  .modalItem > .itemSize {
+    font-size: 16px;
+    height: 28px;
+    border: 1px solid #949494;
+  }
+
+  .modalItem > .textarea {
+    height: 70px;
+    resize: none;
+  }
+
+  .inputBtn {
+    background-color: #ea5936;
+    border-radius: 12px;
+    width: 170px;
+    height: 42px;
+    font-size: 16px;
     color: #fff;
     position: relative;
     left: 50%;
