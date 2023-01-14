@@ -36,6 +36,32 @@
 }
 
 
+/*   Max-width: 800px   */
+@media screen and (max-width:800px) {
+  /*   Sidebar   */
+  .sideItem {
+    display: flex;
+    align-items: center;
+    padding-left: 44px;
+  }
+  
+  .sideIcon {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+  }
+  
+  .main {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .sideTitle {
+    font-size: 23px;
+  }
+}
+
+
 /*   Max-width: 550px   */
 @media screen and (max-width:550px) {
   /*   Sidebar   */

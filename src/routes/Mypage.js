@@ -152,9 +152,11 @@ function ShowContent({id, data}) {
 
         return(
           <article className={cn(style.item)} key={i}>
-            <div className={cn(style.imgContainer)}>
-              <img src={data.img} alt={data.img_alt} />
-            </div>
+            <Link to={data.url} className={cn(style.link)}>
+              <div className={cn(style.imgContainer)}>
+                <img src={data.img} alt={data.img_alt} />
+              </div>
+            </Link>
             <h3>
               {
                 data.title.length > 10

@@ -246,6 +246,27 @@ button {
     font-size: 15px;
     color: #fff;
   }
+
+
+  /*   Sidebar   */
+  .hide-sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0px;
+    padding-top: 25px;
+    width: 320px;
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(5, 60px);
+    background-color: #fff;
+    row-gap: 1rem;
+    z-index: 999;
+    visibility: hidden;
+  }
+
+  .show {
+    visibility: visible;
+  }
 }
 
 
@@ -371,12 +392,12 @@ button {
     top: 40px;
     left: 0px;
     padding-top: 20px;
-    width: 250px;
+    width: 220px;
     height: 100%;
     display: grid;
     grid-template-rows: repeat(5, 40px);
     background-color: #fff;
-    row-gap: 1rem;
+    row-gap: 10px;
     z-index: 999;
     visibility: hidden;
   }

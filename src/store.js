@@ -28,7 +28,7 @@ let mark = createSlice({
     },
   
     deleteMark(state, id) {
-      state.splice(state.indexOf(id), 1);
+      state.splice(state.indexOf(id.payload), 1);
     }
   }
 });
