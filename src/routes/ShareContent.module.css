@@ -247,11 +247,14 @@
   position: relative;
   background-color: #ea5936;
   border-radius: 20px;
-  color: #fff;
   padding: 7px 12px;
   margin-bottom: 10px;
   max-width: 230px;
   text-align: left;
+}
+
+.chatBox > p {
+  color: #fff;
 }
 
 .chatTime {

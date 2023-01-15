@@ -18,6 +18,17 @@ let login = createSlice({
   }
 });
 
+let showUser = createSlice({
+  name: 'showUser',
+  initialState: false,
+
+  reducers: {
+    setShowUser() {
+      return true;
+    }
+  }
+});
+
 let mark = createSlice({
   name: 'mark',
   initialState: [],
@@ -35,12 +46,14 @@ let mark = createSlice({
 
 export let {changeEmail, changePasswd, changeNick} = login.actions;
 
-export let {inputMark, deleteMark} = mark.actions;
+export let {setShowUser} = showUser.actions;
 
+export let {inputMark, deleteMark} = mark.actions;
 
 export default configureStore({
   reducer: {
     login: login.reducer,
+    showUser: showUser.reducer,
     mark: mark.reducer
   }
 });

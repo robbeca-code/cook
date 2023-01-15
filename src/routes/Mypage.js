@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
 import style from './Mypage.module.css';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
@@ -11,6 +13,7 @@ function Mypage({isOpen, food, product, oneServing, dessert, recipe}) {
   let target = 'mypage';
   let [tab, setTab] = useState(0);
   let userId = useSelector((state) => (state.login.nickname));
+  let showUser = useSelector((state) => (state.showUser));
 
   return(
     <section className={cn(style.container)}>
@@ -19,7 +22,7 @@ function Mypage({isOpen, food, product, oneServing, dessert, recipe}) {
       </aside>
 
       {
-        userId === ''
+        !showUser
         ? <div className={cn(style.alert)}>
             <img src="/public-assets/mypage/login-alert.png" alt="" />
             <h1>Login을 한 다음 진행해주세요</h1>
@@ -157,16 +160,23 @@ function ShowContent({id, data}) {
                 <img src={data.img} alt={data.img_alt} />
               </div>
             </Link>
-            <h3>
+            <div className={cn(style.itemInfo)}>
+              <h3>
+                {
+                  data.title.length > 10
+                  ? data.title.slice(0, 11).concat('...')
+                  : data.title
+                }
+              </h3>
               {
-                data.title.length > 10
-                ? data.title.slice(0, 11).concat('...')
-                : data.title
+                data.cost != undefined
+                ? <strong>{data.cost}</strong>
+                : null
               }
-            </h3>
-            <span>{'by '.concat(data.author)}</span>
-            <button type="button" className={cn(style.removeBtn)} onClick={() => { dispatch(deleteMark(data.id)) }}>
-              <img src="/public-assets/mypage/remove.png" alt="remove button" />
+              <span>{'by '.concat(data.author)}</span>
+            </div>
+            <button type="button" onClick={() => { dispatch(deleteMark(data.id)) }}>
+              <FontAwesomeIcon icon={faClose}  className={cn(style.removeBtn)} />
             </button>
           </article>
         );

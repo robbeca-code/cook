@@ -17,14 +17,14 @@ import {recipe, tunaCan} from './routes/Recipe-data';
 import RecipeContent from "./routes/RecipeContent";
 import Chat from './routes/Chat';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeEmail, changePasswd, changeNick } from "./store";
+import { changeEmail, changePasswd, changeNick, setShowUser } from "./store";
 
 function App() {
   let [isOpen, setIsOpen] = useState(false);
   let [loginBtn, setLoginBtn] = useState(false);
-  let [showUser, setShowUser] = useState(false);
   let [chat, setChat] = useState([]);
   let nickname = useSelector((state) => {return state.login.nickname});
+  let showUser = useSelector((state) => {return state.showUser});
 
   return (
     <div className="app">
@@ -70,7 +70,7 @@ function App() {
 
       {
         loginBtn 
-        ? <LoginModal setShowUser={setShowUser} setLoginBtn={setLoginBtn} /> 
+        ? <LoginModal setLoginBtn={setLoginBtn} /> 
         : null
       }
 
@@ -89,18 +89,18 @@ function App() {
 
         <Route path="/chat" element={<Chat isOpen={isOpen} chat={chat} />} />
 
-        <Route path="/mypage" element={<Mypage isOpen={isOpen}  food={food} product={product} oneServing={oneServing} dessert={dessert} recipe={tunaCan} />} />
+        <Route path="/mypage" element={<Mypage isOpen={isOpen} food={food} product={product} oneServing={oneServing} dessert={dessert} recipe={tunaCan} />} />
       </Routes>
     </div>
   );
 }
 
 
-function LoginModal({setShowUser, setLoginBtn}) {
+function LoginModal({setLoginBtn}) {
   let dispatch = useDispatch();
 
   const clickLoginBtn = () => {
-    setShowUser(true);
+    dispatch(setShowUser());
     setLoginBtn(false);
   }
 
