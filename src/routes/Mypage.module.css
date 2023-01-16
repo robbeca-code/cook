@@ -468,17 +468,19 @@
 
   .itemInfo > h3 {
     font-size: 15px;
+    font-weight: normal;
     margin-top: 7px;
-    margin-bottom: 0;
+    margin-bottom: 2px;
   }
 
   .itemInfo > strong {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .itemInfo > span {
     padding-top: 2px;
     font-size: 13px;
+    color: #868e96;
   }
 
   .removeBtn {
