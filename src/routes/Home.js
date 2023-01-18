@@ -5,44 +5,43 @@ import { useState } from 'react';
 import Sidebar from './Sidebar';
 import {slide, tag, content} from './Home-data';
 
-function Home(props) {
+function Home({isOpen}) {
   let target = 'home';
   return (
-    <div className={cn(style.home)}>
-        <aside>
-          <Sidebar isOpen={props.isOpen} target={target} />
-        </aside>
+    <section className={cn(style.home)}>
+      <aside>
+        <Sidebar isOpen={isOpen} target={target} />
+      </aside>
 
-        <Slide slide={slide} />
+      <Slide slide={slide} />
 
-        <Tag tag={tag} />
+      <Tag tag={tag} />
 
-        <Content content={content} />
+      <Content content={content} />
 
-        <article className={cn(style.video)}>
-          <header>
-            <h2 className={cn(style.subTitle)}>영상으로 확인하는</h2>
-            <h1 className={cn(style.mainTitle)}>특별한 <span className={cn(style.point)}>저녁시간</span></h1>
-          </header>
-          <div className={cn(style.videoPlayer)}>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/jC41T25dImI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          
-        </article>
-    </div>
+      <article className={cn(style.video)}>
+        <header>
+          <h2 className={cn(style.subTitle)}>영상으로 확인하는</h2>
+          <h1 className={cn(style.mainTitle)}>특별한 <span className={cn(style.point)}>저녁시간</span></h1>
+        </header>
+        <div className={cn(style.videoPlayer)}>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/jC41T25dImI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </article>
+    </section>
   );
 }
 
-function Slide(props) {
+function Slide({slide}) {
   let [index, setIndex] = useState(0);
 
   function onChangeImage(counter) {
-    if(counter >= props.slide.length){
+    if(counter >= slide.length){
       index = 0;
       setIndex(index);
       return;
     } else if(counter < 0) {
-      index = props.slide.length - 1;
+      index = slide.length - 1;
       setIndex(index);
       return;
     }
@@ -57,12 +56,12 @@ function Slide(props) {
         transform: `translateX(-${index * 100}%)`
       }}>
         <img 
-          src={props.slide[0].img}
+          src={slide[0].img}
           alt="AD image1" 
           className={cn(style.slideImg)}/>
         <div className={cn(style.slideFontContainer)}>
-          <h2 className={cn(style.slideFont, style.title)}>{props.slide[0].title}</h2>
-          <span className={cn(style.slideFont)}>{props.slide[0].content}</span>
+          <h2 className={cn(style.slideFont, style.title)}>{slide[0].title}</h2>
+          <span className={cn(style.slideFont)}>{slide[0].content}</span>
         </div>
       </div>
       <div className={cn(style.slide)} style={{
@@ -70,12 +69,12 @@ function Slide(props) {
         transform: `translateX(-${index * 100}%)`
       }}>
         <img 
-          src={props.slide[1].img}
+          src={slide[1].img}
           alt="AD image1" 
           className={cn(style.slideImg)}/>
         <div className={cn(style.slideFontContainer)}>
-          <h2 className={cn(style.slideFont, style.title)}>{props.slide[1].title}</h2>
-          <span className={cn(style.slideFont)}>{props.slide[1].content}</span>
+          <h2 className={cn(style.slideFont, style.title)}>{slide[1].title}</h2>
+          <span className={cn(style.slideFont)}>{slide[1].content}</span>
         </div>
       </div>
       <button type="button" className={cn(style.btn, style.prevBtn)} onClick={() => {
@@ -92,11 +91,11 @@ function Slide(props) {
   );
 }
 
-function Tag(props) {
+function Tag({tag}) {
   return(
     <div className={cn(style.tagContainer)}>
       {
-        props.tag.map((item, i) => {
+        tag.map((item, i) => {
           return(
             <button type="button" className={cn(style.btn, style.tagBtn)} key={'tag' + i}>
               {item}
@@ -108,12 +107,12 @@ function Tag(props) {
   );
 }
 
-function Content(props) {
+function Content({content}) {
 
   return (
     <section className="appContents">
       {
-        props.content.map((item, i) => {
+        content.map((item, i) => {
           return (
             <article className={cn(style.content)} key={i}>
               <h2 className={cn(style.subTitle)}>{item.subTitle}</h2>

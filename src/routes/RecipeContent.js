@@ -7,7 +7,10 @@ import { inputMark, deleteMark } from '../store';
 
 function RecipeContent({isOpen, data}) {
   let target = 'recipe';
-  let [bookmark, setBookmark] = useState([false, false, false, false, false, false, false, false, false, false]);
+  let reset;
+  (reset = []).length = data.length;
+  reset.fill(false);
+  let [bookmark, setBookmark] = useState(reset);
   let userId = useSelector((state) => (state.login.nickname));
   let dispatch = useDispatch();
 
@@ -26,19 +29,19 @@ function RecipeContent({isOpen, data}) {
   const handleBookmarkBtn = (id, index) => {
     if(userId === '') {
       alert('로그인을 해주세요.');
+      return;
     }
+
+    let copyBookmark = [...bookmark];
+
     if(!bookmark[index]) {
-      let copyBookmark = [...bookmark];
       copyBookmark[index] = true;
       setBookmark(copyBookmark);
-
       dispatch(inputMark(id));
     }
     else if (bookmark[index]) {
-      let copyBookmark = [...bookmark];
       copyBookmark[index] = false;
       setBookmark(copyBookmark);
-
       dispatch(deleteMark(id));
     }
   }
@@ -86,7 +89,6 @@ function RecipeContent({isOpen, data}) {
                 </div>
               </article>
             );
-            
           })
         }
       </section>

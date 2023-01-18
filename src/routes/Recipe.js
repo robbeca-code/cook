@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './Recipe.module.css';
 import cn from 'classnames';
 import Sidebar from "./Sidebar";
@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 function Recipe({isOpen, data}) {
   let target = 'recipe';
-  let kind = ['tuna', 'spam', 'kimchi', 'dumpling', 'ramen'];
 
   return(
     <section className={cn(style.container)}>
@@ -26,7 +25,7 @@ function Recipe({isOpen, data}) {
           </Link>
           <section className={cn(style.grid)}>
           {
-            <RecipeItems kind={kind[0]} data={data} />
+            <RecipeItems kind={'tuna'} data={data} />
           }
           </section>
           
@@ -39,7 +38,7 @@ function Recipe({isOpen, data}) {
           </header>
           <section className={cn(style.grid)}>
           {
-            <RecipeItems kind={kind[1]} data={data} />
+            <RecipeItems kind={'spam'} data={data} />
           }
           </section>
           
@@ -52,7 +51,7 @@ function Recipe({isOpen, data}) {
           </header>
           <section className={cn(style.grid)}>
           {
-            <RecipeItems kind={kind[2]} data={data} />
+            <RecipeItems kind={'kimchi'} data={data} />
           }
           </section>
           
@@ -65,7 +64,7 @@ function Recipe({isOpen, data}) {
           </header>
           <section className={cn(style.grid)}>
           {
-            <RecipeItems kind={kind[3]} data={data} />
+            <RecipeItems kind={'dumpling'} data={data} />
           }
           </section>
           
@@ -78,7 +77,7 @@ function Recipe({isOpen, data}) {
           </header>
           <section className={cn(style.grid)}>
           {
-            <RecipeItems kind={kind[4]} data={data} />
+            <RecipeItems kind={'ramen'} data={data} />
           }
           </section>
           
