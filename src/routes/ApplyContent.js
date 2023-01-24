@@ -52,7 +52,7 @@ function ShowContent({data,  setData, setChatBtn}) {
 
   useEffect(()=>{
     setData(data);
-  });
+  }, [data]);
 
   const handleHeartBtn = () => {
 
