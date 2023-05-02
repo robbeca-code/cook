@@ -84,7 +84,10 @@ function App() {
       {loginBtn ? <LoginModal setLoginBtn={setLoginBtn} /> : null}
 
       <Routes>
-        <Route path="/" element={<Home isOpen={isOpen} />} />
+        <Route
+          path="https://robbeca-code.github.io/cook/"
+          element={<Home isOpen={isOpen} />}
+        />
         <Route path="*" element={<NonPage />} />
 
         <Route
