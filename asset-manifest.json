@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "https://robbeca-code.github.io/cook/static/css/main.3c8e688c.css",
-    "main.js": "https://robbeca-code.github.io/cook/static/js/main.fac42738.js",
-    "static/js/787.078a9cce.chunk.js": "https://robbeca-code.github.io/cook/static/js/787.078a9cce.chunk.js",
-    "index.html": "https://robbeca-code.github.io/cook/index.html",
-    "main.3c8e688c.css.map": "https://robbeca-code.github.io/cook/static/css/main.3c8e688c.css.map",
-    "main.fac42738.js.map": "https://robbeca-code.github.io/cook/static/js/main.fac42738.js.map",
-    "787.078a9cce.chunk.js.map": "https://robbeca-code.github.io/cook/static/js/787.078a9cce.chunk.js.map"
+    "main.css": "/cook/static/css/main.3c8e688c.css",
+    "main.js": "/cook/static/js/main.faddac27.js",
+    "static/js/787.078a9cce.chunk.js": "/cook/static/js/787.078a9cce.chunk.js",
+    "index.html": "/cook/index.html",
+    "main.3c8e688c.css.map": "/cook/static/css/main.3c8e688c.css.map",
+    "main.faddac27.js.map": "/cook/static/js/main.faddac27.js.map",
+    "787.078a9cce.chunk.js.map": "/cook/static/js/787.078a9cce.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3c8e688c.css",
-    "static/js/main.fac42738.js"
+    "static/js/main.faddac27.js"
   ]
 }
