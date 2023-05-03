@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "https://robbeca-code.github.io/cook/static/css/main.3c8e688c.css",
-    "main.js": "https://robbeca-code.github.io/cook/static/js/main.bf852a40.js",
+    "main.js": "https://robbeca-code.github.io/cook/static/js/main.caef374d.js",
     "static/js/787.078a9cce.chunk.js": "https://robbeca-code.github.io/cook/static/js/787.078a9cce.chunk.js",
     "index.html": "https://robbeca-code.github.io/cook/index.html",
     "main.3c8e688c.css.map": "https://robbeca-code.github.io/cook/static/css/main.3c8e688c.css.map",
-    "main.bf852a40.js.map": "https://robbeca-code.github.io/cook/static/js/main.bf852a40.js.map",
+    "main.caef374d.js.map": "https://robbeca-code.github.io/cook/static/js/main.caef374d.js.map",
     "787.078a9cce.chunk.js.map": "https://robbeca-code.github.io/cook/static/js/787.078a9cce.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3c8e688c.css",
-    "static/js/main.bf852a40.js"
+    "static/js/main.caef374d.js"
   ]
 }
