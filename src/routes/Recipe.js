@@ -1,34 +1,32 @@
-import React from 'react';
-import style from './Recipe.module.css';
-import cn from 'classnames';
+import React from "react";
+import style from "./Recipe.module.css";
+import cn from "classnames";
 import Sidebar from "./Sidebar";
 import { Link } from "react-router-dom";
 
-function Recipe({isOpen, data}) {
-  let target = 'recipe';
-
-  return(
+function Recipe({ data }) {
+  return (
     <section className={cn(style.container)}>
       <aside>
-        <Sidebar isOpen={isOpen} target={target} />
+        <Sidebar />
       </aside>
 
       <aside className={cn(style.banner)}>
-        <img src="/public-assets/recipe/recipe-intro.png" alt="" />
+        <img src="/cook/public-assets/recipe/recipe-intro.png" alt="" />
       </aside>
 
       <section className={cn(style.grid)}>
         <article className={cn(style.recipeList)}>
-          <Link to="/recipe/tunaCan" className={cn(style.kindTitle, style.link)}>
+          <Link
+            to="/recipe/tunaCan"
+            className={cn(style.kindTitle, style.link)}
+          >
             <h1>참치 통조림</h1>
             <span>더보기</span>
           </Link>
           <section className={cn(style.grid)}>
-          {
-            <RecipeItems kind={'tuna'} data={data} />
-          }
+            {<RecipeItems kind={"tuna"} data={data} />}
           </section>
-          
         </article>
 
         <article className={cn(style.recipeList)}>
@@ -37,11 +35,8 @@ function Recipe({isOpen, data}) {
             더보기
           </header>
           <section className={cn(style.grid)}>
-          {
-            <RecipeItems kind={'spam'} data={data} />
-          }
+            {<RecipeItems kind={"spam"} data={data} />}
           </section>
-          
         </article>
 
         <article className={cn(style.recipeList)}>
@@ -50,11 +45,8 @@ function Recipe({isOpen, data}) {
             <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
-          {
-            <RecipeItems kind={'kimchi'} data={data} />
-          }
+            {<RecipeItems kind={"kimchi"} data={data} />}
           </section>
-          
         </article>
 
         <article className={cn(style.recipeList)}>
@@ -63,11 +55,8 @@ function Recipe({isOpen, data}) {
             <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
-          {
-            <RecipeItems kind={'dumpling'} data={data} />
-          }
+            {<RecipeItems kind={"dumpling"} data={data} />}
           </section>
-          
         </article>
 
         <article className={cn(style.recipeList)}>
@@ -76,62 +65,57 @@ function Recipe({isOpen, data}) {
             <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
-          {
-            <RecipeItems kind={'ramen'} data={data} />
-          }
+            {<RecipeItems kind={"ramen"} data={data} />}
           </section>
-          
         </article>
       </section>
     </section>
   );
 }
 
-function RecipeItems({kind, data}) {
-
+function RecipeItems({ kind, data }) {
   const handleLevel = (level) => {
-    if(level === '하') {
-      return ('/public-assets/recipe/level-b.png');
+    if (level === "하") {
+      return "/cook/public-assets/recipe/level-b.png";
+    } else if (level === "중") {
+      return "/cook/public-assets/recipe/level-m.png";
+    } else {
+      return "/cook/public-assets/recipe/level-t.png";
     }
-    else if(level === '중') {
-      return ('/public-assets/recipe/level-m.png');
-    }
-    else {
-      return('/public-assets/recipe/level-t.png');
-    }
-  }
+  };
 
-  return(
-    data.map((item, i) => {
-      if(item.kind === kind) {
-        return(
-          <article className={cn(style.recipeItem)} key={i}>
-            <div className={cn(style.imgContainer)}>
-              <img src={item.img} alt={item.img_alt} />
+  return data.map((item, i) => {
+    if (item.kind === kind) {
+      return (
+        <article className={cn(style.recipeItem)} key={i}>
+          <div className={cn(style.imgContainer)}>
+            <img src={item.img} alt={item.img_alt} />
+          </div>
+          <h2>{item.title}</h2>
+          <div className={cn(style.itemInfo)}>
+            <div className={cn(style.item)}>
+              <img
+                src="/cook/public-assets/recipe/heart.png"
+                className={cn(style.subInfoImg)}
+                alt="like"
+              />
+              <span>{item.heart}</span>
             </div>
-            <h2>{item.title}</h2>
-            <div className={cn(style.itemInfo)}>
-              <div className={cn(style.item)}>
-                <img src="/public-assets/recipe/heart.png" className={cn(style.subInfoImg)} alt="like" />
-                <span>{item.heart}</span>
-              </div>
-              <div className={cn(style.item)}>
-                <img src={ handleLevel(item.level) } alt="level" />
-                <span>{item.level}</span>
-              </div>
-              <div className={cn(style.item)}>
-                <img src="/public-assets/recipe/timer.png" alt="time" />
-                <span>{item.time}</span>
-              </div>
+            <div className={cn(style.item)}>
+              <img src={handleLevel(item.level)} alt="level" />
+              <span>{item.level}</span>
             </div>
-          </article>
-        );
-      }
-      else {
-        return(null);
-      }
-    })
-  );
+            <div className={cn(style.item)}>
+              <img src="/cook/public-assets/recipe/timer.png" alt="time" />
+              <span>{item.time}</span>
+            </div>
+          </div>
+        </article>
+      );
+    } else {
+      return null;
+    }
+  });
 }
 
 export default Recipe;

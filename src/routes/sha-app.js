@@ -1,16 +1,14 @@
-import React from 'react';
-import style from './Sha-App.module.css';
-import cn from 'classnames';
-import { Link } from 'react-router-dom';
-import Sidebar from './Sidebar';
+import React from "react";
+import style from "./Sha-App.module.css";
+import cn from "classnames";
+import { Link } from "react-router-dom";
+import Sidebar from "./Sidebar";
 
-function ShaApp(props) {
-  let target = 'share';
-
+function ShaApp() {
   return (
-    <div>      
+    <div>
       <aside>
-        <Sidebar isOpen={props.isOpen} target={target} />
+        <Sidebar />
       </aside>
 
       <section className={cn(style.container)}>
@@ -21,24 +19,42 @@ function ShaApp(props) {
           <ul className={cn(style.itemsList)}>
             <li className={cn(style.item)}>
               <Link to="/share-apply/share">
-                <button type="button" className={cn(style.btn, style.imgContainer)}>
-                  <img src="/public-assets/sha_app/item.png" alt="The ingredients button" />
+                <button
+                  type="button"
+                  className={cn(style.btn, style.imgContainer)}
+                >
+                  <img
+                    src="/cook/public-assets/sha_app/item.png"
+                    alt="The ingredients button"
+                  />
                 </button>
               </Link>
               <h2>식재료</h2>
             </li>
             <li className={cn(style.item)}>
               <Link to="/share-apply/share">
-                <button type="button" className={cn(style.btn, style.imgContainer)}>
-                  <img src="/public-assets/sha_app/pork.png" alt="The ingredients button" />
+                <button
+                  type="button"
+                  className={cn(style.btn, style.imgContainer)}
+                >
+                  <img
+                    src="/cook/public-assets/sha_app/pork.png"
+                    alt="The ingredients button"
+                  />
                 </button>
               </Link>
               <h2>식기 및 도구</h2>
             </li>
             <li className={cn(style.item)}>
               <Link to="/share-apply/share">
-                <button type="button" className={cn(style.btn, style.imgContainer)}>
-                  <img src="/public-assets/sha_app/book.png" alt="The ingredients button" />
+                <button
+                  type="button"
+                  className={cn(style.btn, style.imgContainer)}
+                >
+                  <img
+                    src="/cook/public-assets/sha_app/book.png"
+                    alt="The ingredients button"
+                  />
                 </button>
               </Link>
               <h2>관련 도서</h2>
@@ -53,24 +69,42 @@ function ShaApp(props) {
           <ul className={cn(style.itemsList)}>
             <li className={cn(style.item)}>
               <Link to="/share-apply/apply" className={cn(style.link)}>
-                <button type="button" className={cn(style.btn, style.imgContainer)}>
-                  <img src="/public-assets/sha_app/one-person.png" alt="The ingredients button" />
+                <button
+                  type="button"
+                  className={cn(style.btn, style.imgContainer)}
+                >
+                  <img
+                    src="/cook/public-assets/sha_app/one-person.png"
+                    alt="The ingredients button"
+                  />
                 </button>
               </Link>
               <h2>1인분</h2>
             </li>
             <li className={cn(style.item)}>
               <Link to="/share-apply/apply" className={cn(style.link)}>
-                <button type="button" className={cn(style.btn, style.imgContainer)}>
-                  <img src="/public-assets/sha_app/dessert.png" alt="The ingredients button" />
+                <button
+                  type="button"
+                  className={cn(style.btn, style.imgContainer)}
+                >
+                  <img
+                    src="/cook/public-assets/sha_app/dessert.png"
+                    alt="The ingredients button"
+                  />
                 </button>
               </Link>
               <h2>디저트</h2>
             </li>
             <li className={cn(style.item)}>
               <Link to="/share-apply/apply" className={cn(style.link)}>
-                <button type="button" className={cn(style.btn, style.imgContainer)}>
-                  <img src="/public-assets/sha_app/big-food.png" alt="The ingredients button" />
+                <button
+                  type="button"
+                  className={cn(style.btn, style.imgContainer)}
+                >
+                  <img
+                    src="/cook/public-assets/sha_app/big-food.png"
+                    alt="The ingredients button"
+                  />
                 </button>
               </Link>
               <h2>대용량</h2>
@@ -85,25 +119,25 @@ function ShaApp(props) {
           <ul className={cn(style.itemsList)}>
             <li className={cn(style.item)}>
               <div className={cn(style.imgContainer)}>
-                <img src="/public-assets/sha_app/non-img.png" alt="" />
+                <img src="/cook/public-assets/sha_app/non-img.png" alt="" />
               </div>
               <span className={cn(style.userName)}>길구</span>
             </li>
             <li className={cn(style.item)}>
               <div className={cn(style.imgContainer)}>
-                <img src="/public-assets/sha_app/non-img.png" alt="" />
+                <img src="/cook/public-assets/sha_app/non-img.png" alt="" />
               </div>
               <span className={cn(style.userName)}>인디안밥</span>
             </li>
             <li className={cn(style.item)}>
               <div className={cn(style.imgContainer)}>
-                <img src="/public-assets/sha_app/non-img.png" alt="" />
+                <img src="/cook/public-assets/sha_app/non-img.png" alt="" />
               </div>
               <span className={cn(style.userName)}>푸드파이터</span>
             </li>
             <li className={cn(style.item)}>
               <div className={cn(style.imgContainer)}>
-                <img src="/public-assets/sha_app/non-img.png" alt="" />
+                <img src="/cook/public-assets/sha_app/non-img.png" alt="" />
               </div>
               <span className={cn(style.userName)}>갈비천국</span>
             </li>
@@ -111,7 +145,7 @@ function ShaApp(props) {
         </article>
 
         <aside className={cn(style.ad)}>
-          <img src="/public-assets/sha_app/event-ad.png" alt="" />
+          <img src="/cook/public-assets/sha_app/event-ad.png" alt="" />
         </aside>
       </section>
     </div>

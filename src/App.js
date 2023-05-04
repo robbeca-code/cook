@@ -17,18 +17,30 @@ import { recipe, tunaCan } from "./routes/Recipe-data";
 import RecipeContent from "./routes/RecipeContent";
 import Chat from "./routes/Chat";
 import { useDispatch, useSelector } from "react-redux";
-import { changeEmail, changePasswd, changeNick, setShowUser } from "./store";
+import {
+  changeEmail,
+  changePasswd,
+  changeNick,
+  setShowUser,
+  toggleMenuBtn,
+  changeTarget,
+} from "./store";
 
 function App() {
-  let [isOpen, setIsOpen] = useState(false);
   let [loginBtn, setLoginBtn] = useState(false);
+  //let [clickLoginBtn, setClickLoginBtn] = useState(false);
+
   let [chat, setChat] = useState([]);
+  //let [chats, setChats] = useState([]);
+
   let nickname = useSelector((state) => {
     return state.login.nickname;
   });
   let showUser = useSelector((state) => {
     return state.showUser;
   });
+
+  let dispatch = useDispatch();
 
   return (
     <div className="app">
@@ -38,7 +50,7 @@ function App() {
             <button
               type="button"
               onClick={() => {
-                setIsOpen(!isOpen);
+                dispatch(toggleMenuBtn());
               }}
             >
               <img
@@ -47,7 +59,13 @@ function App() {
                 className="topIcon menu"
               />
             </button>
-            <Link to="/" className="logo">
+            <Link
+              to="/"
+              className="logo"
+              onClick={() => {
+                dispatch(changeTarget("home"));
+              }}
+            >
               <img
                 src={process.env.PUBLIC_URL + "/public-assets/logo.png"}
                 alt="logo"
@@ -84,33 +102,24 @@ function App() {
       {loginBtn ? <LoginModal setLoginBtn={setLoginBtn} /> : null}
 
       <Routes>
-        <Route
-          path="https://robbeca-code.github.io/cook/"
-          element={<Home isOpen={isOpen} />}
-        />
+        <Route path="/" element={<Home />} />
         <Route path="*" element={<NonPage />} />
 
-        <Route
-          path="/recipe"
-          element={<Recipe isOpen={isOpen} data={recipe} />}
-        />
+        <Route path="/recipe" element={<Recipe data={recipe} />} />
         <Route
           path="/recipe/tunaCan"
-          element={<RecipeContent isOpen={isOpen} data={tunaCan} />}
+          element={<RecipeContent data={tunaCan} />}
         />
 
-        <Route path="/share-apply" element={<ShaApp isOpen={isOpen} />} />
+        <Route path="/share-apply" element={<ShaApp />} />
         <Route
           path="/share-apply/apply"
-          element={
-            <Apply isOpen={isOpen} oneServing={oneServing} dessert={dessert} />
-          }
+          element={<Apply oneServing={oneServing} dessert={dessert} />}
         />
         <Route
           path="/share-apply/apply/:id"
           element={
             <ApplyContent
-              isOpen={isOpen}
               chat={chat}
               setChat={setChat}
               oneServing={oneServing}
@@ -120,13 +129,12 @@ function App() {
         />
         <Route
           path="/share-apply/share"
-          element={<Share isOpen={isOpen} food={food} product={product} />}
+          element={<Share food={food} product={product} />}
         />
         <Route
           path="/share-apply/share/:id"
           element={
             <ShareContent
-              isOpen={isOpen}
               chat={chat}
               setChat={setChat}
               food={food}
@@ -135,13 +143,12 @@ function App() {
           }
         />
 
-        <Route path="/chat" element={<Chat isOpen={isOpen} chat={chat} />} />
+        <Route path="/chat" element={<Chat chat={chat} />} />
 
         <Route
           path="/mypage"
           element={
             <Mypage
-              isOpen={isOpen}
               food={food}
               product={product}
               oneServing={oneServing}

@@ -1,5 +1,6 @@
 {
   "homepage": "https://robbeca-code.github.io/cook",
+  "proxy": "https://robbeca-code.github.io/cook",
   "name": "cook",
   "version": "0.1.0",
   "private": true,
