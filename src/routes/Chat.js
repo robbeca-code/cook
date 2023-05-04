@@ -3,7 +3,7 @@ import style from "./Chat.module.css";
 import cn from "classnames";
 import Sidebar from "./Sidebar";
 
-function Chat({ chat }) {
+function Chat({ chats }) {
   const NonChat = () => {
     return (
       <article className={cn(style.nonChat)}>
@@ -23,27 +23,29 @@ function Chat({ chat }) {
         <img src="/cook/public-assets/chat/banner.png" alt="banner" />
       </aside>
 
-      {chat.length === 0 ? <NonChat /> : <ShowChatList chat={chat} />}
+      {chats.length === 0 ? <NonChat /> : <ShowChatList chats={chats} />}
     </section>
   );
 }
 
-function ShowChatList({ chat }) {
+function ShowChatList({ chats }) {
   return (
     <ul className={cn(style.chatList)}>
-      {chat.map((item, i) => {
+      {chats.map((item, i) => {
         return (
           <li className={cn(style.chatItem)} key={i}>
             <div className={cn(style.itemLeft)}>
               <div className={cn(style.imgContainer)}>
-                <img src={item.userProfile} alt={item.author} />
+                <img src={item.authorProfilePicture} alt={item.author} />
               </div>
               <div className={cn(style.chatInfo)}>
                 <h3>{item.author}</h3>
                 <p>
-                  {item.chat[item.chat.length - 1].length > 25
-                    ? item.chat[item.chat.length - 1].slice(0, 26).concat("...")
-                    : item.chat[item.chat.length - 1]}
+                  {item.messages[item.messages.length - 1].length > 25
+                    ? item.messages[item.messages.length - 1]
+                        .slice(0, 26)
+                        .concat("...")
+                    : item.messages[item.messages.length - 1]}
                 </p>
               </div>
             </div>

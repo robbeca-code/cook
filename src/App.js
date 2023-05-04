@@ -27,20 +27,19 @@ import {
 } from "./store";
 
 function App() {
-  let [loginBtn, setLoginBtn] = useState(false);
-  //let [clickLoginBtn, setClickLoginBtn] = useState(false);
+  const [loginBtn, setLoginBtn] = useState(false);
+  //const [clickedLoginBtn, setClickedLoginBtn] = useState(false);
+  const [chats, setChats] = useState([]);
 
-  let [chat, setChat] = useState([]);
-  //let [chats, setChats] = useState([]);
-
-  let nickname = useSelector((state) => {
+  const nickname = useSelector((state) => {
     return state.login.nickname;
   });
-  let showUser = useSelector((state) => {
+
+  const showUser = useSelector((state) => {
     return state.showUser;
   });
 
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   return (
     <div className="app">
@@ -120,8 +119,8 @@ function App() {
           path="/share-apply/apply/:id"
           element={
             <ApplyContent
-              chat={chat}
-              setChat={setChat}
+              chats={chats}
+              setChats={setChats}
               oneServing={oneServing}
               dessert={dessert}
             />
@@ -135,15 +134,15 @@ function App() {
           path="/share-apply/share/:id"
           element={
             <ShareContent
-              chat={chat}
-              setChat={setChat}
+              chats={chats}
+              setChats={setChats}
               food={food}
               product={product}
             />
           }
         />
 
-        <Route path="/chat" element={<Chat chat={chat} />} />
+        <Route path="/chat" element={<Chat chats={chats} />} />
 
         <Route
           path="/mypage"

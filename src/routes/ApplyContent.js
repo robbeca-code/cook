@@ -7,7 +7,7 @@ import Clock from "react-live-clock";
 import { useSelector, useDispatch } from "react-redux";
 import { inputMark, deleteMark } from "../store";
 
-function ApplyContent({ chat, setChat, oneServing, dessert }) {
+function ApplyContent({ chats, setChats, oneServing, dessert }) {
   let { id } = useParams();
   let [chatBtn, setChatBtn] = useState(false);
   let [data, setData] = useState("");
@@ -29,8 +29,8 @@ function ApplyContent({ chat, setChat, oneServing, dessert }) {
       {chatBtn ? (
         <ShowChat
           data={data}
-          chat={chat}
-          setChat={setChat}
+          chats={chats}
+          setChats={setChats}
           setChatBtn={setChatBtn}
         />
       ) : null}
@@ -156,65 +156,73 @@ function ShowContent({ data, setData, setChatBtn }) {
   );
 }
 
-function ShowChat({ data, chat, setChat, setChatBtn }) {
-  let [text, setText] = useState("");
-  let [msg, setMsg] = useState({
-    userProfile: "",
+function ShowChat({ data, chats, setChats, setChatBtn }) {
+  const [message, setMessage] = useState("");
+
+  const [chatInfo, setChatInfo] = useState({
+    authorProfilePicture: "",
     title: "",
     author: "",
     kind: "",
-    chat: [],
+    messages: [],
   });
 
+  // 채팅하는 게시물의 정보를 담는 코드입니다.
   useEffect(() => {
-    msg.userProfile = data.user_img;
-    msg.title = data.title;
-    msg.author = data.author;
-    msg.kind = `신청: ${data.kind}`;
+    if (chats.findIndex((c) => c.title === data.title) == -1) {
+      chatInfo.authorProfilePicture = data.user_img;
+      chatInfo.title = data.title;
+      chatInfo.author = data.author;
+      chatInfo.kind = `신청: ${data.kind}`;
+    }
   }, [data.title]);
 
+  // 닫기 버튼을 눌렀을 때 최종적으로 채팅의 전체 데이터가 저장되는 함수입니다.
   const handleCloseBtn = () => {
-    if (chat.findIndex((c) => c.title === data.title) > -1) {
-      let copyChat = [...chat];
-      setChat(copyChat);
-      setReset();
-      return;
+    if (chats.findIndex((c) => c.title === chatInfo.title) > -1) {
+      let copyChat = [...chats];
+      setChats(copyChat);
+    } else {
+      let copyChat = [...chats];
+      copyChat.push(chatInfo);
+      setChats(copyChat);
     }
 
-    let copyChat = [...chat];
-    copyChat.push(msg);
-    setChat(copyChat);
     setReset();
-  };
-
-  const setReset = () => {
-    let reset = { img: "", title: "", author: "", chat: [] };
-    setMsg(reset);
     setChatBtn(false);
   };
 
-  const handleChatInput = (e) => {
-    setText(e.target.value);
+  const setReset = () => {
+    const reset = {
+      authorProfilePicture: "",
+      title: "",
+      author: "",
+      kind: "",
+      messages: [],
+    };
+    setChatInfo(reset);
+  };
+
+  const handleInput = (e) => {
+    setMessage(e.target.value);
   };
 
   const handleSubmitBtn = () => {
     // chat에 이미 정보가 들어있을 때 -> 채팅 정보만 추가한다.
-    if (chat.findIndex((c) => c.title === data.title) > -1) {
-      let i = chat.findIndex((c) => c.title === data.title);
-      chat[i].chat.push(text);
-      inputMsg(text);
-      return;
+    if (chats.findIndex((c) => c.title === chatInfo.title) > -1) {
+      let i = chats.findIndex((c) => c.title === chatInfo.title);
+      chats[i].messages.push(message);
     }
 
-    // 처음 채팅할 때
-    if (text != "") {
-      inputMsg(text);
+    // 처음 채팅했을 때
+    else {
+      inputMessage(message);
     }
   };
 
-  const inputMsg = (text) => {
-    msg.chat.push(text);
-    setText("");
+  const inputMessage = (message) => {
+    chatInfo.messages.push(message);
+    setMessage("");
   };
 
   return (
@@ -255,20 +263,24 @@ function ShowChat({ data, chat, setChat, setChatBtn }) {
             </span>
           </aside>
           <section className={cn(style.myChat)}>
-            {<ShowChatList msgList={msg.chat} />}
+            {<ShowChatList messages={chatInfo.messages} />}
           </section>
         </article>
         <div className={cn(style.sendContainer)}>
           <input
             type="text"
-            value={text}
+            value={message}
             className={cn(style.inputStyle)}
-            onChange={handleChatInput}
+            onChange={handleInput}
             placeholder="내용입력"
           />
           <button
             type="button"
-            onClick={handleSubmitBtn}
+            onClick={() => {
+              if (message !== "") {
+                return handleSubmitBtn();
+              }
+            }}
             className={cn(style.sendBtn)}
           >
             <img
@@ -282,12 +294,12 @@ function ShowChat({ data, chat, setChat, setChatBtn }) {
   );
 }
 
-function ShowChatList({ msgList }) {
-  return msgList.map((chat, i) => {
+function ShowChatList({ messages }) {
+  return messages.map((message, i) => {
     return (
       <div key={i}>
         <article className={cn(style.chatBox)}>
-          <p className={cn(style.myMsg)}>{chat}</p>
+          <p className={cn(style.myMsg)}>{message}</p>
           <span className={cn(style.chatTime)}>
             <Clock format={"A HH:mm"} ticking={false} timezone={"Asia/Seoul"} />
           </span>

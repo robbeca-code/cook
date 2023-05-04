@@ -12,7 +12,7 @@ function ShaApp() {
       </aside>
 
       <section className={cn(style.container)}>
-        <article class={cn(style.content)}>
+        <article className={cn(style.content)}>
           <header className={cn(style.contentTitle)}>
             <h1>| 나눔 |</h1>
           </header>
