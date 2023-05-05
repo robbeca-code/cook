@@ -1,8 +1,8 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-let login = createSlice({
-  name: "login",
-  initialState: { email: "", passwd: "", nickname: "" },
+let loginInfo = createSlice({
+  name: "loginInfo",
+  initialState: { email: "", passwd: "", name: "" },
   reducers: {
     changeEmail(state, email) {
       state.email = email.payload;
@@ -12,18 +12,18 @@ let login = createSlice({
       state.passwd = pw.payload;
     },
 
-    changeNick(state, nick) {
-      state.nickname = nick.payload;
+    changeName(state, name) {
+      state.name = name.payload;
     },
   },
 });
 
-let showUser = createSlice({
-  name: "showUser",
+let login = createSlice({
+  name: "login",
   initialState: false,
 
   reducers: {
-    setShowUser() {
+    setLogin() {
       return true;
     },
   },
@@ -58,9 +58,9 @@ let mark = createSlice({
   },
 });
 
-export let { changeEmail, changePasswd, changeNick } = login.actions;
+export let { changeEmail, changePasswd, changeName } = loginInfo.actions;
 
-export let { setShowUser } = showUser.actions;
+export let { setLogin } = login.actions;
 
 export let { toggleMenuBtn, changeTarget } = clickMenu.actions;
 
@@ -68,8 +68,8 @@ export let { inputMark, deleteMark } = mark.actions;
 
 export default configureStore({
   reducer: {
+    loginInfo: loginInfo.reducer,
     login: login.reducer,
-    showUser: showUser.reducer,
     clickMenu: clickMenu.reducer,
     mark: mark.reducer,
   },

@@ -20,23 +20,22 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   changeEmail,
   changePasswd,
-  changeNick,
-  setShowUser,
+  changeName,
+  setLogin,
   toggleMenuBtn,
   changeTarget,
 } from "./store";
 
 function App() {
-  const [loginBtn, setLoginBtn] = useState(false);
-  //const [clickedLoginBtn, setClickedLoginBtn] = useState(false);
+  const [clickedLoginBtn, setClickedLoginBtn] = useState(false);
   const [chats, setChats] = useState([]);
 
-  const nickname = useSelector((state) => {
-    return state.login.nickname;
+  const userName = useSelector((state) => {
+    return state.loginInfo.name;
   });
 
-  const showUser = useSelector((state) => {
-    return state.showUser;
+  const isLogin = useSelector((state) => {
+    return state.login;
   });
 
   const dispatch = useDispatch();
@@ -81,14 +80,16 @@ function App() {
               />
             </Link>
 
-            {showUser ? (
-              <UserImg login={nickname} />
+            {isLogin ? (
+              <CompletedLogin userName={userName} />
             ) : (
               <button
                 type="button"
                 className="loginBtn"
                 onClick={() => {
-                  loginBtn ? setLoginBtn(false) : setLoginBtn(true);
+                  clickedLoginBtn
+                    ? setClickedLoginBtn(false)
+                    : setClickedLoginBtn(true);
                 }}
               >
                 Login
@@ -98,7 +99,9 @@ function App() {
         </nav>
       </header>
 
-      {loginBtn ? <LoginModal setLoginBtn={setLoginBtn} /> : null}
+      {clickedLoginBtn ? (
+        <LoginModal setClickedLoginBtn={setClickedLoginBtn} />
+      ) : null}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -161,12 +164,12 @@ function App() {
   );
 }
 
-function LoginModal({ setLoginBtn }) {
+function LoginModal({ setClickedLoginBtn }) {
   let dispatch = useDispatch();
 
-  const clickLoginBtn = () => {
-    dispatch(setShowUser());
-    setLoginBtn(false);
+  const handleLoginBtn = () => {
+    dispatch(setLogin());
+    setClickedLoginBtn(false);
   };
 
   return (
@@ -196,11 +199,11 @@ function LoginModal({ setLoginBtn }) {
           <strong>닉네임</strong>
           <input
             type="text"
-            onChange={(e) => dispatch(changeNick(e.target.value))}
+            onChange={(e) => dispatch(changeName(e.target.value))}
           />
         </div>
 
-        <button type="button" className="inputBtn" onClick={clickLoginBtn}>
+        <button type="button" className="inputBtn" onClick={handleLoginBtn}>
           Login
         </button>
       </article>
@@ -208,14 +211,14 @@ function LoginModal({ setLoginBtn }) {
   );
 }
 
-function UserImg({ login }) {
+function CompletedLogin({ userName }) {
   return (
     <div className="loginImgContainer">
       <img
         src={process.env.PUBLIC_URL + "/public-assets/userLogin.png"}
         alt="user image"
       />
-      <span>{login.length >= 2 ? login.slice(0, 2) : login}</span>
+      <span>{userName.length >= 2 ? userName.slice(0, 2) : userName}</span>
     </div>
   );
 }
