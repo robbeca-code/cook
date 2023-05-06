@@ -1,31 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { food, product } from "./Share-data";
 import Sidebar from "./Sidebar";
 import style from "./ShareContent.module.css";
 import cn from "classnames";
 import { useParams } from "react-router-dom";
 import Clock from "react-live-clock";
 import { useDispatch, useSelector } from "react-redux";
-import { inputMark, deleteMark } from "../store";
+import { inputShareMark, deleteShareMark } from "../store";
 
-function ShareContent({ chats, setChats, food, product }) {
-  let { id } = useParams();
-  let [chatBtn, setChatBtn] = useState(false);
-  let [data, setData] = useState("");
+function ShareContent({ chats, setChats }) {
+  const { id } = useParams();
+  const [chatBtn, setChatBtn] = useState(false);
+  const [data, setData] = useState("");
 
   return (
     <section>
       <aside>
         <Sidebar />
       </aside>
-      {
-        <GetConent
-          id={id}
-          food={food}
-          product={product}
-          setChatBtn={setChatBtn}
-          setData={setData}
-        />
-      }
+      {<GetConent id={id} setChatBtn={setChatBtn} setData={setData} />}
       {chatBtn ? (
         <ShowChat
           data={data}
@@ -38,58 +31,49 @@ function ShareContent({ chats, setChats, food, product }) {
   );
 }
 
-function GetConent({ id, food, product, setChatBtn, setData }) {
-  for (let i = 0; i < food.length; i++) {
-    if (id === food[i].id) {
-      return (
-        <ShowContent data={food[i]} setData={setData} setChatBtn={setChatBtn} />
-      );
-    }
+function GetConent({ id, setChatBtn, setData }) {
+  if (food.findIndex((data) => data.id == id) != -1) {
+    const data = food.filter((data) => data.id == id);
+
+    // data의 [{...}] 자료형을 {...} 자료형으로 데이터를 보내기 위해서 data[0]을 사용했습니다.
+    return (
+      <ShowContent data={data[0]} setData={setData} setChatBtn={setChatBtn} />
+    );
   }
 
-  for (let i = 0; i < product.length; i++) {
-    if (id === product[i].id) {
-      return (
-        <ShowContent
-          data={product[i]}
-          setData={setData}
-          setChatBtn={setChatBtn}
-        />
-      );
-    }
+  if (product.findIndex((data) => data.id == id) != -1) {
+    const data = product.filter((data) => data.id == id);
+    return (
+      <ShowContent data={data[0]} setData={setData} setChatBtn={setChatBtn} />
+    );
   }
 }
 
 function ShowContent({ data, setData, setChatBtn }) {
-  let [heartBtn, setHeartBtn] = useState(false);
-  let userId = useSelector((state) => state.login.nickname);
-  let dispatch = useDispatch();
+  const [clickedHeartBtn, setClickedHeartBtn] = useState(false);
+  const userName = useSelector((state) => state.loginInfo.name);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setData(data);
   }, [data]);
 
   const handleHeartBtn = () => {
-    if (userId === "") {
-      alert("로그인을 해주세요.");
-      return;
-    }
-
-    if (!heartBtn) {
-      setHeartBtn(true);
-      dispatch(inputMark(data.id));
+    if (!clickedHeartBtn) {
+      setClickedHeartBtn(true);
+      dispatch(inputShareMark(data.id));
     } else {
-      setHeartBtn(false);
-      dispatch(deleteMark(data.id));
+      setClickedHeartBtn(false);
+      dispatch(deleteShareMark(data.id));
     }
   };
 
   const handleChatBtn = () => {
-    if (userId === "") {
-      alert("로그인을 해주세요.");
-    } else {
-      setChatBtn(true);
-    }
+    setChatBtn(true);
+  };
+
+  const showAlert = () => {
+    alert("로그인을 해주세요.");
   };
 
   return (
@@ -128,9 +112,15 @@ function ShowContent({ data, setData, setChatBtn }) {
           <button
             type="button"
             className={cn(style.heartBtn)}
-            onClick={handleHeartBtn}
+            onClick={() => {
+              if (userName == "") {
+                return showAlert();
+              } else {
+                return handleHeartBtn();
+              }
+            }}
           >
-            {!heartBtn ? (
+            {!clickedHeartBtn ? (
               <img
                 src="/cook/public-assets/one-content/heart.png"
                 alt="heart button"
@@ -147,7 +137,13 @@ function ShowContent({ data, setData, setChatBtn }) {
         <button
           type="button"
           className={cn(style.chatBtn)}
-          onClick={handleChatBtn}
+          onClick={() => {
+            if (userName == "") {
+              return showAlert();
+            } else {
+              return handleChatBtn();
+            }
+          }}
         >
           채팅하기
         </button>
@@ -169,7 +165,7 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
 
   // 채팅하는 게시물의 정보를 담는 코드입니다.
   useEffect(() => {
-    if (chats.findIndex((c) => c.title === data.title) == -1) {
+    if (chats.findIndex((c) => c.title == data.title) == -1) {
       chatInfo.authorProfilePicture = data.user_img;
       chatInfo.title = data.title;
       chatInfo.author = data.author;
@@ -179,7 +175,7 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
 
   // 닫기 버튼을 눌렀을 때 최종적으로 채팅의 전체 데이터가 저장되는 함수입니다.
   const handleCloseBtn = () => {
-    if (chats.findIndex((c) => c.title === chatInfo.title) > -1) {
+    if (chats.findIndex((c) => c.title == chatInfo.title) > -1) {
       let copyChat = [...chats];
       setChats(copyChat);
     } else {
@@ -209,8 +205,8 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
 
   const handleSubmitBtn = () => {
     // chat에 이미 정보가 들어있을 때 -> 채팅 정보만 추가한다.
-    if (chats.findIndex((c) => c.title === chatInfo.title) > -1) {
-      let i = chats.findIndex((c) => c.title === chatInfo.title);
+    if (chats.findIndex((c) => c.title == chatInfo.title) > -1) {
+      let i = chats.findIndex((c) => c.title == chatInfo.title);
       chats[i].messages.push(message);
     }
 

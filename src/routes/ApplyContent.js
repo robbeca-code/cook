@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { oneServing, dessert } from "./Apply-data";
 import Sidebar from "./Sidebar";
 import style from "./ShareContent.module.css";
 import cn from "classnames";
 import { useParams } from "react-router-dom";
 import Clock from "react-live-clock";
 import { useSelector, useDispatch } from "react-redux";
-import { inputMark, deleteMark } from "../store";
+import { inputApplyMark, deleteApplyMark } from "../store";
 
-function ApplyContent({ chats, setChats, oneServing, dessert }) {
+function ApplyContent({ chats, setChats }) {
   let { id } = useParams();
   let [chatBtn, setChatBtn] = useState(false);
   let [data, setData] = useState("");
@@ -17,15 +18,7 @@ function ApplyContent({ chats, setChats, oneServing, dessert }) {
       <aside>
         <Sidebar />
       </aside>
-      {
-        <GetContent
-          id={id}
-          oneServing={oneServing}
-          dessert={dessert}
-          setChatBtn={setChatBtn}
-          setData={setData}
-        />
-      }
+      {<GetContent id={id} setChatBtn={setChatBtn} setData={setData} />}
       {chatBtn ? (
         <ShowChat
           data={data}
@@ -38,61 +31,50 @@ function ApplyContent({ chats, setChats, oneServing, dessert }) {
   );
 }
 
-function GetContent({ id, oneServing, dessert, setChatBtn, setData }) {
-  for (let i = 0; i < oneServing.length; i++) {
-    if (id === oneServing[i].id) {
-      return (
-        <ShowContent
-          data={oneServing[i]}
-          setData={setData}
-          setChatBtn={setChatBtn}
-        />
-      );
-    }
+function GetContent({ id, setChatBtn, setData }) {
+  if (oneServing.findIndex((data) => data.id == id) != -1) {
+    const data = oneServing.filter((data) => data.id == id);
+
+    // data의 [{...}] 자료형을 {...} 자료형으로 데이터를 보내기 위해서 data[0]을 사용했습니다.
+    return (
+      <ShowContent data={data[0]} setData={setData} setChatBtn={setChatBtn} />
+    );
   }
 
-  for (let i = 0; i < dessert.length; i++) {
-    if (id === dessert[i].id) {
-      return (
-        <ShowContent
-          data={dessert[i]}
-          setData={setData}
-          setChatBtn={setChatBtn}
-        />
-      );
-    }
+  if (dessert.findIndex((data) => data.id == id) != -1) {
+    const data = dessert.filter((data) => data.id == id);
+
+    return (
+      <ShowContent data={data[0]} setData={setData} setChatBtn={setChatBtn} />
+    );
   }
 }
 
 function ShowContent({ data, setData, setChatBtn }) {
-  let [heartBtn, setHeartBtn] = useState(false);
-  let userId = useSelector((state) => state.login.nickname);
-  let dispatch = useDispatch();
+  const [clickedHeartBtn, setClickedHeartBtn] = useState(false);
+  const userName = useSelector((state) => state.loginInfo.name);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setData(data);
   }, [data]);
 
   const handleHeartBtn = () => {
-    if (userId === "") {
-      alert("로그인을 해주세요.");
-      return;
-    }
-    if (!heartBtn) {
-      setHeartBtn(true);
-      dispatch(inputMark(data.id));
+    if (!clickedHeartBtn) {
+      setClickedHeartBtn(true);
+      dispatch(inputApplyMark(data.id));
     } else {
-      setHeartBtn(false);
-      dispatch(deleteMark(data.id));
+      setClickedHeartBtn(false);
+      dispatch(deleteApplyMark(data.id));
     }
   };
 
   const handleChatBtn = () => {
-    if (userId === "") {
-      alert("로그인을 해주세요.");
-    } else {
-      setChatBtn(true);
-    }
+    setChatBtn(true);
+  };
+
+  const showAlert = () => {
+    alert("로그인을 해주세요.");
   };
 
   return (
@@ -128,9 +110,15 @@ function ShowContent({ data, setData, setChatBtn }) {
           <button
             type="button"
             className={cn(style.heartBtn)}
-            onClick={handleHeartBtn}
+            onClick={() => {
+              if (userName == "") {
+                return showAlert();
+              } else {
+                return handleHeartBtn();
+              }
+            }}
           >
-            {!heartBtn ? (
+            {!clickedHeartBtn ? (
               <img
                 src="/cook/public-assets/one-content/heart.png"
                 alt="heart button"
@@ -147,7 +135,13 @@ function ShowContent({ data, setData, setChatBtn }) {
         <button
           type="button"
           className={cn(style.chatBtn)}
-          onClick={handleChatBtn}
+          onClick={() => {
+            if (userName == "") {
+              return showAlert();
+            } else {
+              return handleChatBtn();
+            }
+          }}
         >
           채팅하기
         </button>

@@ -78,7 +78,7 @@ let dessert = [
     id: "d0",
     url: "/share-apply/apply/d0",
     kind: "디저트",
-    img: "/cook/public-assets/apply-content/마카롱.jpg",
+    img: "/cook/public-assets/apply-content/macaron.jpg",
     img_alt: "macaron",
     title: "딸기 마카롱은 내가 최고다! 하는 분 들어오세요!!",
     content:
@@ -104,8 +104,8 @@ let dessert = [
     id: "d2",
     url: "/share-apply/apply/d2",
     kind: "디저트",
-    img: "/cook/public-assets/apply-content/초코케이크.jpg",
-    img_alt: "cake",
+    img: "/cook/public-assets/apply-content/chocolate-cake.jpg",
+    img_alt: "chocolate cake",
     title: "초코 케이크 부탁드립니다.",
     content:
       "초코는 다크 초콜릿으로 만들어주셨으면 해요.크기는 8사람들이 다같이 먹을 수 있을 정도로 크게 만들어주세요.",

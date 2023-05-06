@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./Sha-App.module.css";
+import style from "./ShareAndApply.module.css";
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";

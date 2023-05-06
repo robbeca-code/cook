@@ -3,15 +3,19 @@ import Sidebar from "./Sidebar";
 import style from "./RecipeContent.module.css";
 import cn from "classnames";
 import { useDispatch, useSelector } from "react-redux";
-import { inputMark, deleteMark } from "../store";
+import { inputRecipeMark, deleteRecipeMark } from "../store";
+import { tunaCan } from "./Recipe-data";
 
-function RecipeContent({ data }) {
-  let reset;
-  (reset = []).length = data.length;
-  reset.fill(false);
-  let [bookmark, setBookmark] = useState(reset);
-  let userId = useSelector((state) => state.login.nickname);
-  let dispatch = useDispatch();
+function RecipeContent() {
+  let bookmarkLength;
+  (bookmarkLength = []).length = tunaCan.length;
+  bookmarkLength.fill(false);
+
+  const [bookmark, setBookmark] = useState(bookmarkLength);
+
+  const dispatch = useDispatch();
+
+  const userName = useSelector((state) => state.loginInfo.name);
 
   const handleLevel = (level) => {
     if (level === "하") {
@@ -24,21 +28,16 @@ function RecipeContent({ data }) {
   };
 
   const handleBookmarkBtn = (id, index) => {
-    if (userId === "") {
-      alert("로그인을 해주세요.");
-      return;
-    }
-
     let copyBookmark = [...bookmark];
 
     if (!bookmark[index]) {
       copyBookmark[index] = true;
       setBookmark(copyBookmark);
-      dispatch(inputMark(id));
+      dispatch(inputRecipeMark(id));
     } else if (bookmark[index]) {
       copyBookmark[index] = false;
       setBookmark(copyBookmark);
-      dispatch(deleteMark(id));
+      dispatch(deleteRecipeMark(id));
     }
   };
 
@@ -53,7 +52,7 @@ function RecipeContent({ data }) {
       </header>
 
       <section className={cn(style.grid)}>
-        {data.map((item, i) => {
+        {tunaCan.map((item, i) => {
           return (
             <article className={cn(style.itemContainer)} key={i}>
               <div className={cn(style.imgContainer)}>
@@ -62,7 +61,12 @@ function RecipeContent({ data }) {
                   type="button"
                   className={cn(style.bookmark)}
                   onClick={() => {
-                    handleBookmarkBtn(item.id, i);
+                    if (userName == "") {
+                      alert("로그인을 해주세요.");
+                      return;
+                    } else {
+                      handleBookmarkBtn(item.id, i);
+                    }
                   }}
                 >
                   {!bookmark[i] ? (

@@ -45,15 +45,35 @@ let clickMenu = createSlice({
 
 let mark = createSlice({
   name: "mark",
-  initialState: [],
+  initialState: {
+    shares: [],
+    applys: [],
+    recipes: [],
+  },
 
   reducers: {
-    inputMark(state, id) {
-      state.push(id.payload);
+    inputShareMark(state, id) {
+      state.shares.push(id.payload);
     },
 
-    deleteMark(state, id) {
-      state.splice(state.indexOf(id.payload), 1);
+    inputApplyMark(state, id) {
+      state.applys.push(id.payload);
+    },
+
+    inputRecipeMark(state, id) {
+      state.recipes.push(id.payload);
+    },
+
+    deleteShareMark(state, id) {
+      state.shares.splice(state.shares.indexOf(id.payload), 1);
+    },
+
+    deleteApplyMark(state, id) {
+      state.applys.splice(state.applys.indexOf(id.payload), 1);
+    },
+
+    deleteRecipeMark(state, id) {
+      state.recipes.splice(state.recipes.indexOf(id.payload), 1);
     },
   },
 });
@@ -64,7 +84,16 @@ export let { setLogin } = login.actions;
 
 export let { toggleMenuBtn, changeTarget } = clickMenu.actions;
 
-export let { inputMark, deleteMark } = mark.actions;
+export let {
+  inputMark,
+  deleteMark,
+  inputShareMark,
+  inputApplyMark,
+  inputRecipeMark,
+  deleteShareMark,
+  deleteApplyMark,
+  deleteRecipeMark,
+} = mark.actions;
 
 export default configureStore({
   reducer: {

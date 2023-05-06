@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
 import Sidebar from "./Sidebar";
+import { oneServing, dessert } from "./Apply-data";
 import style from "./Share.module.css";
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function Application({ oneServing, dessert }) {
+function Application() {
   let [tab, setTab] = useState("oneServing");
   let [plus, setPlus] = useState(false);
   let login = useSelector((state) => state.login.nickname);
@@ -70,12 +71,12 @@ function Application({ oneServing, dessert }) {
         <img src="/cook/public-assets/one-content/plus.png" alt="plus button" />
       </button>
 
-      <PlusContent o={oneServing} d={dessert} plus={plus} setPlus={setPlus} />
+      <PlusContent plus={plus} setPlus={setPlus} />
     </section>
   );
 }
 
-function ClickTab({ tab, oneServing, dessert }) {
+function ClickTab({ tab }) {
   if (tab === "oneServing") {
     return <ApplyList data={oneServing} />;
   }
@@ -113,7 +114,7 @@ function ApplyList({ data }) {
   });
 }
 
-function PlusContent({ o, d, plus, setPlus }) {
+function PlusContent({ plus, setPlus }) {
   const options = ["종류 선택", "1인분", "디저트", "대용량"];
   const fileInput = useRef(null);
   let kind;
@@ -145,17 +146,17 @@ function PlusContent({ o, d, plus, setPlus }) {
   const inputData = () => {
     setPlus(false);
 
-    if (o[0].kind === kind) {
-      const index = o.length - 1;
-      o[index].title = title;
-      o[index].content = content;
-      o[index].author = author;
+    if (oneServing[0].kind === kind) {
+      const index = oneServing.length - 1;
+      oneServing[index].title = title;
+      oneServing[index].content = content;
+      oneServing[index].author = author;
     }
-    if (d[0].kind === kind) {
-      const index = d.length - 1;
-      d[index].title = title;
-      d[index].content = content;
-      d[index].author = author;
+    if (dessert[0].kind === kind) {
+      const index = dessert.length - 1;
+      dessert[index].title = title;
+      dessert[index].content = content;
+      dessert[index].author = author;
     }
   };
 

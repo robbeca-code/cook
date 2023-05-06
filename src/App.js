@@ -4,7 +4,7 @@ import Home from "./routes/Home";
 import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import NonPage from "./routes/NonPage";
-import ShaApp from "./routes/Sha-App";
+import ShaApp from "./routes/ShareAndApply";
 import Apply from "./routes/Apply";
 import { oneServing, dessert } from "./routes/Apply-data";
 import ApplyContent from "./routes/ApplyContent";
@@ -13,7 +13,7 @@ import { food, product } from "./routes/Share-data";
 import ShareContent from "./routes/ShareContent";
 import Recipe from "./routes/Recipe";
 import Mypage from "./routes/Mypage";
-import { recipe, tunaCan } from "./routes/Recipe-data";
+import { tunaCan } from "./routes/Recipe-data";
 import RecipeContent from "./routes/RecipeContent";
 import Chat from "./routes/Chat";
 import { useDispatch, useSelector } from "react-redux";
@@ -107,58 +107,24 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NonPage />} />
 
-        <Route path="/recipe" element={<Recipe data={recipe} />} />
-        <Route
-          path="/recipe/tunaCan"
-          element={<RecipeContent data={tunaCan} />}
-        />
+        <Route path="/recipe" element={<Recipe />} />
+        <Route path="/recipe/tunaCan" element={<RecipeContent />} />
 
         <Route path="/share-apply" element={<ShaApp />} />
-        <Route
-          path="/share-apply/apply"
-          element={<Apply oneServing={oneServing} dessert={dessert} />}
-        />
+        <Route path="/share-apply/apply" element={<Apply />} />
         <Route
           path="/share-apply/apply/:id"
-          element={
-            <ApplyContent
-              chats={chats}
-              setChats={setChats}
-              oneServing={oneServing}
-              dessert={dessert}
-            />
-          }
+          element={<ApplyContent chats={chats} setChats={setChats} />}
         />
-        <Route
-          path="/share-apply/share"
-          element={<Share food={food} product={product} />}
-        />
+        <Route path="/share-apply/share" element={<Share />} />
         <Route
           path="/share-apply/share/:id"
-          element={
-            <ShareContent
-              chats={chats}
-              setChats={setChats}
-              food={food}
-              product={product}
-            />
-          }
+          element={<ShareContent chats={chats} setChats={setChats} />}
         />
 
         <Route path="/chat" element={<Chat chats={chats} />} />
 
-        <Route
-          path="/mypage"
-          element={
-            <Mypage
-              food={food}
-              product={product}
-              oneServing={oneServing}
-              dessert={dessert}
-              recipe={tunaCan}
-            />
-          }
-        />
+        <Route path="/mypage" element={<Mypage />} />
       </Routes>
     </div>
   );

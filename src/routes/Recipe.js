@@ -3,8 +3,9 @@ import style from "./Recipe.module.css";
 import cn from "classnames";
 import Sidebar from "./Sidebar";
 import { Link } from "react-router-dom";
+import { recipe } from "./Recipe-data";
 
-function Recipe({ data }) {
+function Recipe() {
   return (
     <section className={cn(style.container)}>
       <aside>
@@ -25,7 +26,7 @@ function Recipe({ data }) {
             <span>더보기</span>
           </Link>
           <section className={cn(style.grid)}>
-            {<RecipeItems kind={"tuna"} data={data} />}
+            {<RecipeItems kind={"tuna"} />}
           </section>
         </article>
 
@@ -35,7 +36,7 @@ function Recipe({ data }) {
             더보기
           </header>
           <section className={cn(style.grid)}>
-            {<RecipeItems kind={"spam"} data={data} />}
+            {<RecipeItems kind={"spam"} />}
           </section>
         </article>
 
@@ -45,7 +46,7 @@ function Recipe({ data }) {
             <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
-            {<RecipeItems kind={"kimchi"} data={data} />}
+            {<RecipeItems kind={"kimchi"} />}
           </section>
         </article>
 
@@ -55,7 +56,7 @@ function Recipe({ data }) {
             <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
-            {<RecipeItems kind={"dumpling"} data={data} />}
+            {<RecipeItems kind={"dumpling"} />}
           </section>
         </article>
 
@@ -65,7 +66,7 @@ function Recipe({ data }) {
             <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
-            {<RecipeItems kind={"ramen"} data={data} />}
+            {<RecipeItems kind={"ramen"} />}
           </section>
         </article>
       </section>
@@ -73,7 +74,7 @@ function Recipe({ data }) {
   );
 }
 
-function RecipeItems({ kind, data }) {
+function RecipeItems({ kind }) {
   const handleLevel = (level) => {
     if (level === "하") {
       return "/cook/public-assets/recipe/level-b.png";
@@ -84,7 +85,7 @@ function RecipeItems({ kind, data }) {
     }
   };
 
-  return data.map((item, i) => {
+  return recipe.map((item, i) => {
     if (item.kind === kind) {
       return (
         <article className={cn(style.recipeItem)} key={i}>

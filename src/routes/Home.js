@@ -42,7 +42,7 @@ function Home() {
 }
 
 function Slide({ slide }) {
-  let [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);
 
   function onChangeImage(counter) {
     if (counter >= slide.length) {
@@ -103,6 +103,7 @@ function Slide({ slide }) {
       >
         <img src="/cook/public-assets/home/prev.png" alt="Preview button" />
       </button>
+
       <button
         type="button"
         className={cn(style.btn, style.nextBtn)}

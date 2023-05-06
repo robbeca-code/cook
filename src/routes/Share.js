@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
 import Sidebar from "./Sidebar";
+import { food, product } from "./Share-data";
 import style from "./Share.module.css";
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function Share({ food, product }) {
+function Share() {
   let [tab, setTab] = useState("food");
   let [plus, setPlus] = useState(false);
   let login = useSelector((state) => state.login.nickname);
@@ -61,9 +62,7 @@ function Share({ food, product }) {
         </button>
       </header>
 
-      <section className={cn(style.grid)}>
-        {<ClickTab tab={tab} food={food} product={product} />}
-      </section>
+      <section className={cn(style.grid)}>{<ClickTab tab={tab} />}</section>
 
       <button
         type="button"
@@ -73,12 +72,12 @@ function Share({ food, product }) {
         <img src="/cook/public-assets/one-content/plus.png" alt="plus button" />
       </button>
 
-      <PlusContent f={food} p={product} plus={plus} setPlus={setPlus} />
+      <PlusContent plus={plus} setPlus={setPlus} />
     </section>
   );
 }
 
-function ClickTab({ tab, food, product }) {
+function ClickTab({ tab }) {
   if (tab === "food") {
     return <ShareList data={food} />;
   }
@@ -124,7 +123,7 @@ function ShareList({ data }) {
   });
 }
 
-function PlusContent({ f, p, plus, setPlus }) {
+function PlusContent({ plus, setPlus }) {
   const options = ["종류 선택", "식재료", "식기 및 도구", "관련도서"];
   const fileInput = useRef(null);
   let kind;
@@ -161,19 +160,19 @@ function PlusContent({ f, p, plus, setPlus }) {
   const inputData = () => {
     setPlus(false);
 
-    if (f[0].kind === kind) {
-      const index = f.length - 1;
-      f[index].title = title;
-      f[index].content = content;
-      f[index].cost = cost;
-      f[index].author = author;
+    if (food[0].kind === kind) {
+      const index = food.length - 1;
+      food[index].title = title;
+      food[index].content = content;
+      food[index].cost = cost;
+      food[index].author = author;
     }
-    if (p[0].kind === kind) {
-      const index = p.length - 1;
-      p[index].title = title;
-      p[index].content = content;
-      p[index].cost = cost;
-      p[index].author = author;
+    if (product[0].kind === kind) {
+      const index = product.length - 1;
+      product[index].title = title;
+      product[index].content = content;
+      product[index].cost = cost;
+      product[index].author = author;
     }
   };
 
