@@ -6,14 +6,11 @@ import { Routes, Route, Link } from "react-router-dom";
 import NonPage from "./routes/NonPage";
 import ShaApp from "./routes/ShareAndApply";
 import Apply from "./routes/Apply";
-import { oneServing, dessert } from "./routes/Apply-data";
 import ApplyContent from "./routes/ApplyContent";
 import Share from "./routes/Share";
-import { food, product } from "./routes/Share-data";
 import ShareContent from "./routes/ShareContent";
 import Recipe from "./routes/Recipe";
 import Mypage from "./routes/Mypage";
-import { tunaCan } from "./routes/Recipe-data";
 import RecipeContent from "./routes/RecipeContent";
 import Chat from "./routes/Chat";
 import { useDispatch, useSelector } from "react-redux";
@@ -131,11 +128,18 @@ function App() {
 }
 
 function LoginModal({ setClickedLoginBtn }) {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const userEmail = useSelector((state) => state.loginInfo.email);
+  const userPassWord = useSelector((state) => state.loginInfo.passwd);
+  const userName = useSelector((state) => state.loginInfo.name);
 
   const handleLoginBtn = () => {
     dispatch(setLogin());
     setClickedLoginBtn(false);
+  };
+
+  const showAlert = () => {
+    return alert("로그인 정보를 다 입력해주세요.");
   };
 
   return (
@@ -145,31 +149,46 @@ function LoginModal({ setClickedLoginBtn }) {
           <h1>로그인</h1>
         </header>
 
-        <div className="loginItem">
-          <strong>이메일</strong>
-          <input
-            type="email"
-            onChange={(e) => dispatch(changeEmail(e.target.value))}
-          />
-        </div>
+        <form>
+          <div className="loginItem">
+            <strong>이메일</strong>
+            <input
+              type="email"
+              autoComplete="on"
+              onChange={(e) => dispatch(changeEmail(e.target.value))}
+            />
+          </div>
 
-        <div className="loginItem">
-          <strong>비밀번호</strong>
-          <input
-            type="password"
-            onChange={(e) => dispatch(changePasswd(e.target.value))}
-          />
-        </div>
+          <div className="loginItem">
+            <strong>비밀번호</strong>
+            <input
+              type="password"
+              autoComplete="on"
+              onChange={(e) => dispatch(changePasswd(e.target.value))}
+            />
+          </div>
 
-        <div className="loginItem">
-          <strong>닉네임</strong>
-          <input
-            type="text"
-            onChange={(e) => dispatch(changeName(e.target.value))}
-          />
-        </div>
+          <div className="loginItem">
+            <strong>닉네임</strong>
+            <input
+              type="text"
+              autoComplete="on"
+              onChange={(e) => dispatch(changeName(e.target.value))}
+            />
+          </div>
+        </form>
 
-        <button type="button" className="inputBtn" onClick={handleLoginBtn}>
+        <button
+          type="button"
+          className="inputBtn"
+          onClick={() => {
+            if (userEmail == "" || userPassWord == "" || userName == "") {
+              return showAlert();
+            } else {
+              return handleLoginBtn();
+            }
+          }}
+        >
           Login
         </button>
       </article>
