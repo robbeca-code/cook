@@ -44,7 +44,7 @@ function Home() {
 function Slide({ slide }) {
   const [index, setIndex] = useState(0);
 
-  function onChangeImage(counter) {
+  const onChangeImage = (counter) => {
     if (counter >= slide.length) {
       index = 0;
       setIndex(index);
@@ -56,7 +56,7 @@ function Slide({ slide }) {
     }
 
     setIndex(counter);
-  }
+  };
 
   return (
     <section className={cn(style.slideContainer)}>

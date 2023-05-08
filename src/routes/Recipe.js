@@ -76,9 +76,9 @@ function Recipe() {
 
 function RecipeItems({ kind }) {
   const handleLevel = (level) => {
-    if (level === "하") {
+    if (level == "하") {
       return "/cook/public-assets/recipe/level-b.png";
-    } else if (level === "중") {
+    } else if (level == "중") {
       return "/cook/public-assets/recipe/level-m.png";
     } else {
       return "/cook/public-assets/recipe/level-t.png";
@@ -86,7 +86,7 @@ function RecipeItems({ kind }) {
   };
 
   return recipe.map((item, i) => {
-    if (item.kind === kind) {
+    if (item.kind == kind) {
       return (
         <article className={cn(style.recipeItem)} key={i}>
           <div className={cn(style.imgContainer)}>

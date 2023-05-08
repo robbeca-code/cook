@@ -23,7 +23,7 @@ function Chat({ chats }) {
         <img src="/cook/public-assets/chat/banner.png" alt="banner" />
       </aside>
 
-      {chats.length === 0 ? <NonChat /> : <ShowChatList chats={chats} />}
+      {chats.length == 0 ? <NonChat /> : <ShowChatList chats={chats} />}
     </section>
   );
 }

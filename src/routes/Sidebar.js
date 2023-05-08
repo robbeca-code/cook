@@ -2,15 +2,14 @@ import React from "react";
 import style from "./Sidebar.module.css";
 import cn from "classnames";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeTarget } from "../store";
 
 function Sidebar() {
+  const dispatch = useDispatch();
+  const clickMenuBtn = useSelector((state) => state.clickMenu.status);
+  const target = useSelector((state) => state.clickMenu.target);
   let sidebarStyle;
-  let dispatch = useDispatch();
-  let clickMenuBtn = useSelector((state) => state.clickMenu.status);
-  let target = useSelector((state) => state.clickMenu.target);
 
   if (!clickMenuBtn) {
     sidebarStyle = "hide-sidebar";
@@ -31,7 +30,7 @@ function Sidebar() {
           <div className={cn(style.sideIcon)}>
             <img
               src={
-                target === "home"
+                target == "home"
                   ? "/cook/public-assets/nav/click-home.png"
                   : "/cook/public-assets/nav/home.png"
               }
@@ -40,7 +39,7 @@ function Sidebar() {
           </div>
           <span
             className={
-              target === "home"
+              target == "home"
                 ? cn(style.sideTitle, style.click)
                 : cn(style.sideTitle, style.link)
             }
@@ -60,7 +59,7 @@ function Sidebar() {
           <div className={cn(style.sideIcon)}>
             <img
               src={
-                target === "recipe"
+                target == "recipe"
                   ? "/cook/public-assets/nav/click-recipe.png"
                   : "/cook/public-assets/nav/recipe.png"
               }
@@ -69,7 +68,7 @@ function Sidebar() {
           </div>
           <span
             className={
-              target === "recipe"
+              target == "recipe"
                 ? cn(style.sideTitle, style.click)
                 : cn(style.sideTitle, style.link)
             }
@@ -91,7 +90,7 @@ function Sidebar() {
           </div>
           <span
             className={
-              target === "share"
+              target == "share"
                 ? cn(style.sideTitle, style.click)
                 : cn(style.sideTitle, style.link)
             }
@@ -111,7 +110,7 @@ function Sidebar() {
           <div className={cn(style.sideIcon)}>
             <img
               src={
-                target === "chat"
+                target == "chat"
                   ? "/cook/public-assets/nav/click-chat.png"
                   : "/cook/public-assets/nav/chat.png"
               }
@@ -120,7 +119,7 @@ function Sidebar() {
           </div>
           <span
             className={
-              target === "chat"
+              target == "chat"
                 ? cn(style.sideTitle, style.click)
                 : cn(style.sideTitle, style.link)
             }
@@ -140,7 +139,7 @@ function Sidebar() {
           <div className={cn(style.sideIcon)}>
             <img
               src={
-                target === "mypage"
+                target == "mypage"
                   ? "/cook/public-assets/nav/click-mypage.png"
                   : "/cook/public-assets/nav/mypage.png"
               }
@@ -149,7 +148,7 @@ function Sidebar() {
           </div>
           <span
             className={
-              target === "mypage"
+              target == "mypage"
                 ? cn(style.sideTitle, style.click)
                 : cn(style.sideTitle, style.link)
             }

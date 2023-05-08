@@ -184,11 +184,11 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
       setChats(copyChat);
     }
 
-    setReset();
+    resetChatInfo();
     setChatBtn(false);
   };
 
-  const setReset = () => {
+  const resetChatInfo = () => {
     const reset = {
       authorProfilePicture: "",
       title: "",
@@ -273,7 +273,7 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
           <button
             type="button"
             onClick={() => {
-              if (message !== "") {
+              if (message != "") {
                 return handleSubmitBtn();
               }
             }}

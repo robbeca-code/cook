@@ -18,9 +18,9 @@ function RecipeContent() {
   const userName = useSelector((state) => state.loginInfo.name);
 
   const handleLevel = (level) => {
-    if (level === "하") {
+    if (level == "하") {
       return "/cook/public-assets/recipe/level-b.png";
-    } else if (level === "중") {
+    } else if (level == "중") {
       return "/cook/public-assets/recipe/level-m.png";
     } else {
       return "/cook/public-assets/recipe/level-t.png";

@@ -7,17 +7,12 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Share() {
-  let [tab, setTab] = useState("food");
-  let [plus, setPlus] = useState(false);
-  let login = useSelector((state) => state.login.nickname);
+  const [tab, setTab] = useState("food");
+  const [plus, setPlus] = useState(false);
+  const userName = useSelector((state) => state.loginInfo.name);
 
   const handlePlusBtn = () => {
-    if (login === "") {
-      alert("로그인을 해주세요.");
-      return;
-    } else {
-      setPlus(true);
-    }
+    setPlus(true);
   };
 
   return (
@@ -67,7 +62,13 @@ function Share() {
       <button
         type="button"
         className={cn(style.plusBtn)}
-        onClick={handlePlusBtn}
+        onClick={() => {
+          if (userName == "") {
+            return alert("로그인을 해주세요.");
+          } else {
+            return handlePlusBtn();
+          }
+        }}
       >
         <img src="/cook/public-assets/one-content/plus.png" alt="plus button" />
       </button>
@@ -78,10 +79,10 @@ function Share() {
 }
 
 function ClickTab({ tab }) {
-  if (tab === "food") {
+  if (tab == "food") {
     return <ShareList data={food} />;
   }
-  if (tab === "product") {
+  if (tab == "product") {
     return <ShareList data={product} />;
   }
 }
@@ -131,7 +132,7 @@ function PlusContent({ plus, setPlus }) {
   let content;
   let cost;
   let img;
-  let author = useSelector((state) => state.login.nickname);
+  const author = useSelector((state) => state.loginInfo.name);
 
   const clickUploadBtn = () => {
     fileInput.current.click();
@@ -160,14 +161,14 @@ function PlusContent({ plus, setPlus }) {
   const inputData = () => {
     setPlus(false);
 
-    if (food[0].kind === kind) {
+    if (food[0].kind == kind) {
       const index = food.length - 1;
       food[index].title = title;
       food[index].content = content;
       food[index].cost = cost;
       food[index].author = author;
     }
-    if (product[0].kind === kind) {
+    if (product[0].kind == kind) {
       const index = product.length - 1;
       product[index].title = title;
       product[index].content = content;

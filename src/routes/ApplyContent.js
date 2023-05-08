@@ -9,9 +9,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { inputApplyMark, deleteApplyMark } from "../store";
 
 function ApplyContent({ chats, setChats }) {
-  let { id } = useParams();
-  let [chatBtn, setChatBtn] = useState(false);
-  let [data, setData] = useState("");
+  const { id } = useParams();
+  const [chatBtn, setChatBtn] = useState(false);
+  const [data, setData] = useState("");
 
   return (
     <section className={cn(style.relative)}>

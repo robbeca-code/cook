@@ -9,14 +9,10 @@ import { useSelector } from "react-redux";
 function Application() {
   let [tab, setTab] = useState("oneServing");
   let [plus, setPlus] = useState(false);
-  let login = useSelector((state) => state.login.nickname);
+  let userName = useSelector((state) => state.loginInfo.name);
 
   const handlePlusBtn = () => {
-    if (login === "") {
-      alert("로그인을 해주세요.");
-    } else {
-      setPlus(true);
-    }
+    setPlus(true);
   };
 
   return (
@@ -66,7 +62,13 @@ function Application() {
       <button
         type="button"
         className={cn(style.plusBtn)}
-        onClick={handlePlusBtn}
+        onClick={() => {
+          if (userName == "") {
+            return alert("로그인을 해주세요.");
+          } else {
+            return handlePlusBtn();
+          }
+        }}
       >
         <img src="/cook/public-assets/one-content/plus.png" alt="plus button" />
       </button>
@@ -77,10 +79,10 @@ function Application() {
 }
 
 function ClickTab({ tab }) {
-  if (tab === "oneServing") {
+  if (tab == "oneServing") {
     return <ApplyList data={oneServing} />;
   }
-  if (tab === "dessert") {
+  if (tab == "dessert") {
     return <ApplyList data={dessert} />;
   }
 }
@@ -121,7 +123,7 @@ function PlusContent({ plus, setPlus }) {
   let title;
   let content;
   let img;
-  let author = useSelector((state) => state.login.nickname);
+  const author = useSelector((state) => state.loginInfo.name);
 
   const clickUploadBtn = () => {
     fileInput.current.click();
@@ -146,13 +148,13 @@ function PlusContent({ plus, setPlus }) {
   const inputData = () => {
     setPlus(false);
 
-    if (oneServing[0].kind === kind) {
+    if (oneServing[0].kind == kind) {
       const index = oneServing.length - 1;
       oneServing[index].title = title;
       oneServing[index].content = content;
       oneServing[index].author = author;
     }
-    if (dessert[0].kind === kind) {
+    if (dessert[0].kind == kind) {
       const index = dessert.length - 1;
       dessert[index].title = title;
       dessert[index].content = content;
