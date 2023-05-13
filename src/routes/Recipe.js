@@ -26,7 +26,7 @@ function Recipe() {
             <span>더보기</span>
           </Link>
           <section className={cn(style.grid)}>
-            {<RecipeItems kind={"tuna"} />}
+            {<RecipeItems kind="tuna" />}
           </section>
         </article>
 
@@ -36,7 +36,7 @@ function Recipe() {
             더보기
           </header>
           <section className={cn(style.grid)}>
-            {<RecipeItems kind={"spam"} />}
+            {<RecipeItems kind="spam" />}
           </section>
         </article>
 
@@ -46,7 +46,7 @@ function Recipe() {
             <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
-            {<RecipeItems kind={"kimchi"} />}
+            {<RecipeItems kind="kimchi" />}
           </section>
         </article>
 
@@ -56,7 +56,7 @@ function Recipe() {
             <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
-            {<RecipeItems kind={"dumpling"} />}
+            {<RecipeItems kind="dumpling" />}
           </section>
         </article>
 
@@ -66,7 +66,7 @@ function Recipe() {
             <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
-            {<RecipeItems kind={"ramen"} />}
+            {<RecipeItems kind="ramen" />}
           </section>
         </article>
       </section>

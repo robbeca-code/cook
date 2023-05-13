@@ -41,8 +41,9 @@ function App() {
     <div className="app">
       <header className="appHeader">
         <nav className="toolBar">
-          <div className="barItem">
+          <div className="toolBarItems">
             <button
+              className="toolBarIcon"
               type="button"
               onClick={() => {
                 dispatch(toggleMenuBtn());
@@ -51,7 +52,6 @@ function App() {
               <img
                 src={process.env.PUBLIC_URL + "/public-assets/menu.png"}
                 alt="menu icon"
-                className="topIcon menu"
               />
             </button>
             <Link
@@ -68,14 +68,13 @@ function App() {
             </Link>
           </div>
 
-          <div className="barItem">
-            <Link to="#" className="search">
+          <div className="toolBarItems">
+            <button type="button" className="toolBarIcon">
               <img
                 src={process.env.PUBLIC_URL + "/public-assets/search.png"}
                 alt="search icon"
-                className="topIcon"
               />
-            </Link>
+            </button>
 
             {isLogin ? (
               <CompletedLogin userName={userName} />
@@ -89,7 +88,7 @@ function App() {
                     : setClickedLoginBtn(true);
                 }}
               >
-                Login
+                로그인
               </button>
             )}
           </div>
@@ -149,48 +148,45 @@ function LoginModal({ setClickedLoginBtn }) {
           <h1>로그인</h1>
         </header>
 
-        <form>
-          <div className="loginItem">
-            <strong>이메일</strong>
-            <input
-              type="email"
-              autoComplete="on"
-              onChange={(e) => dispatch(changeEmail(e.target.value))}
-            />
-          </div>
+        <form className="loginItems">
+          <input
+            type="email"
+            placeholder="이메일을 입력해주세요."
+            autoComplete="on"
+            className="loginItem"
+            onChange={(e) => dispatch(changeEmail(e.target.value))}
+          />
 
-          <div className="loginItem">
-            <strong>비밀번호</strong>
-            <input
-              type="password"
-              autoComplete="on"
-              onChange={(e) => dispatch(changePasswd(e.target.value))}
-            />
-          </div>
+          <input
+            type="password"
+            placeholder="비밀번호를 입력해주세요."
+            autoComplete="on"
+            className="loginItem"
+            onChange={(e) => dispatch(changePasswd(e.target.value))}
+          />
 
-          <div className="loginItem">
-            <strong>닉네임</strong>
-            <input
-              type="text"
-              autoComplete="on"
-              onChange={(e) => dispatch(changeName(e.target.value))}
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="닉네임을 입력해주세요."
+            autoComplete="on"
+            className="loginItem"
+            onChange={(e) => dispatch(changeName(e.target.value))}
+          />
+
+          <button
+            type="button"
+            className="submitBtn"
+            onClick={() => {
+              if (userEmail == "" || userPassWord == "" || userName == "") {
+                return showAlert();
+              } else {
+                return handleLoginBtn();
+              }
+            }}
+          >
+            로그인
+          </button>
         </form>
-
-        <button
-          type="button"
-          className="inputBtn"
-          onClick={() => {
-            if (userEmail == "" || userPassWord == "" || userName == "") {
-              return showAlert();
-            } else {
-              return handleLoginBtn();
-            }
-          }}
-        >
-          Login
-        </button>
       </article>
     </div>
   );

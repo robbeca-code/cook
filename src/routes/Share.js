@@ -63,7 +63,7 @@ function Share() {
         type="button"
         className={cn(style.plusBtn)}
         onClick={() => {
-          if (userName == "") {
+          if (userName === "") {
             return alert("로그인을 해주세요.");
           } else {
             return handlePlusBtn();
@@ -79,10 +79,10 @@ function Share() {
 }
 
 function ClickTab({ tab }) {
-  if (tab == "food") {
+  if (tab === "food") {
     return <ShareList data={food} />;
   }
-  if (tab == "product") {
+  if (tab === "product") {
     return <ShareList data={product} />;
   }
 }
@@ -102,9 +102,7 @@ function ShareList({ data }) {
                 : item.title}
             </h2>
             <div className={cn(style.subInfo)}>
-              <strong>
-                {item.cost != "가격없음" ? item.cost.concat("원") : item.cost}
-              </strong>
+              <strong>{item.cost}</strong>
               <span>{item.location}</span>
             </div>
             <div className={cn(style.author)}>
@@ -127,10 +125,10 @@ function ShareList({ data }) {
 function PlusContent({ plus, setPlus }) {
   const options = ["종류 선택", "식재료", "식기 및 도구", "관련도서"];
   const fileInput = useRef(null);
-  let kind;
+  const [selectedkind, setSelectedKind] = useState("종류 선택");
   let title;
   let content;
-  let cost;
+  let cost = "가격없음";
   let img;
   const author = useSelector((state) => state.loginInfo.name);
 
@@ -143,7 +141,7 @@ function PlusContent({ plus, setPlus }) {
   };
 
   const handleKind = (e) => {
-    kind = e.target.value;
+    setSelectedKind(e.target.value);
   };
 
   const handleTitle = (e) => {
@@ -155,20 +153,26 @@ function PlusContent({ plus, setPlus }) {
   };
 
   const handleCost = (e) => {
-    cost = e.target.value;
+    let value = e.target.value;
+
+    if (typeof parseInt(value) === "number") {
+      cost = parseInt(value) + "원";
+    } else {
+      cost = "가격없음";
+    }
   };
 
   const inputData = () => {
     setPlus(false);
 
-    if (food[0].kind == kind) {
+    if (food[0].kind === selectedkind) {
       const index = food.length - 1;
       food[index].title = title;
       food[index].content = content;
       food[index].cost = cost;
       food[index].author = author;
     }
-    if (product[0].kind == kind) {
+    if (product[0].kind === selectedkind) {
       const index = product.length - 1;
       product[index].title = title;
       product[index].content = content;
@@ -208,7 +212,7 @@ function PlusContent({ plus, setPlus }) {
           <strong>종류</strong>
           <select
             onChange={handleKind}
-            value={options[0]}
+            value={selectedkind}
             className={cn(style.itemSize)}
           >
             {options.map((item) => {
