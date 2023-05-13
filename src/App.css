@@ -152,11 +152,11 @@ button {
   left: 66px;
   padding-top: 10px;
   width: 200px;
-  height: 45%;
+  height: 40%;
   display: grid;
   grid-template-rows: repeat(5, 40px);
   background-color: #fff;
-  row-gap: 1rem;
+  row-gap: 10px;
   z-index: 999;
   visibility: hidden;
 }
@@ -288,12 +288,12 @@ button {
     top: 50px;
     left: 16px;
     padding-top: 10px;
-    width: 200px;
-    height: 45%;
+    width: 10.63em;
+    height: 38%;
     display: grid;
     grid-template-rows: repeat(5, 40px);
     background-color: #fff;
-    row-gap: 1rem;
+    row-gap: 5px;
     z-index: 999;
     visibility: hidden;
   }
