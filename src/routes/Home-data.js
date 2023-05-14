@@ -1,14 +1,6 @@
 let slide = [
-  {
-    img: "/cook/public-assets/home/slide1.png",
-    title: "자취생! 무얼 먹을지 고민이라면",
-    content: "fresheasy의 찌개 세트는 어떠세요?",
-  },
-  {
-    img: "/cook/public-assets/home/slide2.png",
-    title: "집들이 음식이 고민이라면",
-    content: "셰프의 요리키트를 사용해보세요!",
-  },
+  "/cook/public-assets/home/slideModify1.png",
+  "/cook/public-assets/home/slideModify2.png",
 ];
 
 let tag = [

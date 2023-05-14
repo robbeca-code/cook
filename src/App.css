@@ -63,7 +63,8 @@ button {
   display: flex;
   justify-content: space-between;
   place-items: center;
-  padding: 0 70px;
+  width: 64em;
+  margin: 0 auto;
   height: 100%;
 }
 
@@ -190,8 +191,8 @@ button {
   color: #fff;
 }
 
-/*  Max-Width: 600px  */
-@media screen and (max-width: 600px) {
+/*  Max-Width: 800px  */
+@media screen and (max-width: 800px) {
   .appHeader {
     height: 3.5em;
     position: fixed;
@@ -206,6 +207,7 @@ button {
     justify-content: space-between;
     place-items: center;
     padding: 0 20px;
+    width: 100%;
     height: 100%;
   }
 

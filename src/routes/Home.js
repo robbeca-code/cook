@@ -46,12 +46,10 @@ function Slide({ slide }) {
 
   const onChangeImage = (counter) => {
     if (counter >= slide.length) {
-      index = 0;
-      setIndex(index);
+      setIndex(0);
       return;
     } else if (counter < 0) {
-      index = slide.length - 1;
-      setIndex(index);
+      setIndex(slide.length - 1);
       return;
     }
 
@@ -59,7 +57,7 @@ function Slide({ slide }) {
   };
 
   return (
-    <section className={cn(style.slideContainer)}>
+    <aside className={cn(style.slideContainer)}>
       <div
         className={cn(style.slide)}
         style={{
@@ -67,15 +65,7 @@ function Slide({ slide }) {
           transform: `translateX(-${index * 100}%)`,
         }}
       >
-        <img
-          src={slide[0].img}
-          alt="AD image1"
-          className={cn(style.slideImg)}
-        />
-        <div className={cn(style.slideFontContainer)}>
-          <h2 className={cn(style.slideFont, style.title)}>{slide[0].title}</h2>
-          <span className={cn(style.slideFont)}>{slide[0].content}</span>
-        </div>
+        <img src={slide[0]} alt="AD image1" className={cn(style.slideImg)} />
       </div>
       <div
         className={cn(style.slide)}
@@ -84,19 +74,11 @@ function Slide({ slide }) {
           transform: `translateX(-${index * 100}%)`,
         }}
       >
-        <img
-          src={slide[1].img}
-          alt="AD image1"
-          className={cn(style.slideImg)}
-        />
-        <div className={cn(style.slideFontContainer)}>
-          <h2 className={cn(style.slideFont, style.title)}>{slide[1].title}</h2>
-          <span className={cn(style.slideFont)}>{slide[1].content}</span>
-        </div>
+        <img src={slide[1]} alt="AD image1" className={cn(style.slideImg)} />
       </div>
       <button
         type="button"
-        className={cn(style.btn, style.prevBtn)}
+        className={cn(style.btn, style.slideBtn, style.prevBtn)}
         onClick={() => {
           onChangeImage(index - 1);
         }}
@@ -106,14 +88,14 @@ function Slide({ slide }) {
 
       <button
         type="button"
-        className={cn(style.btn, style.nextBtn)}
+        className={cn(style.btn, style.slideBtn, style.nextBtn)}
         onClick={() => {
           onChangeImage(index + 1);
         }}
       >
         <img src="/cook/public-assets/home/next.png" alt="Next button" />
       </button>
-    </section>
+    </aside>
   );
 }
 
@@ -137,10 +119,10 @@ function Tag({ tag }) {
 
 function Content({ content }) {
   return (
-    <section className="appContents">
+    <section className="contentList">
       {content.map((item, i) => {
         return (
-          <article className={cn(style.content)} key={i}>
+          <article className={cn(style.contentContainer)} key={i}>
             <h2 className={cn(style.subTitle)}>{item.subTitle}</h2>
 
             <div className={cn(style.contentHeader)}>
@@ -148,16 +130,15 @@ function Content({ content }) {
                 {item.mainTitle}{" "}
                 <span className={cn(style.point)}>{item.styleTitle}</span>
               </h1>
-              <div className={cn(style.bookmark)}>
+              <div className={cn(style.bookmarkContainer)}>
                 <img
                   src="/cook/public-assets/home/bookmark.png"
                   alt="bookrmark icon"
-                  className={cn(style.bookmark)}
                 />
               </div>
             </div>
 
-            <div className={cn(style.contentMain)}>
+            <div className={cn(style.contentImgList)}>
               <div className={cn(style.imgContainer)}>
                 <img src={item.img1} alt="" />
               </div>
