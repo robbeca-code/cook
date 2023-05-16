@@ -31,6 +31,17 @@ let recipe = [
   },
   {
     id: 3,
+    kind: "tuna",
+    img: "/cook/public-assets/recipe/tuna4.png",
+    img_alt: "참치계란말이",
+    title: "참치계란말이",
+    heart: "336",
+    level: "하",
+    time: "30분",
+    author: "선생님",
+  },
+  {
+    id: 4,
     kind: "spam",
     img: "/cook/public-assets/recipe/spam1.png",
     img_alt: "스팸떡갈비",
@@ -40,7 +51,7 @@ let recipe = [
     time: "30분",
   },
   {
-    id: 4,
+    id: 5,
     kind: "spam",
     img: "/cook/public-assets/recipe/spam2.png",
     img_alt: "스팸치즈토스트",
@@ -50,7 +61,7 @@ let recipe = [
     time: "15분",
   },
   {
-    id: 5,
+    id: 6,
     kind: "spam",
     img: "/cook/public-assets/recipe/spam3.png",
     img_alt: "스팸동",
@@ -60,7 +71,17 @@ let recipe = [
     time: "20분",
   },
   {
-    id: 6,
+    id: 7,
+    kind: "spam",
+    img: "/cook/public-assets/recipe/spam4.png",
+    img_alt: "스팸감자볶음",
+    title: "스팸감자볶음",
+    heart: "397",
+    level: "하",
+    time: "10분",
+  },
+  {
+    id: 8,
     kind: "kimchi",
     img: "/cook/public-assets/recipe/kimchi1.png",
     img_alt: "김치찌개",
@@ -70,7 +91,7 @@ let recipe = [
     time: "30분",
   },
   {
-    id: 7,
+    id: 9,
     kind: "kimchi",
     img: "/cook/public-assets/recipe/kimchi2.png",
     img_alt: "김치찜",
@@ -80,7 +101,7 @@ let recipe = [
     time: "15분",
   },
   {
-    id: 8,
+    id: 10,
     kind: "kimchi",
     img: "/cook/public-assets/recipe/kimchi3.png",
     img_alt: "김치말이국수",
@@ -90,7 +111,17 @@ let recipe = [
     time: "20분",
   },
   {
-    id: 9,
+    id: 11,
+    kind: "kimchi",
+    img: "/cook/public-assets/recipe/kimchi4.png",
+    img_alt: "김치비빔국수",
+    title: "김치비빔국수",
+    heart: "97",
+    level: "하",
+    time: "30분",
+  },
+  {
+    id: 12,
     kind: "dumpling",
     img: "/cook/public-assets/recipe/dumpling1.png",
     img_alt: "떡만두국",
@@ -100,7 +131,7 @@ let recipe = [
     time: "30분",
   },
   {
-    id: 10,
+    id: 13,
     kind: "dumpling",
     img: "/cook/public-assets/recipe/dumpling2.png",
     img_alt: "만두전",
@@ -110,7 +141,7 @@ let recipe = [
     time: "15분",
   },
   {
-    id: 11,
+    id: 14,
     kind: "dumpling",
     img: "/cook/public-assets/recipe/dumpling3.png",
     img_alt: "깐풍만두",
@@ -120,7 +151,17 @@ let recipe = [
     time: "20분",
   },
   {
-    id: 9,
+    id: 15,
+    kind: "dumpling",
+    img: "/cook/public-assets/recipe/dumpling4.png",
+    img_alt: "비빔만두",
+    title: "비빔만두",
+    heart: "210",
+    level: "하",
+    time: "30분",
+  },
+  {
+    id: 16,
     kind: "ramen",
     img: "/cook/public-assets/recipe/ramen1.png",
     img_alt: "냉라면",
@@ -130,7 +171,7 @@ let recipe = [
     time: "30분",
   },
   {
-    id: 10,
+    id: 17,
     kind: "ramen",
     img: "/cook/public-assets/recipe/ramen2.png",
     img_alt: "라면그라탕",
@@ -140,7 +181,7 @@ let recipe = [
     time: "15분",
   },
   {
-    id: 11,
+    id: 18,
     kind: "ramen",
     img: "/cook/public-assets/recipe/ramen3.png",
     img_alt: "투움바라면",
@@ -148,6 +189,16 @@ let recipe = [
     heart: "316",
     level: "하",
     time: "20분",
+  },
+  {
+    id: 19,
+    kind: "ramen",
+    img: "/cook/public-assets/recipe/ramen4.png",
+    img_alt: "라면땅",
+    title: "라면땅",
+    heart: "85",
+    level: "하",
+    time: "10분",
   },
 ];
 

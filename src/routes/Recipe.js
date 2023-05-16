@@ -33,7 +33,7 @@ function Recipe() {
         <article className={cn(style.recipeList)}>
           <header className={cn(style.kindTitle)}>
             <h1>스팸</h1>
-            더보기
+            <span>더보기</span>
           </header>
           <section className={cn(style.grid)}>
             {<RecipeItems kind="spam" />}
@@ -76,9 +76,9 @@ function Recipe() {
 
 function RecipeItems({ kind }) {
   const handleLevel = (level) => {
-    if (level == "하") {
+    if (level === "하") {
       return "/cook/public-assets/recipe/level-b.png";
-    } else if (level == "중") {
+    } else if (level === "중") {
       return "/cook/public-assets/recipe/level-m.png";
     } else {
       return "/cook/public-assets/recipe/level-t.png";
@@ -86,15 +86,15 @@ function RecipeItems({ kind }) {
   };
 
   return recipe.map((item, i) => {
-    if (item.kind == kind) {
+    if (item.kind === kind) {
       return (
-        <article className={cn(style.recipeItem)} key={i}>
+        <article className={cn(style.recipeContainer)} key={i}>
           <div className={cn(style.imgContainer)}>
             <img src={item.img} alt={item.img_alt} />
           </div>
           <h2>{item.title}</h2>
-          <div className={cn(style.itemInfo)}>
-            <div className={cn(style.item)}>
+          <div className={cn(style.recipeInfoList)}>
+            <div className={cn(style.recipeInfoItem)}>
               <img
                 src="/cook/public-assets/recipe/heart.png"
                 className={cn(style.subInfoImg)}
@@ -102,11 +102,11 @@ function RecipeItems({ kind }) {
               />
               <span>{item.heart}</span>
             </div>
-            <div className={cn(style.item)}>
+            <div className={cn(style.recipeInfoItem)}>
               <img src={handleLevel(item.level)} alt="level" />
               <span>{item.level}</span>
             </div>
-            <div className={cn(style.item)}>
+            <div className={cn(style.recipeInfoItem)}>
               <img src="/cook/public-assets/recipe/timer.png" alt="time" />
               <span>{item.time}</span>
             </div>
