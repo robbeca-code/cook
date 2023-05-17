@@ -5,33 +5,44 @@
 
 .container {
   padding-top: 120px;
+  width: 1024px;
+  margin: 0 auto;
 }
 
-.content {
+.mainContentContainer {
   background-color: #dddddd;
-  width: 92vw;
-  padding: 30px 70px;
+  padding: 20px 70px;
   margin: 0 auto 20px;
 }
 
 .contentTitle {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.2em;
 }
 
-.itemsList {
+.contentTitle > h1 {
+  font-weight: normal;
+}
+
+.contentList {
   display: flex;
   justify-content: space-between;
 }
 
 .item {
-  padding: 1rem 0;
+  padding-top: 16px;
   text-align: center;
 }
 
+.item > h2 {
+  font-size: 1.19em;
+  font-weight: normal;
+}
+
 .imgContainer {
-  width: 160px;
-  height: 160px;
+  width: 8em;
+  height: 8em;
+  margin-bottom: 10px;
 }
 
 .imgContainer > img {
@@ -40,35 +51,37 @@
   object-fit: contain;
 }
 
-
 /*   Recommended User   */
-.recommendedUsers {
-  padding: 70px;
+.recommendedUsersContainer {
+  padding: 70px 0;
 }
 
-.recommendedUsers > .contentTitle {
-  padding-bottom: 30px;
+.recommendedUsersContainer > .contentTitle {
   text-align: left;
 }
 
-.recommendedUsers > .itemsList {
+.recommendedUsersContainer > .contentList {
   justify-content: flex-start;
 }
 
-.recommendedUsers > .itemsList > .item {
-  padding-right: 60px;
+.recommendedUsersContainer > .contentList > .item {
+  padding-right: 30px;
+}
+
+.recommendedUsersContainer > .contentList > .item > .imgContainer {
+  width: 6em;
+  height: 6em;
 }
 
 .userName {
-  font-size: 20px;
+  font-size: 1.13em;
 }
-
 
 /*   Ad   */
 .ad {
-  margin-top: 100px;
+  margin-top: 40px;
   width: 100%;
-  height: 170px;
+  height: 6.5em;
   background-color: #f8fd96;
 }
 
@@ -78,166 +91,122 @@
   object-fit: contain;
 }
 
-
 /*   Media Query   */
 @media screen and (max-width: 800px) {
   /*   Share and Apply   */
   .container {
-    padding-top: 90px;
-  }
-
-  .contentTitle {
-    text-align: center;
-    font-size: 1rem;
-  }
-
-  .imgContainer {
-    width: 100px;
-    height: 100px;
-  }
-
-  .item > h2 {
-    font-size: 18px;
-  }
-
-
-  /*   Recommended User   */
-  .recommendedUsers {
-    padding: 30px;
-  }
-
-  .recommendedUsers > .contentTitle {
-    padding-bottom: 10px;
-    text-align: left;
-  }
-
-  .userName {
-    font-size: 18px;
-  }
-
-
-  /*   Ad   */
-  .ad {
-    margin-top: 100px;
+    padding: 90px 20px 0;
     width: 100%;
-    height: 100px;
-    background-color: #f8fd96;
-  }
-}
-
-
-/*   Max-Width: 550px   */
-@media screen and (max-width: 550px) {
-  /*   Share and Apply   */
-  .container {
-    padding-top: 90px;
   }
 
-  .content {
+  .mainContentContainer {
     background-color: #dddddd;
-    width: 92vw;
-    padding: 20px 40px;
+    padding: 10px 30px;
     margin: 0 auto 20px;
   }
 
   .contentTitle {
     text-align: center;
-    font-size: 16px;
-  }
-
-  .imgContainer {
-    width: 80px;
-    height: 80px;
+    font-size: 1em;
   }
 
   .item > h2 {
-    font-size: 16px;
+    font-size: 1em;
   }
-
 
   /*   Recommended User   */
-  .recommendedUsers {
-    padding: 20px;
+  .recommendedUsersContainer {
+    padding: 50px 0;
   }
 
-  .recommendedUsers > .contentTitle {
-    padding-bottom: 10px;
-    text-align: left;
-  }
-
-  .recommendedUsers > .itemsList > .item {
-    padding-right: 30px;
+  .recommendedUsersContainer > .contentList > .item {
+    padding: 8px 20px 0 0;
   }
 
   .userName {
-    font-size: 15px;
-  }
-
-
-  /*   Ad   */
-  .ad {
-    margin-top: 30px;
-    width: 100%;
-    height: 80px;
-    background-color: #f8fd96;
+    font-size: 1em;
   }
 }
 
-
-/*   Max-Width: 400px   */
-@media screen and (max-width: 400px) {
+/*   Max-Width: 600px   */
+@media screen and (max-width: 600px) {
   /*   Share and Apply   */
   .container {
-    padding-top: 70px;
+    padding-top: 80px;
+    width: 100%;
   }
 
-  .content {
-    background-color: #dddddd;
-    width: 92vw;
-    padding: 10px 20px;
-    margin: 0 auto 5px;
+  .mainContentContainer {
+    margin: 0 auto 14px;
   }
 
   .contentTitle {
     text-align: center;
-    font-size: 14px;
+    font-size: 0.97em;
   }
 
   .imgContainer {
-    width: 60px;
-    height: 60px;
+    width: 5em;
+    height: 5em;
   }
 
   .item > h2 {
-    font-size: 13px;
+    font-size: 0.88em;
   }
-
 
   /*   Recommended User   */
-  .recommendedUsers {
-    padding: 17px;
-  }
-
-  .recommendedUsers > .contentTitle {
-    padding-bottom: 10px;
-    text-align: left;
-  }
-
   .recommendedUsers > .itemsList > .item {
     padding-right: 10px;
-    padding-top: 0;
+  }
+
+  .recommendedUsersContainer > .contentList > .item > .imgContainer {
+    width: 4.38em;
+    height: 4.38em;
+    margin-bottom: 0;
   }
 
   .userName {
-    font-size: 13px;
+    font-size: 0.88em;
   }
-
 
   /*   Ad   */
   .ad {
     margin-top: 30px;
     width: 100%;
-    height: 73px;
+    height: 5em;
+    background-color: #f8fd96;
+  }
+}
+
+/*   Max-Width: 400px   */
+@media screen and (max-width: 400px) {
+  .mainContentContainer {
+    padding: 10px 20px;
+    margin: 0 auto 8px;
+  }
+
+  .imgContainer {
+    width: 4.4em;
+    height: 4.4em;
+    margin-bottom: 10px;
+  }
+
+  /*   Recommended User   */
+  .recommendedUsersContainer {
+    padding: 30px 0 0;
+  }
+
+  .recommendedUsersContainer > .contentList > .item > .imgContainer {
+    width: 4em;
+    height: 4em;
+    margin-bottom: 0;
+  }
+
+  /*   Ad   */
+  .ad {
+    margin-top: 30px;
+    width: 100%;
+    height: 3.75em;
     background-color: #f8fd96;
   }
 }

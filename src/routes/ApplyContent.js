@@ -173,10 +173,14 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
 
   // 닫기 버튼을 눌렀을 때 최종적으로 채팅의 전체 데이터가 저장되는 함수입니다.
   const handleCloseBtn = () => {
+    // 채팅한 기록이 있을 때
     if (chats.findIndex((c) => c.title === chatInfo.title) > -1) {
       let copyChat = [...chats];
       setChats(copyChat);
-    } else {
+    }
+
+    // 처음 채팅했을 때
+    else {
       let copyChat = [...chats];
       copyChat.push(chatInfo);
       setChats(copyChat);
@@ -202,7 +206,7 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
   };
 
   const handleSubmitBtn = () => {
-    // chat에 이미 정보가 들어있을 때 -> 채팅 정보만 추가한다.
+    // 채팅한 기록이 있을 때 -> 메세지 정보만 추가한다.
     if (chats.findIndex((c) => c.title === chatInfo.title) > -1) {
       let i = chats.findIndex((c) => c.title === chatInfo.title);
       chats[i].messages.push(message);
