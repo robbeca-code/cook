@@ -47,19 +47,19 @@ function RecipeContent() {
         <Sidebar />
       </aside>
 
-      <header className={cn(style.containerTitle)}>
+      <header className={cn(style.mainTitle)}>
         <h1>참치통조림</h1>
       </header>
 
-      <section className={cn(style.grid)}>
+      <section className={cn(style.recipeList)}>
         {tunaCan.map((item, i) => {
           return (
-            <article className={cn(style.itemContainer)} key={i}>
+            <article className={cn(style.recipeContainer)} key={i}>
               <div className={cn(style.imgContainer)}>
                 <img src={item.img} alt={item.img_alt} />
                 <button
                   type="button"
-                  className={cn(style.bookmark)}
+                  className={cn(style.bookmarkBtn)}
                   onClick={() => {
                     if (userName == "") {
                       alert("로그인을 해주세요.");
@@ -82,21 +82,17 @@ function RecipeContent() {
                   )}
                 </button>
               </div>
-              <strong>{item.title}</strong>
-              <div className={cn(style.itemInfo)}>
-                <div className={cn(style.item)}>
-                  <img
-                    src="/cook/public-assets/recipe/heart.png"
-                    className={cn(style.subInfoImg)}
-                    alt="like"
-                  />
+              <span>{item.title}</span>
+              <div className={cn(style.recipeInfoList)}>
+                <div className={cn(style.recipeInfoItem)}>
+                  <img src="/cook/public-assets/recipe/heart.png" alt="like" />
                   <span>{item.heart}</span>
                 </div>
-                <div className={cn(style.item)}>
+                <div className={cn(style.recipeInfoItem)}>
                   <img src={handleLevel(item.level)} alt="level" />
                   <span>{item.level}</span>
                 </div>
-                <div className={cn(style.item)}>
+                <div className={cn(style.recipeInfoItem)}>
                   <img src="/cook/public-assets/recipe/timer.png" alt="time" />
                   <span>{item.time}</span>
                 </div>

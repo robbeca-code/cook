@@ -1,34 +1,30 @@
 .container {
-  width: 1200px;
+  width: 1024px;
   margin: 0 auto 100px;
-  padding-top: 150px;
+  padding-top: 110px;
 }
 
-.containerTitle {
+.mainTitle {
   text-align: center;
   width: 100%;
   padding-bottom: 18px;
   border-bottom: 1px solid #c0c0c0;
+  font-size: 1em;
 }
 
-.containerTitle > h1 {
-  font-size: 25px;
-}
-
-.grid {
+.recipeList {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   column-gap: 30px;
   row-gap: 50px;
   margin-top: 20px;
   place-content: center;
 }
 
-
 /*   Item Container   */
 .imgContainer {
   width: 100%;
-  height: 250px;
+  height: 12.5em;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -40,245 +36,148 @@
   object-fit: cover;
 }
 
-.bookmark {
+.bookmarkBtn {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 40px;
-  height: 40px;
+  width: 2.19em;
+  height: 2.19em;
 }
 
-.bookmark > img {
+.bookmarkBtn > img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-.itemContainer > strong {
+.recipeContainer > span {
   display: block;
   padding-top: 10px;
-  font-size: 22px;
+  font-size: 1.13em;
 }
 
-.itemInfo {
+.recipeInfoList {
   display: flex;
-  justify-content:flex-start;
+  justify-content: flex-start;
   margin-top: 5px;
 }
 
-.item {
+.recipeInfoItem {
   display: flex;
   align-items: center;
   margin-right: 10px;
 }
 
-.item > img {
-  width: 25px;
-  height: 25px;
-  margin-right: 5px;
+.recipeInfoItem > img {
+  width: 1.19em;
+  height: 1.19em;
+  margin-right: 3px;
 }
 
-.item > span {
-  font-size: 20px;
+.recipeInfoItem > span {
+  font-size: 0.94em;
 }
-
 
 /*   Max-Width: 800px   */
 @media screen and (max-width: 800px) {
   .container {
-    width: 700px;
+    width: 100%;
     margin: 0 auto 100px;
-    padding-top: 100px;
-  }
-  
-  .containerTitle > h1 {
-    font-size: 20px;
+    padding: 100px 20px;
   }
 
-  .grid {
+  .mainTitle {
+    font-size: 0.8em;
+    padding-bottom: 10px;
+  }
+
+  .recipeList {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 30px;
-    row-gap: 80px;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 50px;
     margin-top: 20px;
     place-content: center;
   }
 
-
   /*   Item Container   */
-  .bookmark {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 35px;
-    height: 35px;
+  .imgContainer {
+    width: 100%;
+    height: 10em;
+    border-radius: 9px;
+    overflow: hidden;
+    position: relative;
   }
 
-  .itemContainer > strong {
+  .recipeContainer > span {
     display: block;
     padding-top: 5px;
-    font-size: 18px;
+    font-size: 1em;
   }
-  
-  .item > img {
-    width: 20px;
-    height: 20px;
+
+  .recipeInfoItem {
+    display: flex;
+    align-items: center;
     margin-right: 5px;
   }
-  
-  .item > span {
-    font-size: 16px;
+
+  .recipeInfoItem > img {
+    width: 1em;
+    height: 1em;
+    margin-right: 2px;
+  }
+
+  .recipeInfoItem > span {
+    font-size: 0.81em;
   }
 }
-
 
 /*   Max-Width: 550px   */
 @media screen and (max-width: 550px) {
   .container {
-    width: 500px;
+    width: 100%;
     margin: 0 auto 30px;
-    padding-top: 80px;
+    padding-top: 80px 20px;
   }
-  
-  .containerTitle {
-    text-align: center;
-    width: 100%;
+
+  .mainTitle {
+    font-size: 0.75em;
     padding-bottom: 10px;
-    border-bottom: 1px solid #c0c0c0;
   }
 
-  .containerTitle > h1 {
-    font-size: 18px;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 30px;
-    row-gap: 80px;
-    margin-top: 20px;
-    place-content: center;
-  }
-
-
-  /*   Item Container   */
-  .imgContainer {
-    width: 100%;
-    height: 200px;
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .itemInfo {
-    display: flex;
-    justify-content:flex-start;
-    margin-top: 4px;
-  }
-  
-  .item {
-    display: flex;
-    align-items: center;
-    margin-right: 5px;
-  }
-
-  .bookmark {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 25px;
-    height: 25px;
-  }
-
-  .itemContainer > strong {
-    display: block;
-    padding-top: 5px;
-    font-size: 16px;
-  }
-  
-  .item > img {
-    width: 18px;
-    height: 18px;
-    margin-right: 3px;
-  }
-  
-  .item > span {
-    font-size: 15px;
-  }
-}
-
-
-/*   Max-Width: 400px   */
-@media screen and (max-width: 400px) {
-  .container {
-    width: 360px;
-    margin: 0 auto 30px;
-    padding-top: 80px;
-  }
-  
-  .containerTitle {
-    text-align: center;
-    width: 100%;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #c0c0c0;
-  }
-
-  .containerTitle > h1 {
-    font-size: 18px;
-  }
-
-  .grid {
+  .recipeList {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 10px;
-    row-gap: 80px;
+    row-gap: 40px;
     margin-top: 20px;
     place-content: center;
   }
 
-
   /*   Item Container   */
   .imgContainer {
     width: 100%;
-    height: 150px;
-    border-radius: 12px;
+    height: 9em;
+    border-radius: 7px;
     overflow: hidden;
     position: relative;
   }
 
-  .itemInfo {
+  .bookmarkBtn {
+    position: absolute;
+    top: 7px;
+    right: 5px;
+  }
+
+  .recipeInfoList {
     display: flex;
-    justify-content:flex-start;
+    justify-content: flex-start;
     margin-top: 4px;
   }
-  
-  .item {
+
+  .recipeInfoItem {
     display: flex;
     align-items: center;
     margin-right: 5px;
-  }
-
-  .bookmark {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 25px;
-    height: 25px;
-  }
-
-  .itemContainer > strong {
-    display: block;
-    padding-top: 5px;
-    font-size: 16px;
-  }
-  
-  .item > img {
-    width: 18px;
-    height: 18px;
-    margin-right: 3px;
-  }
-  
-  .item > span {
-    font-size: 15px;
   }
 }
