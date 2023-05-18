@@ -20,7 +20,7 @@ let food = [
     title: "스팸이랑 참치 만원에 들고가세요",
     content:
       "이사 가야해서 팔아요 참치는 2028년까지구요 스팸은 24년도까지에요 스팸 9개 중 하나는 120그람짜리 작은거에요",
-    cost: "10,000",
+    cost: 10000,
     location: "사근동",
     author: "이사좋아",
     user_img: "/cook/public-assets/one-content/img4.png",
@@ -46,7 +46,7 @@ let food = [
     title: "꿀",
     content:
       "이번에 여행다녀온 지인이 선물을 줬는데 꿀을 좋아하지 않아 판매합니다. 두병에 만원에 판매할게요.",
-    cost: "10,000",
+    cost: 4000,
     location: "성수동",
     author: "데일리",
     user_img: "/cook/public-assets/one-content/img6.png",
@@ -74,7 +74,7 @@ let product = [
     title: "독일 휘슬러 냄비세트",
     content:
       "이사 가야해서 팔아요 참치는 2028년까지구요 스팸은 24년도까지에요 스팸 9개 중 하나는 120그람짜리 작은거에요",
-    cost: "20,000",
+    cost: 15000,
     location: "사근동",
     author: "미미",
     user_img: "/cook/public-assets/one-content/img1.png",
@@ -87,7 +87,7 @@ let product = [
     title: "휘슬러 냄비 4종세트",
     content:
       "혼수로 구매하고 젤 작은 사이즈만 종종 사용하고 나머지는 각기 열번도 사용 안한 4종세트입니다.",
-    cost: "10,000",
+    cost: 20000,
     location: "사근동",
     author: "LoRo",
     user_img: "/cook/public-assets/one-content/img2.png",

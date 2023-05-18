@@ -177,7 +177,7 @@ function LoginModal({ setClickedLoginBtn }) {
             type="button"
             className="submitBtn"
             onClick={() => {
-              if (userEmail == "" || userPassWord == "" || userName == "") {
+              if (userEmail === "" || userPassWord === "" || userName === "") {
                 return showAlert();
               } else {
                 return handleLoginBtn();

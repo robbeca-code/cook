@@ -1,6 +1,6 @@
 .container {
-  padding-top: 150px;
-  width: 1200px;
+  padding-top: 110px;
+  width: 1024px;
   position: relative;
   margin: 0 auto 100px;
 }
@@ -16,53 +16,48 @@
 /*   Header   */
 .tabContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  padding: 0 70px;
+  grid-template-columns: repeat(3, 1fr);
 }
 
-.tab {
+.tabBtn {
   text-align: center;
   padding-bottom: 12px;
   border-bottom: 1px solid #949494;
   cursor: pointer;
+  font-size: 0.9em;
 }
 
-.tab > h1 {
-  font-size: 1.3rem;
+.tabBtn > h1 {
   color: #949494;
 }
 
-.tab.click {
+.tabBtn.click {
   border-bottom: 3px solid #ea5936;
 }
 
-.tab.click > h1 {
+.tabBtn.click > h1 {
   color: #ea5936;
 }
-
 
 /*   Grid   */
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 1rem;
-  row-gap: 3rem;
-  padding: 0 50px;
-  place-content: center;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 20px;
+  row-gap: 50px;
   z-index: 980;
 }
 
-
 /*   Share List   */
 
-.item {
-  padding-top: 50px;
+.itemContainer {
+  padding-top: 30px;
 }
 
 .imgContainer {
-  width: 350px;
-  height: 280px;
+  width: 100%;
+  height: 12.5em;
   border-radius: 12px;
   overflow: hidden;
 }
@@ -73,42 +68,41 @@
   object-fit: cover;
 }
 
-.itemInfo > h2 {
-  margin: 10px 0 2px;
-  font-size: 21px;
-}
-
-.subInfo {
+.itemInfo {
   display: flex;
   flex-direction: column;
 }
 
-.subInfo > strong {
-  font-size: 20px;
-  padding-bottom: 5px;
+.itemInfo > h2 {
+  margin: 10px 0 2px;
+  font-size: 1.13em;
+  font-weight: normal;
 }
 
-.subInfo > span {
-  font-size: 18px;
+.itemInfo > strong {
+  font-size: 1.07em;
+  padding-bottom: 2px;
+}
+
+.itemInfo > span {
+  font-size: 1em;
 }
 
 .author {
-  margin-top: 10px;
-  font-size: 18px;
+  margin-top: 5px;
+  font-size: 1em;
 }
 
 .author > span {
   color: #6a6a6a;
 }
 
-
 /*   Plus Button   */
 .plusBtn {
-  position: fixed;
-  bottom: 30px;
-  right: 100px;
-  width: 85px;
-  height: 85px;
+  position: absolute;
+  right: 0;
+  width: 5.46em;
+  height: 5.46em;
   overflow: hidden;
 }
 
@@ -118,86 +112,78 @@
   object-fit: contain;
 }
 
-
 /*   Plus Content   */
 
-.inputModal {
+.inputModalContainer {
   position: absolute;
-  top: 130px;
+  top: 110px;
   left: 50%;
   z-index: 985;
   transform: translate(-50%);
-  width: 500px;
-  height: 770px;
+  padding: 0 20px 30px;
   background-color: #fff;
-  box-shadow: 0 0 0 100vw rgba(0,0,0,0.2);
+  box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.2);
 }
 
 .modalTitle {
-  font-size: 20px;
+  font-size: 1em;
   text-align: center;
-  padding: 20px;
-  border-bottom: 1px solid #cdcdcd;
+  padding: 15px 0;
+}
+
+.modalItems {
+  width: 21.25em;
+  margin: 0 auto;
 }
 
 .modalItem {
-  margin: 30px 40px;
-  display: flex;
-  flex-direction: column;
+  height: 3.6em;
+  width: 100%;
+  margin-top: 10px;
+  padding-left: 10px;
+  font-size: 0.88em;
+  border: 1px solid rgb(221, 221, 221);
 }
 
 .uploadBtn {
-  width: 80px;
-  height: 80px;
+  width: 5em;
+  height: 5em;
   overflow: hidden;
-  border: 1px solid #4e4e4e;
+  border: 1px solid rgb(191 189 189);
 }
 
 .uploadBtn > img {
-  width: 100%;
+  width: 90%;
   height: 100%;
   object-fit: contain;
 }
 
-.modalItem > strong {
-  font-size: 20px;
-  padding-bottom: 5px;
-}
-
-.modalItem > .itemSize {
-  font-size: 18px;
-  height: 40px;
-  border: 1px solid #949494;
-}
-
-.modalItem > .textarea {
-  height: 70px;
+.modalItem.textarea {
+  padding-top: 5px;
+  height: 110px;
   resize: none;
 }
 
 .inputBtn {
   background-color: #ea5936;
-  border-radius: 12px;
-  width: 200px;
-  height: 50px;
-  font-size: 18px;
+  width: 100%;
+  height: 3.6em;
+  font-size: 0.88em;
   color: #fff;
   position: relative;
   left: 50%;
   transform: translate(-50%);
-  margin-top: 20px;
+  margin-top: 25px;
 }
-
 
 /*   Max-Width: 800px   */
 @media screen and (max-width: 800px) {
   .container {
-    padding-top: 100px;
-    width: 700px;
+    padding: 100px 20px;
+    width: 100%;
     position: relative;
     margin: 0 auto 50px;
   }
-
 
   /*   Header   */
   .tabContainer {
@@ -205,55 +191,43 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .tab > h1 {
-    font-size: 1.1rem;
+  .tabBtn {
+    padding-bottom: 9px;
+    font-size: 0.75em;
   }
-
 
   /*   Grid   */
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 1rem;
-    row-gap: 3rem;
-    padding: 0 50px;
-    place-items: center;
-    z-index: 980;
+    grid-template-columns: repeat(3, 1fr);
   }
-
 
   /*   Share List   */
-  .item {
-    padding-top: 50px;
-  }
-
   .imgContainer {
-    width: 270px;
-    height: 230px;
-    border-radius: 12px;
+    width: 100%;
+    height: 10em;
+    border-radius: 9px;
     overflow: hidden;
   }
 
   .itemInfo > h2 {
     margin: 10px 0 2px;
-    font-size: 19px;
+    font-size: 1em;
   }
-  
-  .subInfo > strong {
-    font-size: 17px;
-    padding-bottom: 5px;
+
+  .itemInfo > strong {
+    font-size: 0.94em;
   }
-  
-  .subInfo > span {
-    font-size: 16px;
+
+  .itemInfo > span {
+    font-size: 0.89em;
   }
 
   .author {
-    margin-top: 7px;
-    font-size: 15px;
+    margin-top: 3px;
+    font-size: 0.89em;
     color: #6a6a6a;
   }
-
 
   /*   Plus Button   */
   .plusBtn {
@@ -264,81 +238,15 @@
     height: 65px;
     overflow: hidden;
   }
-
-
-  /*   Plus Content   */
-  .inputModal {
-    position: absolute;
-    top: 130px;
-    left: 50%;
-    z-index: 985;
-    transform: translate(-50%);
-    width: 500px;
-    height: 740px;
-    background-color: #fff;
-    box-shadow: 0 0 0 100vw rgba(0,0,0,0.2);
-  }
-
-  .modalTitle {
-    font-size: 18px;
-    text-align: center;
-    padding: 20px;
-    border-bottom: 1px solid #cdcdcd;
-  }
-
-  .modalItem {
-    margin: 30px 60px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .uploadBtn {
-    width: 65px;
-    height: 65px;
-    overflow: hidden;
-    border: 1px solid #4e4e4e;
-  }
-
-  .modalItem > strong {
-    font-size: 18px;
-    padding-bottom: 5px;
-  }
-
-  .modalItem > .itemSize {
-    font-size: 18px;
-    height: 37px;
-    border: 1px solid #949494;
-  }
-
-  .modalItem > .textarea {
-    height: 70px;
-    resize: none;
-  }
-
-  .inputBtn {
-    background-color: #ea5936;
-    border-radius: 12px;
-    width: 180px;
-    height: 50px;
-    font-size: 18px;
-    color: #fff;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
-    margin-top: 20px;
-  }
 }
-
 
 /*   Max-Width: 550px   */
 @media screen and (max-width: 550px) {
   .container {
-    padding-top: 80px;
-    width: 500px;
+    padding: 80px 20px;
+    width: 100%;
     position: relative;
-    margin: 0 auto 50px;
   }
-
 
   /*   Header   */
   .tabContainer {
@@ -346,218 +254,47 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .tab {
-    text-align: center;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #949494;
-    cursor: pointer;
+  .tabBtn {
+    padding-bottom: 6px;
+    font-size: 0.65em;
   }
 
-  .tab > h1 {
-    font-size: 1rem;
+  .tabBtn.click {
+    border-bottom: 2px solid #ea5936;
   }
-
 
   /*   Grid   */
   .grid {
     display: grid;
-    grid-template-columns: repeat(2, 200px);
-    column-gap: 10px;
-    row-gap: 1rem;
-    padding: 0 50px;
-    place-items: center;
-    z-index: 980;
-  }
-
-
-  /*   Share List   */
-  .item {
-    padding-top: 20px;
-  }
-
-  .imgContainer {
-    width: 200px;
-    height: 190px;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .itemInfo > h2 {
-    margin: 7px 0 2px;
-    font-size: 18px;
-  }
-  
-  .subInfo > strong {
-    font-size: 16px;
-    padding-bottom: 4px;
-  }
-
-  .author {
-    margin-top: 3px;
-    font-size: 15px;
-    color: #6a6a6a;
-  }
-
-
-  /*   Plus Button   */
-  .plusBtn {
-    position: fixed;
-    bottom: 30px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    overflow: hidden;
-  }
-
-
-  /*   Plus Content   */
-  .inputModal {
-    position: absolute;
-    top: 80px;
-    left: 50%;
-    z-index: 985;
-    transform: translate(-50%);
-    width: 450px;
-    height: 610px;
-    background-color: #fff;
-    box-shadow: 0 0 0 100vw rgba(0,0,0,0.2);
-  }
-
-  .modalTitle {
-    font-size: 18px;
-    text-align: center;
-    padding: 10px;
-    border-bottom: 1px solid #cdcdcd;
-  }
-
-  .modalItem {
-    margin: 20px 40px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .uploadBtn {
-    width: 60px;
-    height: 60px;
-    overflow: hidden;
-    border: 1px solid #4e4e4e;
-  }
-
-  .modalItem > strong {
-    font-size: 16px;
-    padding-bottom: 5px;
-  }
-
-  .modalItem > .itemSize {
-    font-size: 18px;
-    height: 30px;
-    border: 1px solid #949494;
-  }
-
-  .modalItem > .textarea {
-    height: 70px;
-    resize: none;
-  }
-
-  .inputBtn {
-    background-color: #ea5936;
-    border-radius: 12px;
-    width: 170px;
-    height: 45px;
-    font-size: 17px;
-    color: #fff;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
-    margin-top: 20px;
-  }
-}
-
-
-/*   Max-Width: 400px   */
-@media screen and (max-width: 400px) {
-  .container {
-    padding-top: 80px;
-    width: 360px;
-    position: relative;
-    margin: 0 auto 50px;
-  }
-
-
-  /*   Header   */
-  .tabContainer {
-    display: grid;
-    grid-template-columns: repeat(3, 100px);
-    place-content: center;
-  }
-
-  .tab {
-    text-align: center;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #949494;
-    cursor: pointer;
-  }
-
-  .tab > h1 {
-    font-size: 15px;
-  }
-
-
-  /*   Grid   */
-  .grid {
-    display: grid;
-    grid-template-columns: 333px;
+    grid-template-columns: 1fr;
     row-gap: 0;
-    padding: 0 17px;
-    place-items: baseline;
-    z-index: 980;
   }
 
-
   /*   Share List   */
-  .item {
+  .itemContainer {
     padding-top: 20px;
     display: flex;
   }
 
   .imgContainer {
-    width: 120px;
-    height: 110px;
-    border-radius: 12px;
+    width: 40%;
+    height: 6.8em;
+    border-radius: 7px;
     overflow: hidden;
-  }
-
-  .imgContainer > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 
   .itemInfo {
+    width: 60%;
     margin: 5px 0 0 5px;
-    width: 180px;
     position: relative;
   }
 
   .itemInfo > h2 {
-    margin: 5px 0 2px;
-    font-size: 16px;
-    font-weight: normal;
+    margin: 0 0 2px;
   }
 
-  .subInfo {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .subInfo > strong {
-    font-size: 15px;
-    padding-bottom: 0;
-  }
-
-  .subInfo > span {
-    font-size: 13px;
-    padding-top: 4px;
+  .itemInfo > span {
+    font-size: 0.84em;
   }
 
   .author {
@@ -565,13 +302,8 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    font-size: 0.84em;
   }
-
-  .author > span {
-    font-size: 13px;
-    color: #868e96;
-  }
-
 
   /*   Plus Button   */
   .plusBtn {
@@ -583,66 +315,62 @@
     overflow: hidden;
   }
 
-
-  /*   Plus Content   */
-  .inputModal {
-    position: absolute;
-    top: 80px;
-    left: 50%;
-    z-index: 985;
-    transform: translate(-50%);
-    width: 350px;
-    height: 510px;
+  /*   Input Modal   */
+  .inputModalContainer {
+    top: 55px;
+    width: 100%;
+    height: 100%;
     background-color: #fff;
-    box-shadow: 0 0 0 100vw rgba(0,0,0,0.2);
   }
 
   .modalTitle {
-    font-size: 16px;
+    font-size: 0.95em;
     text-align: center;
-    padding: 7px;
-    border-bottom: 1px solid #cdcdcd;
+    padding: 25px 0 15px;
+  }
+
+  .modalItems {
+    width: 18.8em;
+    margin: 0 auto;
   }
 
   .modalItem {
-    margin: 13px 20px;
-    display: flex;
-    flex-direction: column;
+    height: 3.3em;
+    width: 100%;
+    margin-top: 10px;
+    padding-left: 10px;
+    font-size: 0.88em;
+    border: 1px solid rgb(221, 221, 221);
   }
 
   .uploadBtn {
-    width: 50px;
-    height: 50px;
+    width: 4.3em;
+    height: 4.3em;
     overflow: hidden;
-    border: 1px solid #4e4e4e;
+    border: 1px solid rgb(191 189 189);
   }
 
-  .modalItem > strong {
-    font-size: 14px;
-    padding-bottom: 3px;
+  .uploadBtn > img {
+    width: 90%;
+    height: 100%;
+    object-fit: contain;
   }
 
-  .modalItem > .itemSize {
-    font-size: 16px;
-    height: 28px;
-    border: 1px solid #949494;
-  }
-
-  .modalItem > .textarea {
-    height: 70px;
+  .modalItem.textarea {
+    padding-top: 5px;
+    height: 100px;
     resize: none;
   }
 
   .inputBtn {
     background-color: #ea5936;
-    border-radius: 12px;
-    width: 170px;
-    height: 42px;
-    font-size: 16px;
+    width: 100%;
+    height: 3.3em;
+    font-size: 0.88em;
     color: #fff;
     position: relative;
     left: 50%;
     transform: translate(-50%);
-    margin-top: 20px;
+    margin-top: 30px;
   }
 }

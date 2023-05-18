@@ -8,11 +8,15 @@ import { useSelector } from "react-redux";
 
 function Share() {
   const [tab, setTab] = useState("food");
-  const [plus, setPlus] = useState(false);
+  const [clickedPlusBtn, setClickedPlusBtn] = useState(false);
   const userName = useSelector((state) => state.loginInfo.name);
 
   const handlePlusBtn = () => {
-    setPlus(true);
+    if (!clickedPlusBtn) {
+      setClickedPlusBtn(true);
+    } else {
+      setClickedPlusBtn(false);
+    }
   };
 
   return (
@@ -25,7 +29,7 @@ function Share() {
         <button
           type="button"
           className={
-            tab === "food" ? cn(style.tab, style.click) : cn(style.tab)
+            tab === "food" ? cn(style.tabBtn, style.click) : cn(style.tabBtn)
           }
           onClick={() => {
             setTab("food");
@@ -36,7 +40,7 @@ function Share() {
         <button
           type="button"
           className={
-            tab === "product" ? cn(style.tab, style.click) : cn(style.tab)
+            tab === "product" ? cn(style.tabBtn, style.click) : cn(style.tabBtn)
           }
           onClick={() => {
             setTab("product");
@@ -47,7 +51,7 @@ function Share() {
         <button
           type="button"
           className={
-            tab === "book" ? cn(style.tab, style.click) : cn(style.tab)
+            tab === "book" ? cn(style.tabBtn, style.click) : cn(style.tabBtn)
           }
           onClick={() => {
             setTab("book");
@@ -57,7 +61,9 @@ function Share() {
         </button>
       </header>
 
-      <section className={cn(style.grid)}>{<ClickTab tab={tab} />}</section>
+      <section className={cn(style.grid)}>
+        <MatchTap tab={tab} />
+      </section>
 
       <button
         type="button"
@@ -73,12 +79,15 @@ function Share() {
         <img src="/cook/public-assets/one-content/plus.png" alt="plus button" />
       </button>
 
-      <PlusContent plus={plus} setPlus={setPlus} />
+      <InputModal
+        clickedPlusBtn={clickedPlusBtn}
+        setClickedPlusBtn={setClickedPlusBtn}
+      />
     </section>
   );
 }
 
-function ClickTab({ tab }) {
+function MatchTap({ tab }) {
   if (tab === "food") {
     return <ShareList data={food} />;
   }
@@ -91,7 +100,11 @@ function ShareList({ data }) {
   return data.map((item, i) => {
     if (item.title != "") {
       return (
-        <Link to={item.url} className={cn(style.item, style.link)} key={i}>
+        <Link
+          to={item.url}
+          className={cn(style.itemContainer, style.link)}
+          key={i}
+        >
           <div className={cn(style.imgContainer)}>
             <img src={item.img} alt="나눔" />
           </div>
@@ -101,10 +114,12 @@ function ShareList({ data }) {
                 ? item.title.slice(0, 11).concat("...")
                 : item.title}
             </h2>
-            <div className={cn(style.subInfo)}>
-              <strong>{item.cost}</strong>
-              <span>{item.location}</span>
-            </div>
+            <strong>
+              {item.cost >= 0
+                ? item.cost.toLocaleString("ko-KR") + "원"
+                : item.cost}
+            </strong>
+            <span>{item.location}</span>
             <div className={cn(style.author)}>
               <span>
                 작성자:&nbsp;
@@ -122,12 +137,12 @@ function ShareList({ data }) {
   });
 }
 
-function PlusContent({ plus, setPlus }) {
+function InputModal({ clickedPlusBtn, setClickedPlusBtn }) {
   const options = ["종류 선택", "식재료", "식기 및 도구", "관련도서"];
   const fileInput = useRef(null);
   const [selectedkind, setSelectedKind] = useState("종류 선택");
-  let title;
-  let content;
+  let title = "";
+  let content = "";
   let cost = "가격없음";
   let img;
   const author = useSelector((state) => state.loginInfo.name);
@@ -156,14 +171,14 @@ function PlusContent({ plus, setPlus }) {
     let value = e.target.value;
 
     if (typeof parseInt(value) === "number") {
-      cost = parseInt(value) + "원";
+      cost = parseInt(value);
     } else {
       cost = "가격없음";
     }
   };
 
   const inputData = () => {
-    setPlus(false);
+    setClickedPlusBtn(false);
 
     if (food[0].kind === selectedkind) {
       const index = food.length - 1;
@@ -181,14 +196,18 @@ function PlusContent({ plus, setPlus }) {
     }
   };
 
-  if (plus) {
+  const showAlert = () => {
+    return alert("나눔 정보를 다 입력해주세요. (가격 제외)");
+  };
+
+  if (clickedPlusBtn) {
     return (
-      <article className={cn(style.inputModal)}>
+      <article className={cn(style.inputModalContainer)}>
         <header className={cn(style.modalTitle)}>
           <h1>나눔 하기</h1>
         </header>
 
-        <div className={cn(style.modalItem)}>
+        <form className={cn(style.modalItems)}>
           <button
             type="button"
             onClick={clickUploadBtn}
@@ -206,14 +225,11 @@ function PlusContent({ plus, setPlus }) {
             onChange={changeFileInput}
             className={cn(style.hidden)}
           />
-        </div>
 
-        <div className={cn(style.modalItem)}>
-          <strong>종류</strong>
           <select
             onChange={handleKind}
             value={selectedkind}
-            className={cn(style.itemSize)}
+            className={cn(style.modalItem)}
           >
             {options.map((item) => {
               return (
@@ -223,39 +239,45 @@ function PlusContent({ plus, setPlus }) {
               );
             })}
           </select>
-        </div>
 
-        <div className={cn(style.modalItem)}>
-          <strong>제목</strong>
           <input
             type="text"
+            placeholder="제목을 입력해주세요."
             onChange={handleTitle}
-            className={cn(style.itemSize)}
+            className={cn(style.modalItem)}
           />
-        </div>
-        <div className={cn(style.modalItem)}>
-          <strong>가격</strong>
+
           <input
             type="text"
+            placeholder="가격을 입력해주세요.(선택)"
             onChange={handleCost}
-            className={cn(style.itemSize)}
+            className={cn(style.modalItem)}
           />
-        </div>
-        <div className={cn(style.modalItem)}>
-          <strong>내용</strong>
+
           <textarea
             onChange={handleContent}
-            className={cn(style.itemSize, style.textarea)}
+            placeholder="내용을 입력해주세요."
+            className={cn(style.modalItem, style.textarea)}
           ></textarea>
-        </div>
 
-        <button
-          type="button"
-          onClick={inputData}
-          className={cn(style.inputBtn)}
-        >
-          입력
-        </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (
+                selectedkind === "종류 선택" ||
+                title === "" ||
+                content === ""
+              ) {
+                showAlert();
+              } else {
+                inputData();
+              }
+            }}
+            className={cn(style.inputBtn)}
+          >
+            입력
+          </button>
+        </form>
       </article>
     );
   } else {
