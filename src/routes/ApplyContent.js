@@ -20,7 +20,7 @@ function ApplyContent({ chats, setChats }) {
       </aside>
       {<GetContent id={id} setChatBtn={setChatBtn} setData={setData} />}
       {chatBtn ? (
-        <ShowChat
+        <ChatModal
           data={data}
           chats={chats}
           setChats={setChats}
@@ -51,7 +51,7 @@ function GetContent({ id, setChatBtn, setData }) {
 }
 
 function ShowContent({ data, setData, setChatBtn }) {
-  const [clickedHeartBtn, setClickedHeartBtn] = useState(false);
+  const [clickedLikeBtn, setClickedLikeBtn] = useState(false);
   const userName = useSelector((state) => state.loginInfo.name);
   const dispatch = useDispatch();
 
@@ -59,12 +59,12 @@ function ShowContent({ data, setData, setChatBtn }) {
     setData(data);
   }, [data]);
 
-  const handleHeartBtn = () => {
-    if (!clickedHeartBtn) {
-      setClickedHeartBtn(true);
+  const handleLikeBtn = () => {
+    if (!clickedLikeBtn) {
+      setClickedLikeBtn(true);
       dispatch(inputApplyMark(data.id));
     } else {
-      setClickedHeartBtn(false);
+      setClickedLikeBtn(false);
       dispatch(deleteApplyMark(data.id));
     }
   };
@@ -78,79 +78,81 @@ function ShowContent({ data, setData, setChatBtn }) {
   };
 
   return (
-    <section className={cn(style.container)}>
+    <article className={cn(style.container)}>
       <header className={cn(style.imgContainer)}>
         <img src={data.img} alt={data.kind} />
       </header>
-      <article className={cn(style.userContainer)}>
-        <div className={cn(style.user)}>
+      <div className={cn(style.userInfoContainer)}>
+        <div className={cn(style.userMainInfo)}>
           <div className={cn(style.imgContainer)}>
             <img src={data.user_img} alt={data.author} />
           </div>
-          <div className={cn(style.userInfo)}>
-            <h2>{data.author}</h2>
+          <div className={cn(style.textContainer)}>
+            <strong>{data.author}</strong>
             <span>{data.location}</span>
           </div>
         </div>
-        <div className={cn(style.manner)}>
+        <div className={cn(style.userMannerInfo)}>
           <img
             src="/cook/public-assets/one-content/manner.png"
             alt="user manner gauge"
           />
         </div>
-      </article>
+      </div>
 
-      <article className={cn(style.mainContent)}>
+      <article className={cn(style.contentContainer)}>
         <h1>{data.title}</h1>
         <p>{data.content}</p>
       </article>
 
-      <aside className={cn(style.bar)}>
-        <div className={cn(style.leftItem)}>
+      <div className={cn(style.barBackgroundContainer)}>
+        <aside className={cn(style.barContainer)}>
+          <div className={cn(style.leftItem)}>
+            <button
+              type="button"
+              className={cn(style.likeBtn)}
+              onClick={() => {
+                if (userName == "") {
+                  return showAlert();
+                } else {
+                  return handleLikeBtn();
+                }
+              }}
+            >
+              {!clickedLikeBtn ? (
+                <img
+                  src="/cook/public-assets/one-content/heart.png"
+                  alt="heart button"
+                />
+              ) : (
+                <img
+                  src="/public-assets/one-content/click-heart.png"
+                  alt="click heart button"
+                />
+              )}
+            </button>
+            <span>종류: {data.kind}</span>
+          </div>
           <button
             type="button"
-            className={cn(style.heartBtn)}
+            className={cn(style.chatBtn)}
             onClick={() => {
               if (userName == "") {
                 return showAlert();
               } else {
-                return handleHeartBtn();
+                return handleChatBtn();
               }
             }}
           >
-            {!clickedHeartBtn ? (
-              <img
-                src="/cook/public-assets/one-content/heart.png"
-                alt="heart button"
-              />
-            ) : (
-              <img
-                src="/public-assets/one-content/click-heart.png"
-                alt="click heart button"
-              />
-            )}
+            채팅하기
           </button>
-          <span>종류: {data.kind}</span>
-        </div>
-        <button
-          type="button"
-          className={cn(style.chatBtn)}
-          onClick={() => {
-            if (userName == "") {
-              return showAlert();
-            } else {
-              return handleChatBtn();
-            }
-          }}
-        >
-          채팅하기
-        </button>
-      </aside>
-    </section>
+        </aside>
+      </div>
+    </article>
   );
 }
 
-function ShowChat({ data, chats, setChats, setChatBtn }) {
+function ChatModal({ data, chats, setChats, setChatBtn }) {
   const [message, setMessage] = useState("");
 
   const [chatInfo, setChatInfo] = useState({
@@ -260,15 +262,14 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
               />
             </span>
           </aside>
-          <section className={cn(style.myChat)}>
+          <div className={cn(style.userChatList)}>
             {<ShowChatList messages={chatInfo.messages} />}
-          </section>
+          </div>
         </article>
-        <div className={cn(style.sendContainer)}>
+        <form className={cn(style.inputContainer)}>
           <input
             type="text"
             value={message}
-            className={cn(style.inputStyle)}
             onChange={handleInput}
             placeholder="내용입력"
           />
@@ -286,7 +287,7 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
               alt="share button"
             />
           </button>
-        </div>
+        </form>
       </article>
     </section>
   );
@@ -297,7 +298,7 @@ function ShowChatList({ messages }) {
     return (
       <div key={i}>
         <article className={cn(style.chatBox)}>
-          <p className={cn(style.myMsg)}>{message}</p>
+          <p>{message}</p>
           <span className={cn(style.chatTime)}>
             <Clock format={"A HH:mm"} ticking={false} timezone={"Asia/Seoul"} />
           </span>

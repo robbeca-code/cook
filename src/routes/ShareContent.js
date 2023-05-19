@@ -18,9 +18,9 @@ function ShareContent({ chats, setChats }) {
       <aside>
         <Sidebar />
       </aside>
-      {<GetConent id={id} setChatBtn={setChatBtn} setData={setData} />}
+      {<Content id={id} setChatBtn={setChatBtn} setData={setData} />}
       {chatBtn ? (
-        <ShowChat
+        <ChatModal
           data={data}
           chats={chats}
           setChats={setChats}
@@ -31,9 +31,9 @@ function ShareContent({ chats, setChats }) {
   );
 }
 
-function GetConent({ id, setChatBtn, setData }) {
-  if (food.findIndex((data) => data.id == id) != -1) {
-    const data = food.filter((data) => data.id == id);
+function Content({ id, setChatBtn, setData }) {
+  if (food.findIndex((data) => data.id === id) !== -1) {
+    const data = food.filter((data) => data.id === id);
 
     // data의 [{...}] 자료형을 {...} 자료형으로 데이터를 보내기 위해서 data[0]을 사용했습니다.
     return (
@@ -41,8 +41,8 @@ function GetConent({ id, setChatBtn, setData }) {
     );
   }
 
-  if (product.findIndex((data) => data.id == id) != -1) {
-    const data = product.filter((data) => data.id == id);
+  if (product.findIndex((data) => data.id === id) !== -1) {
+    const data = product.filter((data) => data.id === id);
     return (
       <ShowContent data={data[0]} setData={setData} setChatBtn={setChatBtn} />
     );
@@ -50,7 +50,7 @@ function GetConent({ id, setChatBtn, setData }) {
 }
 
 function ShowContent({ data, setData, setChatBtn }) {
-  const [clickedHeartBtn, setClickedHeartBtn] = useState(false);
+  const [clickedLikeBtn, setClickedLikeBtn] = useState(false);
   const userName = useSelector((state) => state.loginInfo.name);
   const dispatch = useDispatch();
 
@@ -58,12 +58,12 @@ function ShowContent({ data, setData, setChatBtn }) {
     setData(data);
   }, [data]);
 
-  const handleHeartBtn = () => {
-    if (!clickedHeartBtn) {
-      setClickedHeartBtn(true);
+  const handleLikeBtn = () => {
+    if (!clickedLikeBtn) {
+      setClickedLikeBtn(true);
       dispatch(inputShareMark(data.id));
     } else {
-      setClickedHeartBtn(false);
+      setClickedLikeBtn(false);
       dispatch(deleteShareMark(data.id));
     }
   };
@@ -77,82 +77,86 @@ function ShowContent({ data, setData, setChatBtn }) {
   };
 
   return (
-    <section className={cn(style.container)}>
+    <article className={cn(style.container)}>
       <header className={cn(style.imgContainer)}>
         <img src={data.img} alt={data.kind} />
       </header>
-      <article className={cn(style.userContainer)}>
-        <div className={cn(style.user)}>
+      <div className={cn(style.userInfoContainer)}>
+        <div className={cn(style.userMainInfo)}>
           <div className={cn(style.imgContainer)}>
             <img src={data.user_img} alt={data.author} />
           </div>
-          <div className={cn(style.userInfo)}>
-            <h2>{data.author}</h2>
+          <div className={cn(style.textContainer)}>
+            <strong>{data.author}</strong>
             <span>{data.location}</span>
           </div>
         </div>
-        <div className={cn(style.manner)}>
+        <div className={cn(style.userMannerInfo)}>
           <img
             src="/cook/public-assets/one-content/manner.png"
             alt="user manner gauge"
           />
         </div>
-      </article>
+      </div>
 
-      <article className={cn(style.mainContent)}>
+      <div className={cn(style.contentContainer)}>
         <h1>{data.title}</h1>
         <strong>
-          {data.cost != "가격없음" ? data.cost.concat("원") : data.cost}
+          {data.cost >= 0
+            ? data.cost.toLocaleString("ko-KR") + "원"
+            : data.cost}
         </strong>
         <p>{data.content}</p>
-      </article>
+      </div>
 
-      <aside className={cn(style.bar)}>
-        <div className={cn(style.leftItem)}>
+      <div className={cn(style.barBackgroundContainer)}>
+        <aside className={cn(style.barContainer)}>
+          <div className={cn(style.leftItem)}>
+            <button
+              type="button"
+              className={cn(style.likeBtn)}
+              onClick={() => {
+                if (userName === "") {
+                  return showAlert();
+                } else {
+                  return handleLikeBtn();
+                }
+              }}
+            >
+              {!clickedLikeBtn ? (
+                <img
+                  src="/cook/public-assets/one-content/heart.png"
+                  alt="like button"
+                />
+              ) : (
+                <img
+                  src="/cook/public-assets/one-content/click-heart.png"
+                  alt="click like button"
+                />
+              )}
+            </button>
+            <span>종류: {data.kind}</span>
+          </div>
           <button
             type="button"
-            className={cn(style.heartBtn)}
+            className={cn(style.chatBtn)}
             onClick={() => {
-              if (userName == "") {
+              if (userName === "") {
                 return showAlert();
               } else {
-                return handleHeartBtn();
+                return handleChatBtn();
               }
             }}
           >
-            {!clickedHeartBtn ? (
-              <img
-                src="/cook/public-assets/one-content/heart.png"
-                alt="heart button"
-              />
-            ) : (
-              <img
-                src="/cook/public-assets/one-content/click-heart.png"
-                alt="click heart button"
-              />
-            )}
+            채팅하기
           </button>
-          <span>종류: {data.kind}</span>
-        </div>
-        <button
-          type="button"
-          className={cn(style.chatBtn)}
-          onClick={() => {
-            if (userName == "") {
-              return showAlert();
-            } else {
-              return handleChatBtn();
-            }
-          }}
-        >
-          채팅하기
-        </button>
-      </aside>
-    </section>
+        </aside>
+      </div>
+    </article>
   );
 }
 
-function ShowChat({ data, chats, setChats, setChatBtn }) {
+function ChatModal({ data, chats, setChats, setChatBtn }) {
   const [message, setMessage] = useState("");
 
   const [chatInfo, setChatInfo] = useState({
@@ -165,7 +169,7 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
 
   // 채팅하는 게시물의 정보를 담는 코드입니다.
   useEffect(() => {
-    if (chats.findIndex((c) => c.title == data.title) == -1) {
+    if (chats.findIndex((c) => c.title === data.title) === -1) {
       chatInfo.authorProfilePicture = data.user_img;
       chatInfo.title = data.title;
       chatInfo.author = data.author;
@@ -175,7 +179,7 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
 
   // 닫기 버튼을 눌렀을 때 최종적으로 채팅의 전체 데이터가 저장되는 함수입니다.
   const handleCloseBtn = () => {
-    if (chats.findIndex((c) => c.title == chatInfo.title) > -1) {
+    if (chats.findIndex((c) => c.title === chatInfo.title) > -1) {
       let copyChat = [...chats];
       setChats(copyChat);
     } else {
@@ -205,8 +209,8 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
 
   const handleSubmitBtn = () => {
     // chat에 이미 정보가 들어있을 때 -> 채팅 정보만 추가한다.
-    if (chats.findIndex((c) => c.title == chatInfo.title) > -1) {
-      let i = chats.findIndex((c) => c.title == chatInfo.title);
+    if (chats.findIndex((c) => c.title === chatInfo.title) > -1) {
+      let i = chats.findIndex((c) => c.title === chatInfo.title);
       chats[i].messages.push(message);
     }
 
@@ -222,7 +226,7 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
   };
 
   return (
-    <section className={cn(style.absolute)}>
+    <div className={cn(style.absolute)}>
       <article className={cn(style.chatContainer)}>
         <header className={cn(style.header)}>
           <div className={cn(style.imgContainer)}>
@@ -258,22 +262,21 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
               />
             </span>
           </aside>
-          <section className={cn(style.myChat)}>
+          <div className={cn(style.userChatList)}>
             {<ShowChatList messages={chatInfo.messages} />}
-          </section>
+          </div>
         </article>
-        <div className={cn(style.sendContainer)}>
+        <form className={cn(style.inputContainer)}>
           <input
             type="text"
             value={message}
-            className={cn(style.inputStyle)}
             onChange={handleInput}
             placeholder="내용입력"
           />
           <button
             type="button"
             onClick={() => {
-              if (message != "") {
+              if (message !== "") {
                 return handleSubmitBtn();
               }
             }}
@@ -284,24 +287,22 @@ function ShowChat({ data, chats, setChats, setChatBtn }) {
               alt="share button"
             />
           </button>
-        </div>
+        </form>
       </article>
-    </section>
+    </div>
   );
 }
 
 function ShowChatList({ messages }) {
   return messages.map((message, i) => {
     return (
-      <div key={i}>
-        <article className={cn(style.chatBox)}>
-          <p className={cn(style.myMsg)}>{message}</p>
-          <span className={cn(style.chatTime)}>
-            <Clock format={"A HH:mm"} ticking={false} timezone={"Asia/Seoul"} />
-          </span>
-          <span className={cn(style.nonRead)}>1</span>
-        </article>
-      </div>
+      <article className={cn(style.chatBox)} key={i}>
+        <p>{message}</p>
+        <span className={cn(style.chatTime)}>
+          <Clock format={"A HH:mm"} ticking={false} timezone={"Asia/Seoul"} />
+        </span>
+        <span className={cn(style.nonRead)}>1</span>
+      </article>
     );
   });
 }
