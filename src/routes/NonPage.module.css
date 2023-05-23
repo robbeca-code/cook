@@ -1,14 +1,38 @@
 .container {
-  display: grid;
-  place-content: center;
-  padding-top: 200px;
+  padding-top: 120px;
   text-align: center;
+  font-size: 0.88em;
+}
+
+img {
+  width: 300px;
+  height: auto;
 }
 
 .title {
-  font-size: 3rem;
+  font-size: 1.5em;
+  font-weight: normal;
+  margin-top: 10px;
 }
 
 .strong {
   color: #ea5936;
+}
+
+@media screen and (max-width: 550px) {
+  .container {
+    padding-top: 80px;
+    text-align: center;
+    font-size: 0.67em;
+  }
+
+  img {
+    width: 17em;
+    height: auto;
+  }
+
+  .title {
+    font-size: 1.5em;
+    margin-top: 7px;
+  }
 }

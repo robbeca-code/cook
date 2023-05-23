@@ -1,5 +1,5 @@
 .container {
-  width: 1100px;
+  width: 1024px;
   margin: 0 auto;
   padding-top: 120px;
   margin-bottom: 100px;
@@ -9,21 +9,21 @@
   color: #171717;
 }
 
-
 /*   Alert   */
-.alert {
+.alertContainer {
   text-align: center;
+  font-size: 0.88em;
+}
+
+.alertContainer > img {
+  width: 15.63em;
+  height: auto;
+}
+
+.alertContainer > h1 {
   margin-top: 20px;
+  font-weight: normal;
 }
-
-.alert > img {
-  width: 300px;
-}
-
-.alert > h1 {
-  margin-top: 40px;
-}
-
 
 /*   Header   */
 .header {
@@ -39,7 +39,7 @@
   border-radius: 50%;
   border: 2px solid #979797;
   padding: 10px;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   margin-right: 30px;
 }
 
@@ -48,7 +48,6 @@
   height: 100%;
   object-fit: contain;
 }
-
 
 /*   User Information   */
 .userInfo > p {
@@ -60,7 +59,6 @@
 .userInfo > img {
   width: 400px;
 }
-
 
 /*   Tab Container   */
 .tabContainer {
@@ -78,10 +76,9 @@
 }
 
 .click {
-  color: #EA5936;
-  border-bottom: 3px solid #EA5936;
+  color: #ea5936;
+  border-bottom: 3px solid #ea5936;
 }
-
 
 /*   ShowContent   */
 .grid {
@@ -134,22 +131,14 @@
   color: #fff;
 }
 
-
 /*   Max-Width: 800px   */
 @media screen and (max-width: 800px) {
   .container {
-    width: 700px;
+    width: 100%;
     margin: 0 auto;
-    padding-top: 100px;
+    padding: 100px 20px;
     margin-bottom: 80px;
   }
-  
-  
-  /*   Alert   */
-  .alert > img {
-    width: 200px;
-  }
-
 
   /*   Header   */
   .header {
@@ -166,10 +155,9 @@
     border-radius: 50%;
     border: 2px solid #979797;
     padding: 10px;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     margin-right: 30px;
   }
-
 
   /*   User Information   */
   .userInfo > h2 {
@@ -186,7 +174,6 @@
     width: 350px;
   }
 
-
   /*   Tab Container   */
   .tabBtn {
     width: 100%;
@@ -198,10 +185,9 @@
   }
 
   .click {
-    color: #EA5936;
-    border-bottom: 2px solid #EA5936;
+    color: #ea5936;
+    border-bottom: 2px solid #ea5936;
   }
-
 
   /*   ShowContent   */
   .grid {
@@ -243,26 +229,27 @@
   }
 }
 
-
 /*   Max-Width: 550px   */
 @media screen and (max-width: 550px) {
   .container {
-    width: 450px;
+    width: 100%;
     margin: 0 auto;
-    padding-top: 100px;
+    padding: 90px 20px;
     margin-bottom: 80px;
   }
-  
-  
+
   /*   Alert   */
-  .alert > img {
-    width: 100px;
+  .alertContainer {
+    font-size: 0.67em;
   }
 
-  .alert > h1 {
-    margin-top: 30px;
+  .alertContainer > img {
+    width: 10.5em;
   }
 
+  .alertContainer > h1 {
+    margin-top: 15px;
+  }
 
   /*   Header   */
   .header {
@@ -279,10 +266,9 @@
     border-radius: 50%;
     border: 2px solid #979797;
     padding: 5px;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     margin-right: 17px;
   }
-
 
   /*   User Information   */
   .userInfo > h2 {
@@ -299,7 +285,6 @@
     width: 300px;
   }
 
-
   /*   Tab Container   */
   .tabBtn {
     width: 100%;
@@ -311,10 +296,9 @@
   }
 
   .click {
-    color: #EA5936;
-    border-bottom: 2px solid #EA5936;
+    color: #ea5936;
+    border-bottom: 2px solid #ea5936;
   }
-
 
   /*   ShowContent   */
   .grid {
@@ -362,17 +346,15 @@
   }
 }
 
-
 /*   Max-Width: 400px   */
 @media screen and (max-width: 400px) {
   .container {
-    width: 350px;
+    width: 100%;
     margin: 0 auto;
     padding-top: 80px;
     margin-bottom: 60px;
   }
-  
-  
+
   /*   Alert   */
   .alert > img {
     width: 100px;
@@ -381,7 +363,6 @@
   .alert > h1 {
     margin-top: 30px;
   }
-
 
   /*   Header   */
   .header {
@@ -398,10 +379,9 @@
     border-radius: 50%;
     border: 2px solid #979797;
     padding: 4px;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     margin-right: 15px;
   }
-
 
   /*   User Information   */
   .userInfo > h2 {
@@ -418,7 +398,6 @@
     width: 250px;
   }
 
-
   /*   Tab Container   */
   .tabBtn {
     width: 100%;
@@ -431,10 +410,9 @@
   }
 
   .click {
-    color: #EA5936;
-    border-bottom: 2px solid #EA5936;
+    color: #ea5936;
+    border-bottom: 2px solid #ea5936;
   }
-
 
   /*   ShowContent   */
   .grid {

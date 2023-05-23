@@ -24,7 +24,7 @@ function Mypage() {
       </aside>
 
       {!isLogin ? (
-        <div className={cn(style.alert)}>
+        <div className={cn(style.alertContainer)}>
           <img src="/cook/public-assets/mypage/login-alert.png" alt="" />
           <h1>Login을 한 다음 진행해주세요</h1>
         </div>

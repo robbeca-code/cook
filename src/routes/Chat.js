@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar";
 function Chat({ chats }) {
   const NonChat = () => {
     return (
-      <article className={cn(style.nonChat)}>
+      <article className={cn(style.alertContainer)}>
         <img src="/cook/public-assets/chat/nonChat.png" alt="" />
         <h2>채팅 기록이 없습니다.</h2>
       </article>
@@ -23,7 +23,7 @@ function Chat({ chats }) {
         <img src="/cook/public-assets/chat/banner.png" alt="banner" />
       </aside>
 
-      {chats.length == 0 ? <NonChat /> : <ShowChatList chats={chats} />}
+      {chats.length === 0 ? <NonChat /> : <ShowChatList chats={chats} />}
     </section>
   );
 }
@@ -33,12 +33,12 @@ function ShowChatList({ chats }) {
     <ul className={cn(style.chatList)}>
       {chats.map((item, i) => {
         return (
-          <li className={cn(style.chatItem)} key={i}>
-            <div className={cn(style.itemLeft)}>
+          <li className={cn(style.chatItemContainer)} key={i}>
+            <div className={cn(style.chatMainItem)}>
               <div className={cn(style.imgContainer)}>
                 <img src={item.authorProfilePicture} alt={item.author} />
               </div>
-              <div className={cn(style.chatInfo)}>
+              <div className={cn(style.textContainer)}>
                 <span>{item.author}</span>
                 <p>
                   {item.messages[item.messages.length - 1].length > 25
@@ -49,7 +49,7 @@ function ShowChatList({ chats }) {
                 </p>
               </div>
             </div>
-            <div className={cn(style.itemRight)}>
+            <div className={cn(style.chatKindItem)}>
               <span>{item.kind}</span>
             </div>
           </li>
