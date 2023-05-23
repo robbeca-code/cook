@@ -68,14 +68,7 @@ function App() {
             </Link>
           </div>
 
-          <div className="toolBarItems">
-            <button type="button" className="toolBarIcon">
-              <img
-                src={process.env.PUBLIC_URL + "/public-assets/search.png"}
-                alt="search icon"
-              />
-            </button>
-
+          <div>
             {isLogin ? (
               <CompletedLogin userName={userName} />
             ) : (

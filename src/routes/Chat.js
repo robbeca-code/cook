@@ -7,8 +7,8 @@ function Chat({ chats }) {
   const NonChat = () => {
     return (
       <article className={cn(style.nonChat)}>
-        <h2>채팅 기록이 없습니다.</h2>
         <img src="/cook/public-assets/chat/nonChat.png" alt="" />
+        <h2>채팅 기록이 없습니다.</h2>
       </article>
     );
   };
@@ -39,7 +39,7 @@ function ShowChatList({ chats }) {
                 <img src={item.authorProfilePicture} alt={item.author} />
               </div>
               <div className={cn(style.chatInfo)}>
-                <h3>{item.author}</h3>
+                <span>{item.author}</span>
                 <p>
                   {item.messages[item.messages.length - 1].length > 25
                     ? item.messages[item.messages.length - 1]

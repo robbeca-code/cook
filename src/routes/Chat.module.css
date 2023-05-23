@@ -1,13 +1,13 @@
 .container {
   padding-top: 120px;
-  width: 800px;
+  width: 1024px;
   margin: 0 auto 100px;
 }
 
 .banner {
   margin-bottom: 40px;
   width: 100%;
-  height: 130px;
+  height: 6.5em;
   background-color: #ffdae1;
   text-align: center;
 }
@@ -18,15 +18,15 @@
   object-fit: contain;
 }
 
-
 /*   Non Chat   */
 .nonChat {
   text-align: center;
   margin-top: 40px;
+  font-size: 0.88em;
 }
 
 .nonChat > h2 {
-  margin-bottom: 50px;
+  margin-top: 20px;
 }
 
 .nonChat > img {
@@ -34,7 +34,6 @@
   height: auto;
   opacity: 80%;
 }
-
 
 /*   Show Chat List   */
 .chatList {
@@ -57,11 +56,11 @@
 }
 
 .imgContainer {
-  width: 80px;
-  height: 80px;
+  width: 3.6em;
+  height: 3.6em;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .imgContainer > img {
@@ -70,102 +69,76 @@
   object-fit: cover;
 }
 
-.chatInfo > h3 {
-  margin-bottom: 5px;
+.chatInfo > span {
+  padding-bottom: 5px;
+  font-size: 1.13em;
+}
+
+.chatInfo > p {
+  color: #5b5b5b;
 }
 
 .itemRight {
   color: #545454;
+  font-size: 0.94em;
 }
-
 
 /*   Max-Width: 800px   */
 @media screen and (max-width: 800px) {
   .container {
-    padding-top: 120px;
-    width: 600px;
+    padding: 90px 20px;
+    width: 100%;
     margin: 0 auto 100px;
   }
-  
+
   .banner {
     margin-bottom: 40px;
     width: 100%;
-    height: 90px;
+    height: 5em;
     background-color: #ffdae1;
     text-align: center;
   }
-
-
-  /*   Show Chat List   */
-  .chatList {
-    display: grid;
-    grid-template-rows: repeat(5, 1fr);
-    row-gap: 10px;
-  }
-
-  .imgContainer {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 15px;
-  }
-
-  .chatInfo > h3 {
-    margin-bottom: 5px;
-    font-size: 18px;
-  }
-
-  .chatInfo > p {
-    font-size: 15px;
-  }
-
-  .itemRight > span {
-    font-size: 13px;
-  }
 }
-
 
 /*   Max-Width: 550px   */
 @media screen and (max-width: 550px) {
   .container {
-    padding-top: 90px;
-    width: 500px;
-    margin: 0 auto 70px;
+    padding-top: 80px;
+    width: 100%;
+    margin: 0 auto 50px;
   }
-  
+
   .banner {
     margin-bottom: 40px;
     width: 100%;
-    height: 80px;
+    height: 4em;
     background-color: #ffdae1;
     text-align: center;
   }
-
 
   /*   Non Chat   */
   .nonChat {
     text-align: center;
     margin-top: 40px;
+    font-size: 0.67em;
   }
 
   .nonChat > h2 {
-    margin-bottom: 30px;
-    font-size: 20px;
+    margin-top: 14px;
   }
 
   .nonChat > img {
-    width: 170px;
+    width: 10.5em;
     height: auto;
     opacity: 80%;
   }
 
-
   /*   Show Chat List   */
   .chatList {
     display: grid;
-    grid-template-rows: repeat(5, 1fr);
-    row-gap: 8px;
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    row-gap: 10px;
   }
 
   .chatItem {
@@ -177,96 +150,22 @@
   }
 
   .imgContainer {
-    width: 50px;
-    height: 50px;
+    width: 2.88em;
+    height: 2.88em;
     border-radius: 50%;
     overflow: hidden;
-    margin-right: 13px;
+    margin-right: 7px;
   }
 
-  .chatInfo > h3 {
-    margin-bottom: 3px;
-    font-size: 17px;
+  .chatInfo > span {
+    font-size: 0.94em;
   }
 
   .chatInfo > p {
-    font-size: 14px;
+    font-size: 0.85em;
   }
 
   .itemRight > span {
-    font-size: 12px;
-  }
-}
-
-
-/*   Max-Width: 400px   */
-@media screen and (max-width: 400px) {
-  .container {
-    padding-top: 60px;
-    width: 360px;
-    margin: 0 auto 40px;
-  }
-  
-  .banner {
-    margin-bottom: 40px;
-    width: 100%;
-    height: 60px;
-    background-color: #ffdae1;
-    text-align: center;
-  }
-
-
-  /*   Non Chat   */
-  .nonChat {
-    text-align: center;
-    margin-top: 40px;
-  }
-
-  .nonChat > h2 {
-    margin-bottom: 30px;
-    font-size: 18px;
-  }
-
-  .nonChat > img {
-    width: 150px;
-    height: auto;
-    opacity: 80%;
-  }
-
-
-  /*   Show Chat List   */
-  .chatList {
-    display: grid;
-    grid-template-rows: repeat(5, 1fr);
-    row-gap: 6px;
-  }
-
-  .chatItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #cecece;
-  }
-
-  .imgContainer {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 10px;
-  }
-
-  .chatInfo > h3 {
-    margin-bottom: 0;
-    font-size: 15px;
-  }
-
-  .chatInfo > p {
-    font-size: 12px;
-  }
-
-  .itemRight > span {
-    font-size: 10px;
+    font-size: 0.86em;
   }
 }
