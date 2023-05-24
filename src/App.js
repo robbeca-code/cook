@@ -190,7 +190,7 @@ function CompletedLogin({ userName }) {
     <div className="loginImgContainer">
       <img
         src={process.env.PUBLIC_URL + "/public-assets/userLogin.png"}
-        alt="user image"
+        alt="user img"
       />
       <span>{userName.length >= 2 ? userName.slice(0, 2) : userName}</span>
     </div>

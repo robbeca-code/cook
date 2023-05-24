@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { food, product } from "./Share-data";
 import Sidebar from "./Sidebar";
 import style from "./ShareContent.module.css";
@@ -54,9 +54,7 @@ function ShowContent({ data, setData, setChatBtn }) {
   const userName = useSelector((state) => state.loginInfo.name);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setData(data);
-  }, [data]);
+  setData(data);
 
   const handleLikeBtn = () => {
     if (!clickedLikeBtn) {
@@ -168,14 +166,12 @@ function ChatModal({ data, chats, setChats, setChatBtn }) {
   });
 
   // 채팅하는 게시물의 정보를 담는 코드입니다.
-  useEffect(() => {
-    if (chats.findIndex((c) => c.title === data.title) === -1) {
-      chatInfo.authorProfilePicture = data.user_img;
-      chatInfo.title = data.title;
-      chatInfo.author = data.author;
-      chatInfo.kind = `나눔: ${data.kind}`;
-    }
-  }, [data.title]);
+  if (chats.findIndex((c) => c.title === data.title) === -1) {
+    chatInfo.authorProfilePicture = data.user_img;
+    chatInfo.title = data.title;
+    chatInfo.author = data.author;
+    chatInfo.kind = `나눔: ${data.kind}`;
+  }
 
   // 닫기 버튼을 눌렀을 때 최종적으로 채팅의 전체 데이터가 저장되는 함수입니다.
   const handleCloseBtn = () => {

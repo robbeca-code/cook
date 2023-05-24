@@ -136,15 +136,10 @@ function InputModal({ clickedPlusBtn, setClickedPlusBtn }) {
   const [selectedkind, setSelectedKind] = useState("종류 선택");
   let title;
   let content;
-  let img;
   const author = useSelector((state) => state.loginInfo.name);
 
   const clickUploadBtn = () => {
     fileInput.current.click();
-  };
-
-  const changeFileInput = (e) => {
-    img = e.target.files;
   };
 
   const handleKind = (e) => {
@@ -202,7 +197,6 @@ function InputModal({ clickedPlusBtn, setClickedPlusBtn }) {
             type="file"
             ref={fileInput}
             accept=".png, .jpg"
-            onChange={changeFileInput}
             className={cn(style.hidden)}
           />
 

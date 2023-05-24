@@ -98,7 +98,7 @@ function MatchTap({ tab }) {
 
 function ShareList({ data }) {
   return data.map((item, i) => {
-    if (item.title != "") {
+    if (item.title !== "") {
       return (
         <Link
           to={item.url}
@@ -144,15 +144,10 @@ function InputModal({ clickedPlusBtn, setClickedPlusBtn }) {
   let title = "";
   let content = "";
   let cost = "가격없음";
-  let img;
   const author = useSelector((state) => state.loginInfo.name);
 
   const clickUploadBtn = () => {
     fileInput.current.click();
-  };
-
-  const changeFileInput = (e) => {
-    img = e.target.files;
   };
 
   const handleKind = (e) => {
@@ -222,7 +217,6 @@ function InputModal({ clickedPlusBtn, setClickedPlusBtn }) {
             type="file"
             ref={fileInput}
             accept=".png, .jpg"
-            onChange={changeFileInput}
             className={cn(style.hidden)}
           />
 

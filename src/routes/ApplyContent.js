@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { oneServing, dessert } from "./Apply-data";
 import Sidebar from "./Sidebar";
 import style from "./ShareContent.module.css";
@@ -32,8 +32,8 @@ function ApplyContent({ chats, setChats }) {
 }
 
 function GetContent({ id, setChatBtn, setData }) {
-  if (oneServing.findIndex((data) => data.id == id) != -1) {
-    const data = oneServing.filter((data) => data.id == id);
+  if (oneServing.findIndex((data) => data.id === id) !== -1) {
+    const data = oneServing.filter((data) => data.id === id);
 
     // data의 [{...}] 자료형을 {...} 자료형으로 데이터를 보내기 위해서 data[0]을 사용했습니다.
     return (
@@ -41,8 +41,8 @@ function GetContent({ id, setChatBtn, setData }) {
     );
   }
 
-  if (dessert.findIndex((data) => data.id == id) != -1) {
-    const data = dessert.filter((data) => data.id == id);
+  if (dessert.findIndex((data) => data.id === id) !== -1) {
+    const data = dessert.filter((data) => data.id === id);
 
     return (
       <ShowContent data={data[0]} setData={setData} setChatBtn={setChatBtn} />
@@ -55,9 +55,7 @@ function ShowContent({ data, setData, setChatBtn }) {
   const userName = useSelector((state) => state.loginInfo.name);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setData(data);
-  }, [data]);
+  setData(data);
 
   const handleLikeBtn = () => {
     if (!clickedLikeBtn) {
@@ -112,7 +110,7 @@ function ShowContent({ data, setData, setChatBtn }) {
               type="button"
               className={cn(style.likeBtn)}
               onClick={() => {
-                if (userName == "") {
+                if (userName === "") {
                   return showAlert();
                 } else {
                   return handleLikeBtn();
@@ -137,7 +135,7 @@ function ShowContent({ data, setData, setChatBtn }) {
             type="button"
             className={cn(style.chatBtn)}
             onClick={() => {
-              if (userName == "") {
+              if (userName === "") {
                 return showAlert();
               } else {
                 return handleChatBtn();
@@ -164,14 +162,12 @@ function ChatModal({ data, chats, setChats, setChatBtn }) {
   });
 
   // 채팅하는 게시물의 정보를 담는 코드입니다.
-  useEffect(() => {
-    if (chats.findIndex((c) => c.title === data.title) == -1) {
-      chatInfo.authorProfilePicture = data.user_img;
-      chatInfo.title = data.title;
-      chatInfo.author = data.author;
-      chatInfo.kind = `신청: ${data.kind}`;
-    }
-  }, [data.title]);
+  if (chats.findIndex((c) => c.title === data.title) === -1) {
+    chatInfo.authorProfilePicture = data.user_img;
+    chatInfo.title = data.title;
+    chatInfo.author = data.author;
+    chatInfo.kind = `신청: ${data.kind}`;
+  }
 
   // 닫기 버튼을 눌렀을 때 최종적으로 채팅의 전체 데이터가 저장되는 함수입니다.
   const handleCloseBtn = () => {
