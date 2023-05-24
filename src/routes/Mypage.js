@@ -31,13 +31,13 @@ function Mypage() {
       ) : (
         <div>
           <header className={cn(style.header)}>
-            <div className={cn(style.userImg)}>
+            <div className={cn(style.userImgContainer)}>
               <img
                 src="/cook/public-assets/mypage/userImg.png"
                 alt="user profile"
               />
             </div>
-            <div className={cn(style.userInfo)}>
+            <div className={cn(style.userInfoContainer)}>
               <h2>{userName}</h2>
               <p>저렴한 가격으로 나눔해요~ 반갑습니다~~~</p>
               <img
@@ -97,7 +97,7 @@ function Mypage() {
             </button>
           </div>
 
-          <section className={cn(style.grid)}>{<MatchTap tab={tab} />}</section>
+          <MatchTap tab={tab} />
         </div>
       )}
     </section>
@@ -109,7 +109,7 @@ function MatchTap({ tab }) {
   const ApplyMarks = useSelector((state) => state.mark.applys);
   let recipeMarks = useSelector((state) => state.mark.recipes);
 
-  if (tab == 1 && shareMark.length > 0) {
+  if (tab === 1 && shareMark.length > 0) {
     return (
       <section className={cn(style.grid)}>
         {<ShowContent id={shareMark} data={food} kind="share" />}
@@ -118,7 +118,7 @@ function MatchTap({ tab }) {
     );
   }
 
-  if (tab == 2 && ApplyMarks.length > 0) {
+  if (tab === 2 && ApplyMarks.length > 0) {
     return (
       <section className={cn(style.grid)}>
         {<ShowContent id={ApplyMarks} data={oneServing} kind="apply" />}
@@ -127,7 +127,7 @@ function MatchTap({ tab }) {
     );
   }
 
-  if (tab == 3 && recipeMarks.length > 0) {
+  if (tab === 3 && recipeMarks.length > 0) {
     return (
       <section className={cn(style.grid)}>
         {<ShowContent id={recipeMarks} data={tunaCan} kind="recipe" />}
@@ -136,17 +136,27 @@ function MatchTap({ tab }) {
   }
 }
 
+const showItemCost = (cost) => {
+  if (cost === undefined) {
+    return null;
+  } else if (cost === "가격없음") {
+    return <strong>{cost}</strong>;
+  } else if (cost > 0) {
+    return <strong>{cost.toLocaleString("ko-KR") + "원"}</strong>;
+  }
+};
+
 function ShowContent({ id, data, kind }) {
   const dispatch = useDispatch();
 
   const deleteMark = (dataId) => {
-    if (kind == "apply") {
+    if (kind === "apply") {
       dispatch(deleteApplyMark(dataId));
     }
-    if (kind == "share") {
+    if (kind === "share") {
       dispatch(deleteShareMark(dataId));
     }
-    if (kind == "recipe") {
+    if (kind === "recipe") {
       dispatch(deleteRecipeMark(dataId));
     }
   };
@@ -154,20 +164,20 @@ function ShowContent({ id, data, kind }) {
   return data.map((data, i) => {
     if (id.indexOf(data.id) > -1) {
       return (
-        <article className={cn(style.item)} key={i}>
+        <article className={cn(style.itemContainer)} key={i}>
           <Link to={data.url} className={cn(style.link)}>
             <div className={cn(style.imgContainer)}>
               <img src={data.img} alt={data.img_alt} />
             </div>
           </Link>
-          <div className={cn(style.itemInfo)}>
+          <div className={cn(style.itemInfoContainer)}>
             <h3>
               {data.title.length > 10
                 ? data.title.slice(0, 11).concat("...")
                 : data.title}
             </h3>
-            {data.cost != undefined ? <strong>{data.cost}</strong> : null}
-            <span>{"by ".concat(data.author)}</span>
+            {showItemCost(data.cost)}
+            <span>{"작성자: ".concat(data.author)}</span>
           </div>
           <button
             type="button"
