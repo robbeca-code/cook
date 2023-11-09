@@ -242,7 +242,7 @@ function ChatModal({ data, chats, setChats, setChatBtn }) {
             onClick={handleCloseBtn}
           >
             <img
-              src="/public-assets/apply-content/close.png"
+              src="/cook/public-assets/apply-content/close.png"
               alt="close button"
             />
           </button>
@@ -279,7 +279,7 @@ function ChatModal({ data, chats, setChats, setChatBtn }) {
             className={cn(style.sendBtn)}
           >
             <img
-              src="/public-assets/one-content/share.png"
+              src="/cook/public-assets/one-content/share.png"
               alt="share button"
             />
           </button>
